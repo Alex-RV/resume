@@ -66,7 +66,7 @@ export default function Container(props) {
           <meta property="article:published_time" content={meta.date} />
         )} */}
       </Head>
-      <div className="flex flex-col justify-center px-8">
+      <div className="flex flex-col justify-center px-8 ">
         <nav className="flex items-center justify-between w-full relative max-w-2xl border-gray-200 dark:border-gray-700 mx-auto pt-8 pb-8 sm:pb-16  text-gray-900 bg-gray-50  dark:bg-gray-900 bg-opacity-60 dark:text-gray-100">
           <div className="ml-[-0.60rem]">
             <MobileMenu />
@@ -74,7 +74,7 @@ export default function Container(props) {
             <NavItem href="/about" text="About" />
             <NavItem href="/projects" text="Projects" />
             <NavItem href="/skills" text="Skills" />
-            {/* <NavItem href="/snippets" text="Snippets" /> */}
+            <NavItem href="/experiences" text="Experiences" />
           </div>
           <button
             aria-label="Toggle Dark Mode"

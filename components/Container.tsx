@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
-import { useTheme } from 'next-themes';
+import { ThemeProvider, useTheme } from 'next-themes';
 import NextLink from 'next/link';
 import cn from 'classnames';
 
@@ -28,11 +28,26 @@ function NavItem({ href, text }) {
 }
 
 export default function Container(props) {
+  const [systemMode, setSystemMode] = useState("");
+
+  useEffect(() => {
+    const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
+    if (darkThemeMq.matches) {
+      window.localStorage.setItem("systemMode", "dark");
+    } else {
+      window.localStorage.setItem("systemMode", "light");
+    };
+    setSystemMode(window.localStorage.getItem("systemMode"))
+    setTheme(systemMode)
+  }, [])
+  
   const [mounted, setMounted] = useState(false);
   const { resolvedTheme, setTheme } = useTheme();
 
   // After mounting, we have access to the theme
   useEffect(() => setMounted(true), []);
+
+  
 
   const { children, ...customMeta } = props;
   const router = useRouter();
@@ -84,6 +99,7 @@ export default function Container(props) {
             <NavItem href="/skills" text="Skills" />
             <NavItem href="/experiences" text="Experiences" />
           </div>
+          <label>{systemMode}</label>
           <button
             aria-label="Toggle Dark Mode"
             type="button"

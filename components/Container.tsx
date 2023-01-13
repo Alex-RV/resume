@@ -119,7 +119,7 @@ export default function Container(props) {
             )}
           </button>
         </nav>
-        <hr className="flex items-center  justify-between w-full   relative mx-auto pt-8  sm:pb-5 border-1 max-w-2xl border-gray-200 mb-14 dark:border-gray-800" />
+        <hr className="flex items-center  justify-between w-full   relative mx-auto pt-1  sm:pb-1 border-1 max-w-2xl border-gray-200 mb-6 dark:border-gray-800" />
         
       </div>
       <main

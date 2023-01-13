@@ -27,11 +27,11 @@ export default function Home() {
               </h1>
               
             </div>
-            <div className="w-[80px] sm:w-[300px] relative mb-8 sm:mb-0 mr-auto">
+            <div className="w-[80px] sm:w-[250px] relative mb-8 sm:mb-0 mr-auto">
               <Image
                 alt="Alex Riabov"
-                height={300}
-                width={300}
+                height={250}
+                width={250}
                 src="/avatar.jpg"
                 sizes="30vw"
                 priority
@@ -45,7 +45,7 @@ export default function Home() {
                 Full-stack developer. <br/>Student-Engineer at {' '}
                 <span className="font-semibold">Google Code Next</span>
               </h2>
-              <p className="text-gray-600 text-xl dark:text-gray-400 mb-16">
+              <p className="text-gray-600 text-xl dark:text-gray-400 ">
                 Coder, full-stack developer focused on back-end development. 
               </p>
             </div>

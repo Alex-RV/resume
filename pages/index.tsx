@@ -19,7 +19,7 @@ export default function Home() {
     <Suspense fallback={null}>
       <Container>
       <div className="flex flex-col justify-center items-start max-w-2xl border-gray-200 dark:border-gray-700 mx-auto pb-16">
-          <div className="flex flex-col mr-1 items-start mb-8 p-10 bg-white dark:bg-[#18222d] shadow-2xl rounded-2xl dark:bg-transparent dark:shadow-transparent">
+          <div className="flex flex-col items-start mb-8 p-10 bg-white dark:bg-[#18222d] shadow-2xl rounded-2xl dark:shadow-transparent">
             <div className="flex sm:flex-row pr-8 grid-cols-2 content-center ">
             <div className="flex flex-col pr-8">
               <h1 className=" items-center font-bold text-5xl md:text-7xl tracking-tight mb-1 text-[#2ea6ff] dark:text-[#2ea6ff]">

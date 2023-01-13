@@ -11,7 +11,7 @@ import ProjectCard from '../components/ProjectCard';
 import ContactForm from "../components/ContactForm"
 
 
-// const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   return (

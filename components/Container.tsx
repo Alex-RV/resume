@@ -31,15 +31,32 @@ export default function Container(props) {
   const [mounted, setMounted] = useState(false);
   const { resolvedTheme, setTheme } = useTheme();
   const [systemMode, setSystemMode] = useState("");
+  // useEffect(() => {
+  //   console.time("mapWay")
+  //   const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
+  //   if (darkThemeMq.matches) {
+  //     window.localStorage.setItem("systemMode", "dark");
+  //   } else {
+  //     window.localStorage.setItem("systemMode", "light");
+  //   };
+  //   setSystemMode(window.localStorage.getItem("systemMode"))
+  //   setTheme(systemMode)
+  //   console.timeEnd("mapWay")
+  // }, [])
+
   useEffect(() => {
-    const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
-    if (darkThemeMq.matches) {
-      window.localStorage.setItem("systemMode", "dark");
-    } else {
-      window.localStorage.setItem("systemMode", "light");
-    };
-    setSystemMode(window.localStorage.getItem("systemMode"))
-    setTheme(systemMode)
+    const fetchData = async () => {
+      const darkThemeMq = await window.matchMedia("(prefers-color-scheme: dark)");
+      if (darkThemeMq.matches) {
+        window.localStorage.setItem("systemMode", "dark");
+      } else {
+        window.localStorage.setItem("systemMode", "light");
+      };
+      setSystemMode(window.localStorage.getItem("systemMode"))
+      setTheme(systemMode)
+    }
+    fetchData()
+      .catch(console.error);
   }, [])
 
   // After mounting, we have access to the theme
@@ -95,7 +112,6 @@ export default function Container(props) {
             <NavItem href="/skills" text="Skills" />
             <NavItem href="/experiences" text="Experiences" />
           </div>
-          <label>{systemMode}</label>
           <button
             aria-label="Toggle Dark Mode"
             type="button"

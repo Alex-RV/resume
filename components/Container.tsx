@@ -30,6 +30,7 @@ function NavItem({ href, text }) {
 export default function Container(props) {
   const [mounted, setMounted] = useState(false);
   const { resolvedTheme, setTheme } = useTheme();
+  setTheme("dark")
 
   // After mounting, we have access to the theme
   useEffect(() => setMounted(true), []);

@@ -1,8 +1,9 @@
 import React from 'react'
+import Container from '../components/Container'
 
 function projects() {
   return (
-    <div>projects</div>
+    <Container></Container>
   )
 }
 

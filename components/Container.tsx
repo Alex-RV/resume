@@ -31,33 +31,36 @@ export default function Container(props) {
   const [mounted, setMounted] = useState(false);
   const { resolvedTheme, setTheme } = useTheme();
   const [systemMode, setSystemMode] = useState("");
-  // useEffect(() => {
-  //   console.time("mapWay")
-  //   const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
-  //   if (darkThemeMq.matches) {
-  //     window.localStorage.setItem("systemMode", "dark");
-  //   } else {
-  //     window.localStorage.setItem("systemMode", "light");
-  //   };
-  //   setSystemMode(window.localStorage.getItem("systemMode"))
-  //   setTheme(systemMode)
-  //   console.timeEnd("mapWay")
-  // }, [])
-
+  
+  //getting data about the system theme mode
   useEffect(() => {
-    const fetchData = async () => {
-      const darkThemeMq = await window.matchMedia("(prefers-color-scheme: dark)");
+    if(globalThis.age == 0){
+      const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
       if (darkThemeMq.matches) {
         window.localStorage.setItem("systemMode", "dark");
       } else {
         window.localStorage.setItem("systemMode", "light");
       };
-      setSystemMode(window.localStorage.getItem("systemMode"))
-      setTheme(systemMode)
+      setSystemMode(window.localStorage.getItem("systemMode"));
+      setTheme(systemMode);
+      globalThis.age = 1;
     }
-    fetchData()
-      .catch(console.error);
   }, [])
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const darkThemeMq = await window.matchMedia("(prefers-color-scheme: dark)");
+  //     if (darkThemeMq.matches) {
+  //       window.localStorage.setItem("systemMode", "dark");
+  //     } else {
+  //       window.localStorage.setItem("systemMode", "light");
+  //     };
+  //     setSystemMode(window.localStorage.getItem("systemMode"))
+  //     setTheme(systemMode)
+  //   }
+  //   fetchData()
+  //     .catch(console.error);
+  // }, [])
 
   // After mounting, we have access to the theme
   useEffect(() => setMounted(true), []);
@@ -93,14 +96,6 @@ export default function Container(props) {
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"/>
         <meta name="msapplication-TileColor" content="#da532c"/>
         <meta name="theme-color" content="#ffffff"/>
-        {/* <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@alexriabov" />
-        <meta name="twitter:title" content={meta.title} />
-        <meta name="twitter:description" content={meta.description} />
-        <meta name="twitter:image" content={meta.image} /> */}
-        {/* {meta.date && (
-          <meta property="article:published_time" content={meta.date} />
-        )} */}
       </Head>
       <div className="flex flex-col justify-center px-8">
         <nav className="flex items-center  justify-between w-full   relative max-w-2xl mx-auto pt-8  sm:pb-5  text-gray-900 bg-gray-50  dark:bg-[#131415] bg-opacity-60 dark:text-gray-100">
@@ -112,6 +107,7 @@ export default function Container(props) {
             <NavItem href="/skills" text="Skills" />
             <NavItem href="/experiences" text="Experiences" />
           </div>
+          {/* <label>{systemMode}</label> */}
           <button
             aria-label="Toggle Dark Mode"
             type="button"

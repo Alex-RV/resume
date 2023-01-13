@@ -1,8 +1,11 @@
 import React from 'react'
+import Container from '../components/Container'
 
 function experiences() {
   return (
-    <div>experiences</div>
+    <Container>
+      
+    </Container>
   )
 }
 

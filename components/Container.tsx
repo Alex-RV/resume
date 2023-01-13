@@ -30,7 +30,6 @@ function NavItem({ href, text }) {
 export default function Container(props) {
   const [mounted, setMounted] = useState(false);
   const { resolvedTheme, setTheme } = useTheme();
-  const [systemMode, setSystemMode] = useState("");
   
   //getting data about the system theme mode
   useEffect(() => {
@@ -41,27 +40,11 @@ export default function Container(props) {
       } else {
         window.localStorage.setItem("systemMode", "light");
       };
-      setSystemMode(window.localStorage.getItem("systemMode"));
-      setTheme(systemMode);
+      setTheme(window.localStorage.getItem("systemMode"));
       globalThis.age = 1;
     }
   }, [])
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const darkThemeMq = await window.matchMedia("(prefers-color-scheme: dark)");
-  //     if (darkThemeMq.matches) {
-  //       window.localStorage.setItem("systemMode", "dark");
-  //     } else {
-  //       window.localStorage.setItem("systemMode", "light");
-  //     };
-  //     setSystemMode(window.localStorage.getItem("systemMode"))
-  //     setTheme(systemMode)
-  //   }
-  //   fetchData()
-  //     .catch(console.error);
-  // }, [])
-
+  
   // After mounting, we have access to the theme
   useEffect(() => setMounted(true), []);
 

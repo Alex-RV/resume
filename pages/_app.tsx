@@ -3,9 +3,7 @@ import type { AppProps } from 'next/app'
 import { ThemeProvider } from 'next-themes'
 import { Inter } from '@next/font/google';
 import { Analytics } from '@vercel/analytics/react';
-import { Html, Head, Main, NextScript } from 'next/document'
 import { useState, useEffect } from 'react';
-import { useTheme } from 'next-themes';
 
 
 

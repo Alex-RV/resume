@@ -13,6 +13,8 @@ npm i react
 npm i react-dom
 npm i swr
 npm i typescript
-npm install --force use-delayed-render
 npm i @tailwindcss/typography
 npm i autoprefixer
+npm install -- force @vercel/analytics
+
+npm install --force use-delayed-render

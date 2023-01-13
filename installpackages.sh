@@ -16,5 +16,12 @@ npm i typescript
 npm i @tailwindcss/typography
 npm i autoprefixer
 npm install -- force @vercel/analytics
+npm install --save --force @sendgrid/mail
 
 npm install --force use-delayed-render
+
+
+
+# echo "export SENDGRID_API_KEY='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'" > sendgrid.env
+# echo "sendgrid.env" >> .gitignore
+# source ./sendgrid.env

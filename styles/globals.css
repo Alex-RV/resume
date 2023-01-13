@@ -109,3 +109,7 @@ a {
     color-scheme: dark;
   }
 }
+[data-theme='colored'] {
+  --background: black;
+  --foreground: white;
+}

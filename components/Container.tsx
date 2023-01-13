@@ -45,7 +45,7 @@ export default function Container(props) {
   };
 
   return (
-    <div className="bg-gray-50 dark:bg-gray-900">
+    <div className="bg-[#f9fafb] dark:bg-[#131415]">
       <Head>
         <title>{meta.title}</title>
         <meta name="robots" content="follow, index" />
@@ -74,9 +74,9 @@ export default function Container(props) {
           <meta property="article:published_time" content={meta.date} />
         )} */}
       </Head>
-      <div className="flex flex-col justify-center px-8 ">
-        <nav className="flex items-center justify-between w-full relative max-w-2xl border-gray-200 dark:border-gray-700 mx-auto pt-8 pb-8 sm:pb-16  text-gray-900 bg-gray-50  dark:bg-gray-900 bg-opacity-60 dark:text-gray-100">
-          <div className="ml-[-0.60rem]">
+      <div className="flex flex-col justify-center px-8">
+        <nav className="flex items-center  justify-between w-full   relative max-w-2xl mx-auto pt-8  sm:pb-5  text-gray-900 bg-gray-50  dark:bg-[#131415] bg-opacity-60 dark:text-gray-100">
+          <div className="ml-[-0.60rem] ">
             <MobileMenu />
             <NavItem href="/" text="Home" />
             <NavItem href="/about" text="About" />
@@ -98,7 +98,7 @@ export default function Container(props) {
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                className="w-5 h-5 text-gray-800 dark:text-gray-200"
+                className="w-5 h-5 text-gray-800 dark:text-gray-200 animate-pulse duration-75"
               >
                 {resolvedTheme === 'dark' ? (
                   <path
@@ -119,10 +119,12 @@ export default function Container(props) {
             )}
           </button>
         </nav>
+        <hr className="flex items-center  justify-between w-full   relative mx-auto pt-8  sm:pb-5 border-1 max-w-2xl border-gray-200 mb-14 dark:border-gray-800" />
+        
       </div>
       <main
         id="skip"
-        className="flex flex-col justify-center px-8 bg-gray-50 dark:bg-gray-900"
+        className="flex flex-col justify-center px-8 bg-gray-50 dark:bg-[#131415] "
       >
         {children}
         <Footer />

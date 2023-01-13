@@ -9,8 +9,8 @@ export default function ContactForm() {
       return (
           <form
             // onSubmit={handleSubmit}
-            className="shadow-xl flex flex-col px-8 py-8border border-blue-200 rounded-xl p-6 my-4 w-full dark:border-gray-800 bg-white dark:bg-[#141524]">
-            <h1 className="text-2xl font-bold dark:text-gray-50">
+            className=" flex flex-col px-8 py-8 shadow-2xl dark:shadow-transparent rounded-xl p-6 my-4 w-full bg-white dark:bg-[#18222d]">
+            <h1 className="text-2xl font-bold text-[#2ea6ff] dark:text-[#2ea6ff]">
               Contact with me
             </h1>
   
@@ -79,14 +79,14 @@ export default function ContactForm() {
             <div className="flex flex-row items-center justify-start">
               <button
                 type="submit"
-                className="px-10 mt-8 py-2 bg-[#130F49] text-gray-50 font-light rounded-md text-lg flex flex-row items-center"
+                className="px-10 mt-8 py-2 bg-[#2ea6ff] text-gray-50 font-light rounded-md text-lg flex flex-row items-center"
               >
                 Submit
                 <svg
                   width="24"
                   height="24"
                   viewBox="0 0 24 24"
-                  className="text-cyan-500 ml-2"
+                  className="text-black dark:text-[#18222d] ml-2"
                   fill="currentColor"
                   xmlns="http://www.w3.org/2000/svg"
                 >

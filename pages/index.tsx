@@ -12,18 +12,36 @@ import ContactForm from "../components/ContactForm"
 
 
 const inter = Inter({ subsets: ['latin'] })
+// [#141524]
 
 export default function Home() {
   return (
     <Suspense fallback={null}>
       <Container>
       <div className="flex flex-col justify-center items-start max-w-2xl border-gray-200 dark:border-gray-700 mx-auto pb-16">
-          <div className="flex flex-col-reverse sm:flex-row items-start mb-8">
+          <div className="flex flex-col items-start mb-8 p-10 bg-white dark:bg-[#18222d] shadow-2xl rounded-2xl dark:bg-transparent dark:shadow-transparent">
+            <div className="flex sm:flex-row pr-8 grid-cols-2 content-center ">
             <div className="flex flex-col pr-8">
-              <h1 className="font-bold text-5xl md:text-7xl tracking-tight mb-1 text-black dark:text-white">
+              <h1 className=" items-center font-bold text-5xl md:text-7xl tracking-tight mb-1 text-[#2ea6ff] dark:text-[#2ea6ff]">
                 Alex Riabov
               </h1>
-              <h2 className="text-gray-700 dark:text-gray-200 mb-4 text-2xl">
+              
+            </div>
+            <div className="w-[80px] sm:w-[300px] relative mb-8 sm:mb-0 mr-auto">
+              <Image
+                alt="Alex Riabov"
+                height={300}
+                width={300}
+                src="/avatar.jpg"
+                sizes="30vw"
+                priority
+                className="rounded-full filter grayscale"
+              />
+            </div>
+            </div>
+            
+            <div >
+            <h2 className="text-gray-700 dark:text-gray-200 mb-4 text-2xl">
                 Full-stack developer. <br/>Student-Engineer at {' '}
                 <span className="font-semibold">Google Code Next</span>
               </h2>
@@ -31,36 +49,26 @@ export default function Home() {
                 Coder, full-stack developer focused on back-end development. 
               </p>
             </div>
-            <div className="w-[80px] sm:w-[250px] relative mb-8 sm:mb-0 mr-auto">
-              <Image
-                alt="Alex Riabov"
-                height={250}
-                width={250}
-                src="/avatar.jpg"
-                sizes="30vw"
-                priority
-                className="rounded-full filter grayscale"
-              />
-            </div>
+
           </div>
-            <h3 className="font-bold text-2xl md:text-4xl tracking-tight mb-6 text-black dark:text-white">
-              Most poular projects
+            <h3 className="font-bold text-2xl md:text-4xl tracking-tight mb-6 text-[#2ea6ff] dark:text-[#2ea6ff]">
+              Most popular projects
             </h3>
             <div className="flex gap-6 flex-col md:flex-row">
               <ProjectCard
-                title="Everything I Know About Style Guides, Design Systems, and Component Libraries"
-                slug="style-guides-component-libraries-design-systems"
+                title="Play in the game with your motions"
+                slug="ai-game-raspberry"
                 name="AI game on Raspberry PI"
               />
               <ProjectCard
-                title="Rust Is The Future of JavaScript Infrastructure"
-                slug="rust"
-                name="AI game on Raspberry PI"
+                title="App to control your spendings"
+                slug="accounting-app"
+                name="Accounting app"
               />
               <ProjectCard
-                title="Past, Present, and Future of React State Management"
-                slug="react-state-management"
-                name="AI game on Raspberry PI"
+                title="Maleware, but with memes"
+                slug="memeware"
+                name="Memeware"
               />
             </div>
             <Link

@@ -15,8 +15,10 @@ npm i swr
 npm i typescript
 npm i @tailwindcss/typography
 npm i autoprefixer
-npm install -- force @vercel/analytics
-npm install --save --force @sendgrid/mail
+npm i -- force @vercel/analytics
+npm i --save --force @sendgrid/mail
+
+npm i --force @glidejs/glide
 
 npm install --force use-delayed-render
 

@@ -10,15 +10,10 @@ export default function About() {
   return (
     <Container>
       <div className="flex flex-col justify-center items-start max-w-2xl mx-auto mb-16">
-      <div className="flex sm:flex-row justify-center items-start max-w-2xl mx-auto mb-16 ">
-        <div className='flex flex-col mr-6 text-black dark:text-white'>
-        <h1 className="flex font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">
-          About me
+        <div className='flex flex-row mb-10'>
+        <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">
+          About Me
         </h1>
-        <h3> My favorite quote:</h3>
-        
-        </div>
-        
         <div className="w-[80px] sm:w-[250px]  ml-40 relative justify-self-end mb-8 sm:mb-0 mr-auto">
           <Image
             alt="Logo"
@@ -31,14 +26,28 @@ export default function About() {
           />
         </div>
         </div>
-        <h1 className='md:text-2xl '>Who is the Alex Riabov?</h1>
-        <p className="text-gray-600 dark:text-gray-400 mb-4 flex">
-        I’m a programmer, who has started my way from learning code by myself and communicating with other developers. 
+        
+        <div className="mb-8">
+          <p className="text-gray-600 dark:text-gray-400 mb-4">
+          I’m a programmer, who has started my way from learning code by myself and communicating with other developers. 
         I’m a political refugee, who moved to the Bay Area, United States at the beginning of 2022. 
         I know how life is changeable and how hard it is to keep your position and opinion in this world. 
         Now I’m a student in San Leandro High School. Ambassador of Google Code Next and full-stack developer.
+            
+          </p>
+        </div>
+        <div className="flex flex-col w-full">
+        </div>
+        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 my-2 w-full">
+        </div>
+        <h2 className="font-bold text-3xl tracking-tight mb-4 mt-16 text-black dark:text-white">
+          Top Quotes
+        </h2>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">
+          Quotes from people about me
         </p>
-        <div className="flex w-700 flex-col md:flex-row max-w-2xl mt-16">
+      </div>
+      <div className="flex flex-col justify-center items-start max-w-2xl mx-auto mb-16">
         <Splide
           options={ {
             type   : 'loop',
@@ -77,7 +86,7 @@ export default function About() {
           </SplideSlide>
         </Splide>
         </div>
-      </div>
+        
     </Container>
   )
 }

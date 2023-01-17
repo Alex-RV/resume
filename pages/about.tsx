@@ -1,9 +1,10 @@
 import React from 'react'
 import Image from 'next/image'
+import { Splide, SplideSlide } from '@splidejs/react-splide';
+import '@splidejs/react-splide/css';
 
 import Container from '../components/Container'
-import ProjectCard from '../components/ProjectCard'
-import CarouselBar from '../components/Carousel/CarouselBar'
+import InfoCard from '../components/InfoCard'
 
 export default function About() {
   return (
@@ -37,28 +38,45 @@ export default function About() {
         I know how life is changeable and how hard it is to keep your position and opinion in this world. 
         Now I’m a student in San Leandro High School. Ambassador of Google Code Next and full-stack developer.
         </p>
-        <div className="flex gap-6 flex-col md:flex-row">
-        {/* <img src="/logo.jpg" className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/> */}
-          <CarouselBar
-          title="He is great"
-          name="Me"
-          slug=""/>
-              {/* <ProjectCard
-                title="He is great"
-                slug=""
-                name="Me"
-              />
-              <ProjectCard
-                title="He is amazing"
-                slug="accounting-app"
-                name="Kristina"
-              />
-              <ProjectCard
-                title="He is awesome"
-                slug="memeware"
-                name="Melani"
-              /> */}
-          </div>
+        <div className="flex w-700 flex-col md:flex-row max-w-2xl mt-16">
+        <Splide
+          options={ {
+            type   : 'loop',
+            perPage: 3,
+            drag   : 'free',
+            rewind: true,
+            gap   : '1rem',
+            autoplay: true,
+          } }
+          aria-label="My Favorite Images"
+          className='w-full px-12 py-5'>
+          <SplideSlide>
+            <InfoCard 
+            title={"It was a great story about me"}
+            name={"Kristina"}/>
+          </SplideSlide>
+          <SplideSlide>
+          <InfoCard 
+            title={"He is"}
+            name={"Someone"}/>
+          </SplideSlide>
+          <SplideSlide>
+          <InfoCard 
+            title={"He is amazing"}
+            name={"Me"}/>
+          </SplideSlide>
+          <SplideSlide>
+          <InfoCard 
+            title={"Page"}
+            name={"Persone"}/>
+          </SplideSlide>
+          <SplideSlide>
+          <InfoCard 
+            title={"Text"}
+            name={"People"}/>
+          </SplideSlide>
+        </Splide>
+        </div>
       </div>
     </Container>
   )

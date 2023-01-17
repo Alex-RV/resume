@@ -15,8 +15,9 @@ npm i swr
 npm i typescript
 npm i @tailwindcss/typography
 npm i autoprefixer
-npm i -- force @vercel/analytics
+npm i --force @vercel/analytics
 npm i --save --force @sendgrid/mail
+npm i --force @splidejs/react-splide
 
 npm install --force use-delayed-render
 

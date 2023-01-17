@@ -9,7 +9,7 @@ import InfoCard from '../components/InfoCard'
 export default function About() {
   return (
     <Container>
-      <div className="flex flex-col justify-center items-start max-w-2xl mx-auto mb-16">
+      <div className="flex flex-col items-start max-w-2xl mx-auto mb-16">
         <div className='flex flex-row mb-10'>
         <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">
           About Me
@@ -56,6 +56,13 @@ export default function About() {
             rewind: true,
             gap   : '1rem',
             autoplay: true,
+            breakpoints: {
+              640: {
+                perPage: 1,
+                width : "70%",
+              },
+            }
+            
           } }
           aria-label="My Favorite Images"
           className='w-full px-12 py-5'>

@@ -9,7 +9,7 @@ export default function InfoCard({ title, name }) {
       )}>
         <div className="flex w-full flex-col shadow-2xl bg-white dark:bg-[#18222d] h-full rounded-lg p-4">
         <div className="flex h-full flex-col md:flex-col justify-between">
-            <h4 className="text-lg md:text-lg font-medium mb-6 sm:mb-10 w-full text-gray-500 dark:text-gray-100 tracking-tight">
+            <h4 className="text-lg md:text-lg font-medium mb-6 sm:mb-10 w-full sm:w-fit text-gray-500 dark:text-gray-100 tracking-tight">
                 {title}
             </h4>
             

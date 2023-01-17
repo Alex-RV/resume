@@ -63,7 +63,7 @@ export default function About() {
               },
               550: {
                 perPage: 1,
-                width : "30%",
+                width : "50%",
               }
             }
             

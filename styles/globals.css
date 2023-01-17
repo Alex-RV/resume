@@ -109,3 +109,45 @@ a {
     color-scheme: dark;
   }
 }
+
+.shard-button{
+  display: inline-block;
+  white-space: nowrap;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  margin-right: 10px;
+  margin-bottom: 40px;
+  text-decoration: none;
+  font-family: Lato;
+  font-weight: 400;
+  overflow: hidden;
+  position: relative;
+  z-index: 0;
+}
+
+.shard-button:after{
+  display: block;
+  content: '';
+  position: absolute;
+  -webkit-transition: height 300ms;
+  -moz-transition: height 300ms;
+  transition: height 300ms;
+  width: 400%;
+  height: 0;
+  z-index: -1;
+  top: 50%;
+  left: 50%;
+  background: red;
+  -webkit-transform: translateX(-50%) translateY(-50%) rotate(45deg);
+  -moz-transform: translateX(-50%) translateY(-50%) rotate(45deg);
+  -ms-transform: translateX(-50%) translateY(-50%) rotate(45deg);
+  transform: translateX(-50%) translateY(-50%) rotate(45deg);
+}
+
+.shard-button:hover:after {
+  height: 600%;
+  -webkit-transition: all 400ms;
+  -moz-transition: all 400ms;
+  transition: all 400ms;
+}

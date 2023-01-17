@@ -2,6 +2,8 @@ import React from 'react'
 import Container from '../components/Container'
 import Link from 'next/link'
 
+import ProjectLink from '../components/ProjectLink'
+
 function projects() {
   return (
     <Container
@@ -24,6 +26,22 @@ function projects() {
           Projects:
         </h2>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
+            <button className='shard-button'>Hello</button>
+        <div className='columns-3'>
+            <ProjectLink
+            slug={"logo.jpg"}/>
+            <ProjectLink
+            slug={"logo.jpg"}/>
+            <ProjectLink
+            slug={"logo.jpg"}/>
+            <ProjectLink
+            slug={"logo.jpg"}/>
+            <ProjectLink
+            slug={"logo.jpg"}/>
+            <ProjectLink
+            slug={"logo.jpg"}/>
+
+        </div>
         </p>
       </div>
     </Container>

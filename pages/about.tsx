@@ -47,7 +47,7 @@ export default function About() {
           Quotes from people about me
         </p>
       </div>
-      <div className="flex flex-col justify-center items-start max-w-2xl sm:mx-3 mx-auto mb-16">
+      <div className="flex flex-col justify-center items-start max-w-2xl mx-auto mb-16">
         <Splide
           options={ {
             type   : 'loop',

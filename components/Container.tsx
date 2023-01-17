@@ -44,7 +44,7 @@ export default function Container(props) {
       globalThis.age = 1;
     }
   }, [])
-  
+
   // After mounting, we have access to the theme
   useEffect(() => setMounted(true), []);
 
@@ -131,7 +131,7 @@ export default function Container(props) {
       </div>
       <main
         id="skip"
-        className="flex flex-col justify-center px-8 bg-gray-50 dark:bg-[#131415] "
+        className="flex flex-col justify-center px-8 sm:px-auto bg-gray-50 dark:bg-[#131415] "
       >
         {children}
         <Footer />

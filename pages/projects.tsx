@@ -21,28 +21,51 @@ function projects() {
         <div className="flex flex-col w-full">
         </div>
         <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 my-2 w-full">
-        </div>
         <h2 className="font-bold text-3xl tracking-tight mb-4 mt-16 text-black dark:text-white">
           Projects:
         </h2>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
             <button className='shard-button'>Hello</button>
-        <div className='columns-3'>
-            <ProjectLink
-            slug={"logo.jpg"}/>
-            <ProjectLink
-            slug={"logo.jpg"}/>
-            <ProjectLink
-            slug={"logo.jpg"}/>
-            <ProjectLink
-            slug={"logo.jpg"}/>
-            <ProjectLink
-            slug={"logo.jpg"}/>
-            <ProjectLink
-            slug={"logo.jpg"}/>
-
-        </div>
         </p>
+        </div>
+        
+        <div className='columns-3 container mx-auto'>
+            <ProjectLink
+            slug={"first"}
+            file={"logo.jpg"}/>
+            <ProjectLink
+            slug={"second"}
+            file={"logo.jpg"}/>
+            <ProjectLink
+            slug={"third"}
+            file={"logo.jpg"}/>
+            <ProjectLink
+            slug={"first"}
+            file={"logo.jpg"}/>
+            <ProjectLink
+            slug={"second"}
+            file={"logo.jpg"}/>
+            <ProjectLink
+            slug={"third"}
+            file={"logo.jpg"}/>
+            <ProjectLink
+            slug={"first"}
+            file={"logo.jpg"}/>
+            <ProjectLink
+            slug={"second"}
+            file={"logo.jpg"}/>
+            <ProjectLink
+            slug={"third"}
+            file={"logo.jpg"}/>
+            <ProjectLink
+            slug={"third"}
+            file={"logo.jpg"}/>
+             <ProjectLink
+            slug={"third"}
+            file={"logo.jpg"}/>
+            
+        </div>
+        
       </div>
     </Container>
   )

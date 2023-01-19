@@ -6,7 +6,7 @@ export default function ProjectCard({ title, slug, name }) {
 
   return (
     <Link
-      href={`/blog/${slug}`}
+      href={`/projects/${slug}`}
       className={cn(
         'transform hover:scale-[1.01] transition-all',
         'rounded-xl w-full md:w-1/3 bg-black p-1'

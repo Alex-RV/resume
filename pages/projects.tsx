@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 import ProjectLink from '../components/ProjectLink'
 
-function projects() {
+export default function projects() {
   return (
     <Container
     title="Projects – Alex Riabov"
@@ -24,13 +24,25 @@ function projects() {
         <h2 className="font-bold text-3xl tracking-tight mb-4 mt-16 text-black dark:text-white">
           Projects:
         </h2>
-        <p className="text-gray-600 dark:text-gray-400 mb-4">
+        {/* <p className="text-gray-600 dark:text-gray-400 mb-4">
             <button className='shard-button'>Hello</button>
-        </p>
+        </p> */}
         </div>
         
-        <div className='columns-3 container mx-auto'>
+        <div className='flex flex-row gap-5 container justify-between w-auto mx-auto'>
+          <div className='flex flex-col'>
+          <ProjectLink
+            slug={"first"}
+            file={"logo.jpg"}/>
             <ProjectLink
+            slug={"second"}
+            file={"logo.jpg"}/>
+            <ProjectLink
+            slug={"third"}
+            file={"logo.jpg"}/>
+          </div>
+          <div className='flex mt-14 flex-col'>
+          <ProjectLink
             slug={"first"}
             file={"logo.jpg"}/>
             <ProjectLink
@@ -42,13 +54,9 @@ function projects() {
             <ProjectLink
             slug={"first"}
             file={"logo.jpg"}/>
-            <ProjectLink
-            slug={"second"}
-            file={"logo.jpg"}/>
-            <ProjectLink
-            slug={"third"}
-            file={"logo.jpg"}/>
-            <ProjectLink
+          </div>
+          <div className='flex flex-col'>
+          <ProjectLink
             slug={"first"}
             file={"logo.jpg"}/>
             <ProjectLink
@@ -58,17 +66,12 @@ function projects() {
             slug={"third"}
             file={"logo.jpg"}/>
             <ProjectLink
-            slug={"third"}
+            slug={"first"}
             file={"logo.jpg"}/>
-             <ProjectLink
-            slug={"third"}
-            file={"logo.jpg"}/>
-            
+          </div>
         </div>
         
       </div>
     </Container>
   )
 }
-
-export default projects

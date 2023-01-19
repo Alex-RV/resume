@@ -88,7 +88,7 @@ export default function Container(props) {
             <NavItem href="/about" text="About" />
             <NavItem href="/projects" text="Projects" />
             <NavItem href="/skills" text="Skills" />
-            <NavItem href="/experiences" text="Experiences" />
+            <NavItem href="/experience" text="Experience" />
           </div>
           {/* <label>{systemMode}</label> */}
           <button

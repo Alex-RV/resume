@@ -1,12 +1,10 @@
 import React from 'react'
 import Container from '../components/Container'
 
-function experiences() {
+export default function experience() {
   return (
     <Container>
-      
+    
     </Container>
   )
 }
-
-export default experiences

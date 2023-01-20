@@ -1,10 +1,8 @@
 import React from 'react'
 import Container from '../components/Container'
 
-function skills() {
+export default function Skills() {
   return (
     <Container></Container>
   )
 }
-
-export default skills

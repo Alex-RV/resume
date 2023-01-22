@@ -10,7 +10,7 @@ export default function ProjectLink({slug, file, title, description}) {
     href={`/projects/${slug}`}
     className={cn(
       'transform hover:scale-[1.01] transition-all',
-      'rounded-xl w-full bg-black p-1 m-5 mx-5'
+      'rounded-xl w-full bg-black p-1'
     )}
   >
     <div className="flex flex-col justify-between h-full shadow-2xl bg-white dark:bg-[#18222d] rounded-lg p-4">

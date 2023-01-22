@@ -1,4 +1,5 @@
 import React from 'react'
+
 import Container from '../components/Container'
 import SkillsCard from '../components/SkillsCard'
 
@@ -7,18 +8,55 @@ export default function Skills() {
     <Container 
     title="Skills – Alex Riabov"
     description="Languages and other">
-        <div className="flex flex-col justify-center items-start max-w-2xl mx-auto mb-16">
+      <div className="flex flex-col justify-start items-start max-w-2xl w-full mx-auto mb-16">
+      <div className='flex flex-col max-w-2xl w-full mx-auto'>
           <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">
-            Skills :</h1>
-          
+            Professional Skills :</h1>
         </div>
-        <div className='flex flex-col'>
+      </div>
+      <div className='flex flex-col'>
             <SkillsCard
             scale={"90%"}
-            color={"red"}
+            color={"#3AA8C1"}
+            img={"https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg"}
+            description={"Python"}/>
+            <SkillsCard
+            scale={"80%"}
+            color={"#3AA8C1"}
+            img={"https://upload.wikimedia.org/wikipedia/en/3/30/Java_programming_language_logo.svg"}
+            description={"Java"}/>
+            <SkillsCard
+            scale={"60%"}
+            color={"#3AA8C1"}
             img={"/logo.jpg"}
-            description={"I learned this language by 5 years"}/>
-          </div>
+            description={"C#"}/>
+            <SkillsCard
+            scale={"60%"}
+            color={"#01796F"}
+            img={"/logo.jpg"}
+            description={"TypeScript"}/>
+            <SkillsCard
+            scale={"60%"}
+            color={"#01796F"}
+            img={"https://upload.wikimedia.org/wikipedia/commons/b/ba/Javascript_badge.svg"}
+            description={"JavaScript"}/>
+            <SkillsCard
+            scale={"60%"}
+            color={"#01796F"}
+            img={"https://upload.wikimedia.org/wikipedia/commons/8/8e/Nextjs-logo.svg"}
+            description={"NexJS"}/>
+            <SkillsCard
+            scale={"60%"}
+            color={"#01796F"}
+            img={"https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg"}
+            description={"React"}/>
+            <SkillsCard
+            scale={"60%"}
+            color={"#01796F"}
+            img={"https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg"}
+            description={"TailWind"}/>
+      </div>
+        
     </Container>
   )
 }

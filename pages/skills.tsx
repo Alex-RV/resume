@@ -23,7 +23,7 @@ export default function Skills() {
             <SkillsCard
             scale={"80%"}
             color={"#3AA8C1"}
-            img={"https://upload.wikimedia.org/wikipedia/en/3/30/Java_programming_language_logo.svg"}
+            img={"https://www.vectorlogo.zone/logos/java/java-icon.svg"}
             description={"Java"}/>
             <SkillsCard
             scale={"60%"}

@@ -18,7 +18,7 @@ export default function Skills() {
             <SkillsCard
             scale={"90%"}
             color={"#3AA8C1"}
-            img={"https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg"}
+            img={"https://www.vectorlogo.zone/logos/python/python-icon.svg"}
             description={"Python"}/>
             <SkillsCard
             scale={"80%"}
@@ -28,12 +28,12 @@ export default function Skills() {
             <SkillsCard
             scale={"60%"}
             color={"#3AA8C1"}
-            img={"/logo.jpg"}
+            img={"https://cdn.cdnlogo.com/logos/c/27/c.svg"}
             description={"C#"}/>
             <SkillsCard
             scale={"60%"}
             color={"#01796F"}
-            img={"/logo.jpg"}
+            img={"https://www.vectorlogo.zone/logos/typescriptlang/typescriptlang-icon.svg"}
             description={"TypeScript"}/>
             <SkillsCard
             scale={"60%"}

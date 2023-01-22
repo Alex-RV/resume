@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import useSWR from 'swr';
 import cn from 'classnames';
+import Image from 'next/image';
 
 
 export default function ProjectLink({slug, file, title, description}) {
@@ -19,8 +20,8 @@ export default function ProjectLink({slug, file, title, description}) {
         <a className="absolute inset-0 z-10 bg-black text-center flex flex-col items-center justify-center opacity-0 hover:opacity-100 bg-opacity-90 duration-300">
           <h1  className="mx-auto text-white" >{description}</h1>
         </a>
-        <div className="h-48 flex flex-wrap content-center">
-          <img src={file} alt={file} className="mx-auto "/>
+        <div className="flex flex-wrap content-center">
+          <img src={file} alt={file} className="mx-auto filter w-auto h-auto"/>
         </div>
       </div>
       

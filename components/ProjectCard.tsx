@@ -13,7 +13,7 @@ export default function ProjectCard({ title, slug, name }) {
       )}
     >
       <div className="flex flex-col justify-between h-full shadow-2xl bg-white dark:bg-[#18222d] rounded-lg p-4">
-        <div className="flex flex-col md:flex-col justify-between">
+        <div className="flex flex-col md:flex-row justify-between">
             <h4 className="text-lg md:text-lg font-medium mb-6 sm:mb-10 w-full text-gray-500 dark:text-gray-100 tracking-tight">
                 {title}
             </h4>
@@ -23,24 +23,6 @@ export default function ProjectCard({ title, slug, name }) {
             <h2 className="text-lg md:text-lg font-medium w-full text-gray-900 dark:text-gray-500 tracking-tight">
                 {name}
             </h2>
-          {/* <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-            />
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-            />
-          </svg> */}
         </div>
       </div>
     </Link>

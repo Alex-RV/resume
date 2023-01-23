@@ -17,7 +17,7 @@ export default function ProjectLink({slug, file, title, description}) {
       <div className="flex flex-col md:flex-col justify-between">
 
       <div className="relative flex ">
-        <a className="absolute inset-0 z-10 bg-black text-center flex flex-col items-center justify-center opacity-0 hover:opacity-100 bg-opacity-90 duration-300">
+        <a className="absolute inset-0 z-10 bg-black text-center flex flex-col items-center justify-center opacity-0 hover:opacity-90 bg-opacity-90 duration-300">
           <h1  className="mx-auto text-[2vw] flex text-white" >{description}</h1>
         </a>
         <div className="flex flex-wrap content-center">

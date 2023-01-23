@@ -54,7 +54,7 @@ export default function Home() {
             <h3 className="font-bold text-2xl md:text-4xl tracking-tight mb-6 text-[#2ea6ff] dark:text-[#2ea6ff]">
               Most popular projects
             </h3>
-            <div className="flex gap-6 flex-col md:flex-row">
+            <div className="flex gap-6 flex-col w-full md:flex-row">
               <ProjectCard
                 title="Play in the game with your motions"
                 slug="ai-game-raspberry"

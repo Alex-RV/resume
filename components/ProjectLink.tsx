@@ -18,7 +18,7 @@ export default function ProjectLink({slug, file, title, description}) {
 
       <div className="relative flex ">
         <a className="absolute inset-0 z-10 bg-black text-center flex flex-col items-center justify-center opacity-0 hover:opacity-100 bg-opacity-90 duration-300">
-          <h1  className="mx-auto text-[3vw] flex text-white" >{description}</h1>
+          <h1  className="mx-auto text-[2vw] flex text-white" >{description}</h1>
         </a>
         <div className="flex flex-wrap content-center">
           <img src={file} alt={file} className="mx-auto filter w-auto h-auto"/>
@@ -27,7 +27,7 @@ export default function ProjectLink({slug, file, title, description}) {
       
       </div>
       <div className="flex items-center text-gray-800 dark:text-gray-200 capsize">
-          <h2 className="text-lg md:text-lg font-medium w-full text-gray-900 dark:text-gray-300 tracking-tight">
+          <h2 className="leading-7 text-[3vw] p-1 font-medium w-full text-gray-900 dark:text-gray-300 tracking-tight">
               {title}
           </h2>
       </div>

@@ -13,7 +13,7 @@ export default function projects() {
         <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">
           Projects :
         </h1>
-        <div className='grid-cols-2 grid gap-5 sm:grid-cols-3 container w-full max-w-2xl justify-center items-start'>
+        <div className='grid-cols-2 grid gap-5 sm:grid-cols-3 mx-auto container w-full max-w-2xl justify-center items-start'>
           <ProjectLink
             slug={"first"}
             file={"/logo.jpg"}

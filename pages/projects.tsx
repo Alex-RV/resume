@@ -9,8 +9,8 @@ export default function projects() {
     <Container
     title="Projects – Alex Riabov"
     description="All my projects">
-        <div className="flex flex-col justify-center items-start max-w-2xl mx-auto mb-16">
-        <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">
+        <div className="flex flex-col justify-center items-start  mx-auto ">
+        <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-16 text-black dark:text-white">
           Projects :
         </h1>
         <div className='grid-cols-2 grid gap-5 sm:grid-cols-3 mx-auto container w-full max-w-2xl justify-center items-start'>

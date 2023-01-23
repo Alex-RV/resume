@@ -26,32 +26,42 @@ export default function Skills() {
             img={"https://www.vectorlogo.zone/logos/java/java-icon.svg"}
             description={"Java"}/>
             <SkillsCard
-            scale={"60%"}
+            scale={"90%"}
             color={"#3AA8C1"}
             img={"https://cdn.cdnlogo.com/logos/c/27/c.svg"}
             description={"C#"}/>
+            <SkillsCard
+            scale={"60%"}
+            color={"#3AA8C1"}
+            img={"https://www.vectorlogo.zone/logos/swift/swift-ar21.svg"}
+            description={"Swift"}/>
+            <SkillsCard
+            scale={"80%"}
+            color={"#3AA8C1"}
+            img={"https://www.vectorlogo.zone/logos/firebase/firebase-icon.svg"}
+            description={"Firebase"}/>
             <SkillsCard
             scale={"60%"}
             color={"#01796F"}
             img={"https://www.vectorlogo.zone/logos/typescriptlang/typescriptlang-icon.svg"}
             description={"TypeScript"}/>
             <SkillsCard
-            scale={"60%"}
+            scale={"70%"}
             color={"#01796F"}
             img={"https://upload.wikimedia.org/wikipedia/commons/b/ba/Javascript_badge.svg"}
             description={"JavaScript"}/>
             <SkillsCard
-            scale={"60%"}
+            scale={"80%"}
             color={"#01796F"}
             img={"https://upload.wikimedia.org/wikipedia/commons/8/8e/Nextjs-logo.svg"}
             description={"NexJS"}/>
             <SkillsCard
-            scale={"60%"}
+            scale={"80%"}
             color={"#01796F"}
             img={"https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg"}
             description={"React"}/>
             <SkillsCard
-            scale={"60%"}
+            scale={"70%"}
             color={"#01796F"}
             img={"https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg"}
             description={"TailWind"}/>

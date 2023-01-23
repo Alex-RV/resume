@@ -13,7 +13,7 @@ export default function ProjectLink({slug, file, title, description}) {
       'rounded-xl w-full bg-black p-1'
     )}
   >
-    <div className="flex flex-col justify-between h-full shadow-2xl bg-white dark:bg-[#18222d] rounded-lg p-4">
+    <div className="flex flex-col justify-between h-full shadow-2xl bg-white dark:bg-[#18222d] rounded-lg p-4 pb-3">
       <div className="flex flex-col md:flex-col justify-between">
 
       <div className="relative flex ">
@@ -27,7 +27,7 @@ export default function ProjectLink({slug, file, title, description}) {
       
       </div>
       <div className="flex items-center text-gray-800 dark:text-gray-200 capsize">
-          <h2 className="leading-7 text-[3vw] p-1 font-medium w-full text-gray-900 dark:text-gray-300 tracking-tight">
+          <h2 className="leading-7 text-[3vw] sm:text-[2vw] pt-1 font-medium w-full text-gray-900 dark:text-gray-300 tracking-tight">
               {title}
           </h2>
       </div>

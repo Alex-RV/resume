@@ -9,7 +9,7 @@ export default function ProjectCard({ title, slug, name }) {
       href={`/projects/${slug}`}
       className={cn(
         'transform hover:scale-[1.01] transition-all',
-        'rounded-xl w-full md:w-1/3 bg-black p-1'
+        'rounded-xl w-full md:w-1/3 bg-[#2ea6ff] p-1'
       )}
     >
       <div className="flex flex-col justify-between h-full shadow-2xl bg-white dark:bg-[#18222d] rounded-lg p-4">

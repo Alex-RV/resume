@@ -10,16 +10,22 @@ export default function About() {
   return (
     <Container>
       <div className="flex flex-col items-start max-w-2xl mx-auto mb-16">
-        <div className='flex flex-row mb-10'>
-        <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">
+        <div className='flex flex-row mb-1'>
+          <div>
+          <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">
           About Me
         </h1>
+        <h3 className='text-black dark:text-white '>
+        If you see your way, don't hesitate
+        </h3>
+          </div>
+        
         <div className="w-[80px] sm:w-[250px]  ml-40 relative justify-self-end mb-8 sm:mb-0 mr-auto">
           <Image
             alt="Logo"
             height={250}
             width={250}
-            src="/logo.svg"
+            src="/logo.jpg"
             sizes="30vw"
             priority
             className="rounded-full filter"
@@ -40,12 +46,12 @@ export default function About() {
         </div>
         <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 my-2 w-full">
         </div>
-        <h2 className="font-bold text-3xl tracking-tight mb-4 mt-16 text-black dark:text-white">
+        <h2 className="font-bold text-3xl tracking-tight mb-4 mt-16 text-[#2ea6ff]">
           Top Quotes
         </h2>
-        <p className="text-gray-600 dark:text-gray-400 mb-4">
+        {/* <p className="text-gray-600 dark:text-gray-400 mb-4">
           Quotes from people about me
-        </p>
+        </p> */}
       </div>
       <div className="flex flex-col justify-center items-start max-w-2xl mx-auto mb-16">
         <Splide

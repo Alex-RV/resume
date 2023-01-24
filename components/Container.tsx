@@ -62,7 +62,7 @@ export default function Container(props) {
     <div className="bg-[#f9fafb] dark:bg-[#131415]">
       <Head>
         <title>{meta.title}</title>
-        <meta name="robots" content="follow, index" />
+        {/* <meta name="robots" content="follow, index" /> */}
         <meta content={meta.description} name="description" />
         <meta property="og:url" content={`https://aleksandr-riabov-vercel.app${router.asPath}`} />
         <link rel="canonical" href={`https://aleksandr-riabov-vercel.app${router.asPath}`} />
@@ -71,6 +71,7 @@ export default function Container(props) {
         <meta property="og:description" content={meta.description} />
         <meta property="og:title" content={meta.title} />
         <meta property="og:image" content={meta.image} />
+        <meta name="viewport" content="width=1000"></meta>
         
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>

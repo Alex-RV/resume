@@ -78,28 +78,28 @@ export default function About() {
           className='w-full px-12 py-5'>
           <SplideSlide>
             <InfoCard 
-            title={"It was a great story about me"}
-            name={"Kristina"}/>
-          </SplideSlide>
-          <SplideSlide>
-          <InfoCard 
-            title={"He is"}
+            title={"Quote about Me"}
             name={"Someone"}/>
           </SplideSlide>
           <SplideSlide>
           <InfoCard 
-            title={"He is amazing"}
-            name={"Me"}/>
+            title={"Quote about Me"}
+            name={"Someone"}/>
           </SplideSlide>
           <SplideSlide>
           <InfoCard 
-            title={"Page"}
-            name={"Persone"}/>
+            title={"Quote about Me"}
+            name={"Someone"}/>
           </SplideSlide>
           <SplideSlide>
           <InfoCard 
-            title={"Text"}
-            name={"People"}/>
+            title={"Quote about Me"}
+            name={"Someone"}/>
+          </SplideSlide>
+          <SplideSlide>
+          <InfoCard 
+            title={"Quote about Me"}
+            name={"Someone"}/>
           </SplideSlide>
         </Splide>
         </div>

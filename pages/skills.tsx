@@ -4,6 +4,8 @@ import Container from '../components/Container'
 import SkillsCard from '../components/SkillsCard'
 
 export default function Skills() {
+  const back_end = "#2ea6ff";
+  const web = "#01796F";
   return (
     <Container 
     title="Skills – Alex Riabov"
@@ -17,54 +19,59 @@ export default function Skills() {
       <div className='flex flex-col'>
             <SkillsCard
             scale={"90%"}
-            color={"#3AA8C1"}
+            color={back_end}
             img={"skills/python-icon.svg"}
             description={"Python"}/>
             <SkillsCard
             scale={"80%"}
-            color={"#3AA8C1"}
+            color={back_end}
             img={"skills/java-icon.svg"}
             description={"Java"}/>
             <SkillsCard
             scale={"90%"}
-            color={"#3AA8C1"}
+            color={back_end}
             img={"skills/c-icon.svg"}
             description={"C#"}/>
             <SkillsCard
             scale={"60%"}
-            color={"#3AA8C1"}
+            color={back_end}
             img={"skills/swift-icon.svg"}
             description={"Swift"}/>
             <SkillsCard
             scale={"80%"}
-            color={"#3AA8C1"}
+            color={back_end}
             img={"skills/firebase-icon.svg"}
             description={"Firebase"}/>
             <SkillsCard
             scale={"60%"}
-            color={"#01796F"}
+            color={web}
             img={"skills/typescript-icon.svg"}
             description={"TypeScript"}/>
             <SkillsCard
             scale={"70%"}
-            color={"#01796F"}
+            color={web}
             img={"skills/javascript-icon.svg"}
             description={"JavaScript"}/>
             <SkillsCard
             scale={"80%"}
-            color={"#01796F"}
+            color={web}
             img={"skills/nextjs-icon.svg"}
             description={"NexJS"}/>
             <SkillsCard
             scale={"80%"}
-            color={"#01796F"}
+            color={web}
             img={"skills/react-icon.svg"}
             description={"React"}/>
             <SkillsCard
             scale={"70%"}
-            color={"#01796F"}
+            color={web}
             img={"skills/tailwind-icon.svg"}
             description={"TailWind"}/>
+            <SkillsCard
+            scale={"30%"}
+            color={back_end}
+            img={"skills/c-plus-icon.svg"}
+            description={"C++"}/>
       </div>
         
     </Container>

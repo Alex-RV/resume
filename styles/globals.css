@@ -178,7 +178,7 @@ a {
 @media screen and (max-width:768px){.timeline-block .timeline-content:before{display:none;}
 }
 
-@media only screen and (min-width:768px){#timeline-education::before{left:50%;margin-left:-2px;height:77.1%;opacity:0.4;background:#2ea6ff;}
+@media only screen and (min-width:768px){#timeline-education::before{left:50%;margin-left:-2px;height:87%;opacity:0.4;background:#2ea6ff;}
 #timeline-experience::before{left:50%;margin-left:-2px;height:69.1%;opacity:0.4;background:#06A763;}
 .timeline-block{margin:-5em 0;}
 .timeline-block .card{margin:0;}

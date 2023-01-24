@@ -20,7 +20,7 @@ export default function About() {
             </h3>
           </div>
         
-        <div className="w-[80px] sm:w-[250px]  ml-40 relative justify-self-end mb-8 sm:mb-0 mr-auto">
+        <div className="w-[80px] sm:w-[250px]  ml-10 sm:ml-40 relative justify-self-end mb-8 sm:mb-0 mr-auto">
           <Image
             alt="Logo"
             height={250}

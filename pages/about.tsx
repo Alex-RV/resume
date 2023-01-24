@@ -11,13 +11,13 @@ export default function About() {
     <Container>
       <div className="flex flex-col items-start max-w-2xl mx-auto mb-16">
         <div className='flex flex-row mb-1'>
-          <div>
-          <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">
-          About Me
-        </h1>
-        <h3 className='text-black dark:text-white '>
-        If you see your way, don't hesitate
-        </h3>
+          <div className='flex flex-col h-full '>
+            <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">
+            About Me
+            </h1>
+            <h3 className=' mt-auto sm:mt-10 text-2xl text-[#2ea6ff] font-extrabold'>
+            If you see your way, don’t hesitate
+            </h3>
           </div>
         
         <div className="w-[80px] sm:w-[250px]  ml-40 relative justify-self-end mb-8 sm:mb-0 mr-auto">

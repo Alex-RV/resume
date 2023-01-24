@@ -18,52 +18,52 @@ export default function Skills() {
             <SkillsCard
             scale={"90%"}
             color={"#3AA8C1"}
-            img={"https://www.vectorlogo.zone/logos/python/python-icon.svg"}
+            img={"skills/python-icon.svg"}
             description={"Python"}/>
             <SkillsCard
             scale={"80%"}
             color={"#3AA8C1"}
-            img={"https://www.vectorlogo.zone/logos/java/java-icon.svg"}
+            img={"skills/java-icon.svg"}
             description={"Java"}/>
             <SkillsCard
             scale={"90%"}
             color={"#3AA8C1"}
-            img={"https://cdn.cdnlogo.com/logos/c/27/c.svg"}
+            img={"skills/c-icon.svg"}
             description={"C#"}/>
             <SkillsCard
             scale={"60%"}
             color={"#3AA8C1"}
-            img={"https://www.vectorlogo.zone/logos/swift/swift-ar21.svg"}
+            img={"skills/swift-icon.svg"}
             description={"Swift"}/>
             <SkillsCard
             scale={"80%"}
             color={"#3AA8C1"}
-            img={"https://www.vectorlogo.zone/logos/firebase/firebase-icon.svg"}
+            img={"skills/firebase-icon.svg"}
             description={"Firebase"}/>
             <SkillsCard
             scale={"60%"}
             color={"#01796F"}
-            img={"https://www.vectorlogo.zone/logos/typescriptlang/typescriptlang-icon.svg"}
+            img={"skills/typescript-icon.svg"}
             description={"TypeScript"}/>
             <SkillsCard
             scale={"70%"}
             color={"#01796F"}
-            img={"https://upload.wikimedia.org/wikipedia/commons/b/ba/Javascript_badge.svg"}
+            img={"skills/javascript-icon.svg"}
             description={"JavaScript"}/>
             <SkillsCard
             scale={"80%"}
             color={"#01796F"}
-            img={"https://upload.wikimedia.org/wikipedia/commons/8/8e/Nextjs-logo.svg"}
+            img={"skills/nextjs-icon.svg"}
             description={"NexJS"}/>
             <SkillsCard
             scale={"80%"}
             color={"#01796F"}
-            img={"https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg"}
+            img={"skills/react-icon.svg"}
             description={"React"}/>
             <SkillsCard
             scale={"70%"}
             color={"#01796F"}
-            img={"https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg"}
+            img={"skills/tailwind-icon.svg"}
             description={"TailWind"}/>
       </div>
         

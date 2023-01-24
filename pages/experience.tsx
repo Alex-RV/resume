@@ -9,7 +9,7 @@ export default function experience() {
     <Container
     title="Projects – Alex Riabov"
     description="Experience">
-        <div className="flex flex-col max-w-2xl w-full mx-auto mb-16">
+        <div className="flex flex-col max-w-2xl w-full mx-auto">
         <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-16 text-black dark:text-white">
           Experience :
         </h1>

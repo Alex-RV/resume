@@ -3,7 +3,7 @@ import React from 'react'
 export default function ExperienceCard({title, name, date, description,letter}) {
   return (
     <div className="timeline-block">
-                <div className="timeline-dot"><h6>{letter}</h6></div>
+                <div className="timeline-dot"><h6 className="material-icons">{letter}</h6></div>
                 <div className="card timeline-content">
                     <div className="card-content bg-slate-100 dark:bg-slate-600 ">
                         <h6 className="timeline-title text-black dark:text-white ">{title}</h6>

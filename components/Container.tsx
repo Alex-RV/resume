@@ -61,6 +61,8 @@ export default function Container(props) {
   return (
     <div className="bg-[#f9fafb] dark:bg-[#131415]">
       <Head>
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"/>
         <title>{meta.title}</title>
         {/* <meta name="robots" content="follow, index" /> */}
         <meta content={meta.description} name="description" />

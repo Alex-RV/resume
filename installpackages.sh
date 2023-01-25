@@ -21,7 +21,7 @@ npm i --force @splidejs/react-splide
 
 npm install --force use-delayed-render
 
-
+# $ git clone https://github.com/google/material-design-icons/
 
 # echo "export SENDGRID_API_KEY='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'" > sendgrid.env
 # echo "sendgrid.env" >> .gitignore

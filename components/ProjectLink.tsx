@@ -13,7 +13,7 @@ export default function ProjectLink({slug, file, title, description}) {
       'rounded-xl w-full bg-black p-1'
     )}
   >
-    <div className="flex flex-col justify-between h-full shadow-2xl bg-white dark:bg-[#18222d] rounded-lg p-4 pb-3">
+    <div className="flex flex-col justify-between shadow-2xl bg-white dark:bg-[#18222d] rounded-lg p-4 pb-3">
       <div className="flex flex-col md:flex-col justify-between">
 
       <div className="relative flex ">

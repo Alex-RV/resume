@@ -6,7 +6,6 @@ export default function ContactForm() {
     const [subject, setSubject] = useState("");
     const [message, setMessage] = useState("");
 
-    const [submitted, setSubmitted] = useState(false)
 
   //   Form validation state
   const [errors, setErrors] = useState({});
@@ -41,7 +40,7 @@ export default function ContactForm() {
     }
 
     setErrors({ ...tempErrors });
-    // console.log("errors", errors);
+    console.log("errors", errors);
     return isValid;
   };
 
@@ -70,12 +69,22 @@ export default function ContactForm() {
           console.log('Response received');
           if (res.status === 200) {
             console.log('Response succeeded!');
-            setSubmitted(true);
             setEmail('');
             setSubject('');
             setMessage('');
             setFullname('');
             setButtonText("Submit")
+            setShowSuccessMessage(true);
+            setShowFailureMessage(false);
+          }
+          else{
+            setEmail('');
+            setSubject('');
+            setMessage('');
+            setFullname('');
+            setButtonText("Submit")
+            setShowSuccessMessage(false);
+            setShowFailureMessage(true);
           }
         })
     }
@@ -102,7 +111,10 @@ export default function ContactForm() {
               name="fullname"
               className="bg-transparent border-b py-2 pl-4 focus:outline-none focus:rounded-md focus:ring-1 ring-green-500 font-light text-gray-500 dark:text-gray-200"
             />
-           
+            {errors?.fullname && (
+            <p className="text-red-500">Fullname cannot be empty.</p>
+          )}
+
   
             <label
               htmlFor="email"
@@ -119,7 +131,9 @@ export default function ContactForm() {
               }}
               className="bg-transparent border-b py-2 pl-4 focus:outline-none focus:rounded-md focus:ring-1 ring-green-500 font-light text-gray-500 dark:text-gray-200"
             />
-            
+            {errors?.email && (
+            <p className="text-red-500">Email cannot be empty.</p>
+          )}
   
             <label
               htmlFor="subject"
@@ -136,6 +150,9 @@ export default function ContactForm() {
               }}
               className="bg-transparent border-b py-2 pl-4 focus:outline-none focus:rounded-md focus:ring-1 ring-green-500 font-light text-gray-500 dark:text-gray-200"
             />
+            {errors?.subject && (
+            <p className="text-red-500">Subject cannot be empty.</p>
+          )}
            
             <label
               htmlFor="message"
@@ -150,6 +167,9 @@ export default function ContactForm() {
               }}
               className="bg-transparent border-b py-2 pl-4 focus:outline-none focus:rounded-md focus:ring-1 ring-green-500 font-light text-gray-500 dark:text-gray-200"
             ></textarea>
+            {errors?.message && (
+            <p className="text-red-500">Message body cannot be empty.</p>
+          )}
             
             <div className="flex flex-row items-center justify-start">
               <button
@@ -172,6 +192,18 @@ export default function ContactForm() {
                 </svg>
               </button>
             </div>
+            <div className="text-left">
+            {showSuccessMessage && (
+              <p className="text-green-500 font-semibold text-sm my-2">
+                Thankyou! Your Message has been delivered.
+              </p>
+            )}
+            {showFailureMessage && (
+              <p className="text-red-500">
+                Oops! Something went wrong, please try again.
+              </p>
+            )}
+          </div>
           </form>
       )
   }

@@ -16,7 +16,7 @@ export default function About() {
             About Me
             </h1>
             <h3 className=' mt-auto sm:mt-10 text-2xl text-[#2ea6ff] font-extrabold'>
-            If you see your way, don’t hesitate
+            If you see your way, don’t hesitate,
             </h3>
           </div>
         
@@ -37,12 +37,12 @@ export default function About() {
           <p className="text-gray-600 dark:text-gray-400 mb-4">
           As a self-taught programmer, 
           I have developed my skills through learning and collaborating with other developers. 
-          As a political refugee, I have experienced firsthand the challenges and uncertainty 
+          As a political refugee, I have experienced first-hand the challenges and uncertainties 
           that come with navigating a new country and culture. Recently, I have settled in the 
-          Bay Area of the United States and am currently a student at San Leandro High School. 
-          In addition to my studies, I am also an Ambassador for Google Code Next and a 
+          San Francisco Bay Area of the United States and am currently a student at San Leandro High School. 
+          In addition to my studies, I an Ambassador for Google Code Next and a 
           full-stack developer. I understand the importance of perseverance and determination 
-          in the face of adversity and am dedicated to using my skills and experiences to make a 
+          in the face of adversity, and I am dedicated to using my skills and experiences to make a 
           positive impact in the world.
             
           </p>

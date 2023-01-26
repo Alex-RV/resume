@@ -13,6 +13,9 @@ export default function projects() {
         <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-16 text-black dark:text-white">
           Projects :
         </h1>
+        <p>
+          The percentages below are representative of my proficiency in each skill.
+        </p>
         <div className='grid-cols-2 grid gap-5 sm:grid-cols-3 mx-auto container w-full max-w-2xl justify-center items-start'>
           <ProjectLink
             slug={"first"}

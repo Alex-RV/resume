@@ -35,10 +35,15 @@ export default function About() {
         
         <div className="mb-8">
           <p className="text-gray-600 dark:text-gray-400 mb-4">
-          I’m a programmer, who has started my way from learning code by myself and communicating with other developers. 
-        I’m a political refugee, who moved to the Bay Area, United States at the beginning of 2022. 
-        I know how life is changeable and how hard it is to keep your position and opinion in this world. 
-        Now I’m a student in San Leandro High School. Ambassador of Google Code Next and full-stack developer.
+          As a self-taught programmer, 
+          I have developed my skills through learning and collaborating with other developers. 
+          As a political refugee, I have experienced firsthand the challenges and uncertainty 
+          that come with navigating a new country and culture. Recently, I have settled in the 
+          Bay Area of the United States and am currently a student at San Leandro High School. 
+          In addition to my studies, I am also an Ambassador for Google Code Next and a 
+          full-stack developer. I understand the importance of perseverance and determination 
+          in the face of adversity and am dedicated to using my skills and experiences to make a 
+          positive impact in the world.
             
           </p>
         </div>

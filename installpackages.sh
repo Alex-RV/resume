@@ -18,6 +18,12 @@ npm i autoprefixer
 npm i --force @vercel/analytics
 npm i --save --force @sendgrid/mail
 npm i --force @splidejs/react-splide
+#for the sending mail
+npm i nodemailer
+#in terminal of project folder
+npm i dotenv
+#and then
+touch .env
 
 npm install --force use-delayed-render
 

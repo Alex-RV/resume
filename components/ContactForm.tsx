@@ -6,11 +6,13 @@ export default function ContactForm() {
     const [subject, setSubject] = useState("");
     const [message, setMessage] = useState("");
 
+    const [submitted, setSubmitted] = useState(false)
+
   //   Form validation state
   const [errors, setErrors] = useState({});
 
   //   Setting button text on form submission
-  const [buttonText, setButtonText] = useState("Send");
+  const [buttonText, setButtonText] = useState("Submit");
 
   // Setting success or failure messages states
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
@@ -39,50 +41,49 @@ export default function ContactForm() {
     }
 
     setErrors({ ...tempErrors });
-    console.log("errors", errors);
+    // console.log("errors", errors);
     return isValid;
   };
 
   //   Handling form submit
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => { 
     e.preventDefault();
 
     let isValidForm = handleValidation();
 
     if (isValidForm) {
       setButtonText("Sending");
-      const res = await fetch("/api/sendgrid", {
-        body: JSON.stringify({
-          email: email,
-          fullname: fullname,
-          subject: subject,
-          message: message,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-        method: "POST",
-      });
-
-      const { error } = await res.json();
-      if (error) {
-        console.log(error);
-        setShowSuccessMessage(false);
-        setShowFailureMessage(true);
-        setButtonText("Send");
-        return;
-      }
-      setShowSuccessMessage(true);
-      setShowFailureMessage(false);
-      setButtonText("Send");
+      let data = {
+          fullname,
+          email,
+          subject,
+          message,
+        };
+        fetch('/api/contact', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        }).then((res) => {
+          console.log('Response received');
+          if (res.status === 200) {
+            console.log('Response succeeded!');
+            setSubmitted(true);
+            setEmail('');
+            setSubject('');
+            setMessage('');
+            setFullname('');
+            setButtonText("Submit")
+          }
+        })
     }
-    console.log(fullname, email, subject, message);
-  };
+  }
   
       return (
           <form
-            // onSubmit={handleSubmit}
+            onSubmit={handleSubmit}
             className=" flex flex-col px-8 py-8 shadow-2xl dark:shadow-transparent rounded-xl p-6 my-4 w-full bg-white dark:bg-[#18222d]">
             <h1 className="text-2xl font-bold text-[#2ea6ff] dark:text-[#2ea6ff]">
               Contact with me
@@ -155,7 +156,7 @@ export default function ContactForm() {
                 type="submit"
                 className="px-10 mt-8 py-2 bg-[#2ea6ff] text-gray-50 font-light rounded-md text-lg flex flex-row items-center"
               >
-                Submit
+                {buttonText}
                 <svg
                   width="24"
                   height="24"

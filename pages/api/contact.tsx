@@ -1,6 +1,6 @@
 export default async (req, res) => {
   require('dotenv').config()
-  const PASSWORD = process.env.password
+  const PASSWORD_KEY = process.env.PASSWORD_KEY
 
   let nodemailer = require('nodemailer')
   const transporter = nodemailer.createTransport({
@@ -9,7 +9,7 @@ export default async (req, res) => {
     port: 587, // port for secure SMTP
     auth: {
       user: 'alex-riabov-resume@outlook.com',
-      pass: 'PasswordResume',
+      pass: PASSWORD_KEY,
     },
     tls: {
       ciphers:'SSLv3'

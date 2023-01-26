@@ -111,7 +111,8 @@ export default function ContactForm() {
               name="fullname"
               className="bg-transparent border-b py-2 pl-4 focus:outline-none focus:rounded-md focus:ring-1 ring-green-500 font-light text-gray-500 dark:text-gray-200"
             />
-            {errors?.fullname && (
+            {// @ts-ignore
+            errors?.fullname && (
             <p className="text-red-500">Fullname cannot be empty.</p>
           )}
 
@@ -131,7 +132,8 @@ export default function ContactForm() {
               }}
               className="bg-transparent border-b py-2 pl-4 focus:outline-none focus:rounded-md focus:ring-1 ring-green-500 font-light text-gray-500 dark:text-gray-200"
             />
-            {errors?.email && (
+            {// @ts-ignore
+            errors?.email && (
             <p className="text-red-500">Email cannot be empty.</p>
           )}
   
@@ -150,7 +152,8 @@ export default function ContactForm() {
               }}
               className="bg-transparent border-b py-2 pl-4 focus:outline-none focus:rounded-md focus:ring-1 ring-green-500 font-light text-gray-500 dark:text-gray-200"
             />
-            {errors?.subject && (
+            {// @ts-ignore
+            errors?.subject && (
             <p className="text-red-500">Subject cannot be empty.</p>
           )}
            
@@ -167,7 +170,8 @@ export default function ContactForm() {
               }}
               className="bg-transparent border-b py-2 pl-4 focus:outline-none focus:rounded-md focus:ring-1 ring-green-500 font-light text-gray-500 dark:text-gray-200"
             ></textarea>
-            {errors?.message && (
+            {// @ts-ignore
+            errors?.message && (
             <p className="text-red-500">Message body cannot be empty.</p>
           )}
             

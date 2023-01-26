@@ -1,80 +1,60 @@
-const nodemailer = require("nodemailer");
+export default function (req, res) {
+  require('dotenv').config()
+  const PASSWORD = process.env.password
 
-export default async (req, res) => {
-
-  // const { fullname, subject, email, message } = JSON.parse(req.body);
-    // require('dotenv').config()
-    // let nodemailer = require('nodemailer')
-    const transporter = nodemailer.createTransport({
-      host: "smtp-mail.outlook.com", // hostname
-      secureConnection: false, // use SSL
-      port: 587, // port for secure SMTP
-      auth: {
-        user: 'alex-riabov-resume@outlook.com',
-        pass: process.env.password,
-      },
-      tls: {
-        ciphers:'SSLv3'
-    }
-    });
-    await new Promise((resolve, reject) => {
-      // verify connection configuration
-      transporter.verify(function (error, success) {
-          if (error) {
-              console.log(error);
-              reject(error);
-          } else {
-              console.log("Server is ready to take our messages");
-              resolve(success);
-          }
-      });
-  });
-    const mailData = {
-      from: 'alex-riabov-resume@outlook.com',
-      to: 'alexsandrr2005@gmail.com',
-      subject: `[Lead from website] : ${req.body.subject}`,
-      text: req.body.message + " | Sent from: " + req.body.email,
-      html: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-      <html lang="en">
-      <head>
-        <meta charset="utf-8">
-      
-        <title>The HTML5 Herald</title>
-        <meta name="description" content="The HTML5 Herald">
-        <meta name="author" content="SitePoint">
-      <meta http-equiv="Content-Type" content="text/html charset=UTF-8" />
-      
-        <link rel="stylesheet" href="css/styles.css?v=1.0">
-      
-      </head>
-      
-      <body>
-        <div class="img-container" style="display: flex;justify-content: center;align-items: center;border-radius: 5px;overflow: hidden; font-family: 'helvetica', 'ui-sans';">              
-              </div>
-              <div class="container" style="margin-left: 20px;margin-right: 20px;">
-              <h3>You've got a new mail from ${req.body.fullname}, their email is: ✉️${req.body.email} </h3>
-              <div style="font-size: 16px;">
-              <p>Message:</p>
-              <p>${req.body.message}</p>
-              <br>
-              </div>
-              <img src="https://alex-riabov.vercel.app/_next/image?url=%2Flogo.jpg&w=828&q=75" class="logo-image" style="height: 50px;width: 50px;border-radius: 5px;overflow: hidden;">
-              </div>
-      </body>
-      </html>`,
-    }
-    await new Promise((resolve, reject) => {
-      // send mail
-      transporter.sendMail(mailData, (err, info) => {
-          if (err) {
-              console.error(err);
-              reject(err);
-          } else {
-              console.log(info);
-              resolve(info);
-          }
-      });
-  });
-  
-  res.status(200).json({ status: "OK" });
-  };
+  let nodemailer = require('nodemailer')
+  const transporter = nodemailer.createTransport({
+    host: "smtp-mail.outlook.com", // hostname
+    secureConnection: false, // use SSL
+    port: 587, // port for secure SMTP
+    auth: {
+      user: 'alex-riabov-resume@outlook.com',
+      pass: 'PasswordResume',
+    },
+    tls: {
+      ciphers:'SSLv3'
+  }
+  })
+  const mailData = {
+    from: 'alex-riabov-resume@outlook.com',
+    to: 'alexsandrr2005@gmail.com',
+    subject: `[Lead from website] : ${req.body.subject}`,
+    text: req.body.message + " | Sent from: " + req.body.email,
+    html: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    <html lang="en">
+    <head>
+      <meta charset="utf-8">
+    
+      <title>The HTML5 Herald</title>
+      <meta name="description" content="The HTML5 Herald">
+      <meta name="author" content="SitePoint">
+    <meta http-equiv="Content-Type" content="text/html charset=UTF-8" />
+    
+      <link rel="stylesheet" href="css/styles.css?v=1.0">
+    
+    </head>
+    
+    <body>
+      <div class="img-container" style="display: flex;justify-content: center;align-items: center;border-radius: 5px;overflow: hidden; font-family: 'helvetica', 'ui-sans';">              
+            </div>
+            <div class="container" style="margin-left: 20px;margin-right: 20px;">
+            <h3>You've got a new mail from ${req.body.fullname}, their email is: ✉️${req.body.email} </h3>
+            <div style="font-size: 16px;">
+            <p>Message:</p>
+            <p>${req.body.message}</p>
+            <br>
+            </div>
+            <img src="https://alex-riabov.vercel.app/_next/image?url=%2Flogo.jpg&w=828&q=75" class="logo-image" style="height: 50px;width: 50px;border-radius: 5px;overflow: hidden;">
+            </div>
+    </body>
+    </html>`,
+  }
+  transporter.sendMail(mailData, function (err, info) {
+    if(err)
+      console.log(err)
+    else
+      console.log(info)
+  })
+  res.status(200)
+  res.send()
+}

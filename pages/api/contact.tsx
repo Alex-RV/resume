@@ -1,4 +1,4 @@
-export default function (req, res) {
+export default async (req, res) => {
   require('dotenv').config()
   const PASSWORD = process.env.password
 
@@ -49,12 +49,18 @@ export default function (req, res) {
     </body>
     </html>`,
   }
-  transporter.sendMail(mailData, function (err, info) {
-    if(err)
-      console.log(err)
-    else
-      console.log(info)
-  })
+  await new Promise((resolve, reject) => {
+    // send mail
+    transporter.sendMail(mailData, (err, info) => {
+        if (err) {
+            console.error(err);
+            reject(err);
+        } else {
+            console.log(info);
+            resolve(info);
+        }
+    });
+});
   res.status(200)
   res.send()
 }

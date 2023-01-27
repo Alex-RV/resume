@@ -4,7 +4,8 @@ import Image from 'next/image';
 
 export default function SkillsCard({scale, color, description, img}) {
   return (
-    <div data-aos="fade-up" className='flex flex-row rounded-2xl mb-10 mx-auto bg-gray-200 dark:bg-slate-600 max-w-2xl w-full transform hover:scale-[1.01] transition-all'>
+    <div className='transform hover:scale-[1.01] transition-all'>
+      <div data-aos="fade-up" className='flex flex-row rounded-2xl mb-10 mx-auto bg-gray-200 dark:bg-slate-600 max-w-2xl w-full transform hover:scale-[1.01] transition-all'>
         <div className='flex p-4 items-center bg-cover bg-center bg-no-repeat'>
         <Image
                 alt="IMG"
@@ -27,6 +28,8 @@ export default function SkillsCard({scale, color, description, img}) {
             </div>
         </div>
     </div>
+    </div>
+    
   );
 }
 

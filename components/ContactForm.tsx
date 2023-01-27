@@ -1,10 +1,18 @@
 import React, {useState} from "react"
+import styles from 'styles/Home.module.css';
 
 export default function ContactForm() {
     const [fullname, setFullname] = useState("");
     const [email, setEmail] = useState("");
     const [subject, setSubject] = useState("");
     const [message, setMessage] = useState("");
+
+  //for plane animation
+  const [plane, setPlane] = useState("");
+  const startPlane = () => {
+    setPlane("true")
+    styles.animatePlane;
+  }
 
 
   //   Form validation state
@@ -179,6 +187,7 @@ export default function ContactForm() {
             <div className="flex flex-row items-center justify-start">
               <button
                 type="submit"
+                onClick={startPlane}
                 className="px-10 mt-8 py-2 bg-[#2ea6ff] text-gray-50 font-light rounded-md text-lg flex flex-row items-center"
               >
                 {buttonText}
@@ -186,7 +195,7 @@ export default function ContactForm() {
                   width="24"
                   height="24"
                   viewBox="0 0 24 24"
-                  className="text-black dark:text-[#18222d] ml-2"
+                  className={`${plane == "true" && styles.animatePlane}text-black dark:text-[#18222d] inline-block ml-2"`}
                   fill="currentColor"
                   xmlns="http://www.w3.org/2000/svg"
                 >

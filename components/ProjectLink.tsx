@@ -7,6 +7,8 @@ import Image from 'next/image';
 export default function ProjectLink({slug, file, title, description}) {
   return (
     <Link
+    data-aos="flip-left"
+    data-aos-duration="1000"
     href={`/projects/${slug}`}
     className={cn(
       'transform hover:scale-[1.01] transition-all',

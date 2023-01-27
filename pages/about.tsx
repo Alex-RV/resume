@@ -10,12 +10,12 @@ export default function About() {
   return (
     <Container>
       <div className="flex flex-col items-start max-w-2xl mx-auto mb-16">
-        <div className='flex flex-row mb-1'>
+        <div className='flex flex-row sm:mb-1 mb-5'>
           <div className='flex flex-col h-full '>
             <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">
             About Me
             </h1>
-            <h3 className=' mt-auto sm:mt-10 text-2xl text-[#2ea6ff] font-extrabold'>
+            <h3 data-aos="fade-up" className=' mt-auto sm:mt-10 text-2xl text-[#2ea6ff] font-extrabold'>
             If you see your way, don’t hesitate,
             </h3>
           </div>
@@ -33,7 +33,7 @@ export default function About() {
         </div>
         </div>
         
-        <div className="mb-8">
+        <div data-aos="fade-up" className="mb-8">
           <p className="text-gray-600 dark:text-gray-400 mb-4">
           As a self-taught programmer, 
           I have developed my skills through learning and collaborating with other developers. 
@@ -51,14 +51,14 @@ export default function About() {
         </div>
         <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 my-2 w-full">
         </div>
-        <h2 className="font-bold text-3xl tracking-tight mb-4 mt-16 text-[#2ea6ff]">
+        <h2 data-aos="fade-up" className="font-bold text-3xl tracking-tight mb-4 mt-16 text-[#2ea6ff]">
           Top Quotes
         </h2>
         {/* <p className="text-gray-600 dark:text-gray-400 mb-4">
           Quotes from people about me
         </p> */}
       </div>
-      <div className="flex flex-col justify-center items-start max-w-2xl mx-auto mb-16">
+      <div  data-aos="fade-up" className="flex flex-col justify-center items-start max-w-2xl mx-auto mb-16">
         <Splide
           options={ {
             type   : 'loop',

@@ -4,8 +4,6 @@ import Image from 'next/image'
 import { Inter } from '@next/font/google'
 import styles from '../styles/Home.module.css'
 import { Suspense } from 'react';
-import Aos from 'aos';
-import "aos/dist/aos.css"
 
 
 import Container from '../components/Container'
@@ -17,9 +15,6 @@ const inter = Inter({ subsets: ['latin'] })
 // [#141524]
 
 export default function Home() {
-  useEffect(() => {
-    Aos.init({duration: 2000});
-  }, []);
   return (
     <Suspense fallback={null}>
       <Container>

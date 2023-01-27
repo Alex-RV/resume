@@ -1,9 +1,11 @@
-import React, {useState} from "react"
+import React, {useEffect, useState} from "react"
 import Link from 'next/link'
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
 import styles from '../styles/Home.module.css'
 import { Suspense } from 'react';
+import Aos from 'aos';
+import "aos/dist/aos.css"
 
 
 import Container from '../components/Container'
@@ -15,11 +17,14 @@ const inter = Inter({ subsets: ['latin'] })
 // [#141524]
 
 export default function Home() {
+  useEffect(() => {
+    Aos.init({duration: 2000});
+  }, []);
   return (
     <Suspense fallback={null}>
       <Container>
       <div className="flex flex-col justify-start items-start max-w-2xl w-full mx-auto mb-16 border-gray-200 dark:border-gray-700">
-          <div className="flex flex-col items-start mb-8 p-10 bg-white dark:bg-[#18222d] shadow-2xl rounded-2xl dark:shadow-transparent">
+          <div data-aos="fade-up" className="flex flex-col items-start mb-5 pb-6 p-10 bg-white dark:bg-[#18222d] shadow-2xl rounded-2xl dark:shadow-transparent">
             <div className="flex sm:flex-row grid-cols-2 content-center ">
             <div className="flex flex-col">
               <h1 className=" items-center font-bold text-5xl md:text-7xl tracking-tight mb-1 text-[#2ea6ff] dark:text-[#2ea6ff]">
@@ -51,10 +56,10 @@ export default function Home() {
             </div>
 
           </div>
-            <h3 className="font-bold text-2xl md:text-4xl tracking-tight mb-6 text-[#2ea6ff] dark:text-[#2ea6ff]">
+            <h3 data-aos="fade-up" className="font-bold text-2xl md:text-4xl tracking-tight mb-6 text-[#2ea6ff] dark:text-[#2ea6ff]">
               Most popular projects
             </h3>
-            <div className="flex gap-6 flex-col w-full md:flex-row">
+            <div data-aos="fade-up" className="flex gap-6 flex-col w-full md:flex-row">
               <ProjectCard
                 title="Play in the game with your motions"
                 slug="ai-game-raspberry"

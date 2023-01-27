@@ -18,6 +18,7 @@ npm i autoprefixer
 npm i --force @vercel/analytics
 npm i --save --force @sendgrid/mail
 npm i --force @splidejs/react-splide
+npm i --save aos 
 #for the sending mail
 npm i nodemailer
 #in terminal of project folder

@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, {useState, useRef, useEffect} from "react"
 import styles from 'styles/Home.module.css';
 
 export default function ContactForm() {
@@ -8,12 +8,19 @@ export default function ContactForm() {
     const [message, setMessage] = useState("");
 
   //for plane animation
-  const [plane, setPlane] = useState("");
-  const startPlane = () => {
-    setPlane("true")
-    styles.animatePlane;
-  }
-
+  // const myRef = useRef();
+  // const [myElementIsVisible, updateMyElementIsVisible] = useState(false);
+  const [plane, setPlane] =useState(false)
+  // console.log('myElementIsVisible', myElementIsVisible)
+  // useEffect(() => {
+  //   const observer = new IntersectionObserver((entries, observer) => {
+  //     const entry = entries[0];
+  //     console.log('entry', entry);
+  //     console.log('entry.isIntersecting', entry.isIntersecting);
+  //     updateMyElementIsVisible(entry.isIntersecting);
+  //   });
+  //   observer.observe(myRef.current);
+  // }, []);
 
   //   Form validation state
   const [errors, setErrors] = useState({});
@@ -59,6 +66,7 @@ export default function ContactForm() {
     let isValidForm = handleValidation();
 
     if (isValidForm) {
+      setPlane(true);
       setButtonText("Sending");
       let data = {
           fullname,
@@ -84,6 +92,7 @@ export default function ContactForm() {
             setButtonText("Submit")
             setShowSuccessMessage(true);
             setShowFailureMessage(false);
+            setPlane(false);
           }
           else{
             setEmail('');
@@ -93,6 +102,7 @@ export default function ContactForm() {
             setButtonText("Submit")
             setShowSuccessMessage(false);
             setShowFailureMessage(true);
+            setPlane(false);
           }
         })
     }
@@ -106,6 +116,7 @@ export default function ContactForm() {
             <h1 className="text-2xl font-bold text-[#2ea6ff] dark:text-[#2ea6ff]">
               Contact with me
             </h1>
+            
   
             <label
               htmlFor="fullname" className="text-gray-500 font-light mt-8 dark:text-gray-50">
@@ -187,7 +198,6 @@ export default function ContactForm() {
             <div className="flex flex-row items-center justify-start">
               <button
                 type="submit"
-                onClick={startPlane}
                 className="px-10 mt-8 py-2 bg-[#2ea6ff] text-gray-50 font-light rounded-md text-lg flex flex-row items-center"
               >
                 {buttonText}
@@ -195,7 +205,7 @@ export default function ContactForm() {
                   width="24"
                   height="24"
                   viewBox="0 0 24 24"
-                  className={`${plane == "true" && styles.animatePlane}text-black dark:text-[#18222d] inline-block ml-2"`}
+                  className={`${ plane ? "animatePlane " : ""}text-black dark:text-white inline-block ml-2`}
                   fill="currentColor"
                   xmlns="http://www.w3.org/2000/svg"
                 >
@@ -204,6 +214,7 @@ export default function ContactForm() {
                     fill="currentColor"
                   />
                 </svg>
+                
               </button>
             </div>
             <div className="text-left">

@@ -16,7 +16,7 @@ export default function About() {
             About Me
             </h1>
             <h3 data-aos="fade-up" className=' mt-auto sm:mt-10 text-2xl text-[#2ea6ff] font-extrabold'>
-            If you see your way, don’t hesitate,
+            Pursue your goals.
             </h3>
           </div>
         

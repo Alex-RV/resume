@@ -7,6 +7,9 @@ You can get know me better through this site
 Open [https://alex-riabov.vercel.app/](https://alex-riabov.vercel.app/) in your brouser.
 
 ## To make it I used NextJS and React
+
+Use installpackages.sh file or
+
 All required packages:
 
 ```bash
@@ -31,8 +34,6 @@ npm i @splidejs/react-splide
 
 npm install use-delayed-render
 ```
-
-Or use installpackages.sh file
 
 ## Feel free to use it like a template for your project
 

@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@next/font": "13.1.1",
+    "@sanity/vision": "^3.2.5",
     "@sendgrid/mail": "^7.7.0",
     "@splidejs/react-splide": "^0.7.12",
     "@types/node": "18.11.18",

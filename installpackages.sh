@@ -21,7 +21,8 @@ npm i --force @splidejs/react-splide
 npm i --save aos
 npm i -g @sanity/cli
 sanity init
-npm i next-sanity   
+npm i next-sanity 
+npm i @sanity/vision  
 #for the sending mail
 npm i nodemailer
 #in terminal of project folder

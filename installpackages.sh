@@ -19,6 +19,9 @@ npm i --force @vercel/analytics
 npm i --save --force @sendgrid/mail
 npm i --force @splidejs/react-splide
 npm i --save aos
+npm i -g @sanity/cli
+sanity init
+npm i next-sanity   
 #for the sending mail
 npm i nodemailer
 #in terminal of project folder

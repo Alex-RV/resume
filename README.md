@@ -34,7 +34,7 @@ npm install use-delayed-render
 
 Or use installpackages.sh file
 
-## Feel free to use it like an example for your own web site
+## Feel free to use it like a template for your project
 
 ```bash
 git clone https://github.com/Alex-RV/resume.git

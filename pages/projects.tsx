@@ -1,10 +1,20 @@
-import React from 'react'
+import React, {Suspense, useState} from 'react'
 import Container from '../components/Container'
 import Link from 'next/link'
 
 import ProjectLink from '../components/ProjectLink'
+import { sanityClient, urlFor} from "../sanity.config"
+import {Post} from "../typings"
 
-export default function projects() {
+
+interface Props {
+  posts: [Post];
+}
+
+export default function projects({posts}: Props) {
+  // console.log("POST from posts log: "+ posts.map(post => (
+  //   post.slug
+  // )))
   return (
     <Container
     title="Projects – Alex Riabov"
@@ -14,34 +24,37 @@ export default function projects() {
           Projects :
         </h1>
         <div className='grid-cols-2 grid gap-5 sm:grid-cols-3 mx-auto container w-full max-w-2xl justify-center items-start'>
-          <ProjectLink
-            slug={"first"}
-            file={"/logo.jpg"}
-            title={"Project"}
-            description={"Description of project"}/>
+          {posts.map(post => (
             <ProjectLink
-            slug={"second"}
-            file={"/logo.jpg"}
-            title={"Project"}
-            description={"Description of project"}/>
-            <ProjectLink
-            slug={"third"}
-            file={"/logo.jpg"}
-            title={"Project"}
-            description={"Description of project"}/>
-          <ProjectLink
-            slug={"first"}
-            file={"/logo.jpg"}
-            title={"Project"}
-            description={"Description of project"}/>
-            <ProjectLink
-            slug={"second"}
-            file={"/logo.jpg"}
-            title={"Project"}
-            description={"Description of project"}/>
+            slug={`"projects/"${post.slug.current}`}
+            file={post.mainImage.asset}
+            title={post.title}
+            description={post.description}/>
+          ))}
         </div>
       </div>
       
     </Container>
-  )
+  );
 }
+export const getServerSideProps = async () => {
+  const query = `*[_type == "post"]{
+    _id,
+      title,
+      slug,
+      author -> {
+        name,
+        image,
+      },
+      description,
+      mainImage,
+      slug
+  }`;
+  const posts = await sanityClient.fetch(query);
+
+  return{
+    props:{
+      posts,
+    },
+  };
+};

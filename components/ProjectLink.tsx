@@ -2,6 +2,7 @@ import Link from 'next/link';
 import useSWR from 'swr';
 import cn from 'classnames';
 import Image from 'next/image';
+import { urlFor } from '../sanity.config';
 
 
 export default function ProjectLink({slug, file, title, description}) {
@@ -23,7 +24,7 @@ export default function ProjectLink({slug, file, title, description}) {
           <h1  className="mx-auto text-[2vw] flex text-white" >{description}</h1>
         </a>
         <div className="flex flex-wrap content-center">
-          <img src={file} alt={file} className="mx-auto filter w-auto h-auto"/>
+          <img src={urlFor(file).url() == "" ? "/logo.jpg" : urlFor(file).url()} alt={file} className="mx-auto filter w-auto h-auto"/>
         </div>
       </div>
       

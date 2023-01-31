@@ -52,7 +52,7 @@ export default function Container(props) {
   const { children, ...customMeta } = props;
   const router = useRouter();
   const meta = {
-    title: 'Aleksandr Riabov – Developer, engineer, creator.',
+    title: 'Aleksandr Riabov – Developer, Engineer, Inventor.',
     description: `Full-stack developer, hardware engineer.`,
     image: 'https://drive.google.com/file/d/1BI0JYU5gFaVPEIXvO0DXi-Sefufm0-Ao/view?usp=share_link',
     type: 'website',

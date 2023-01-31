@@ -25,6 +25,7 @@ npm i next-sanity
 npm i @sanity/vision  
 npm i @sanity/client
 npm i --save @sanity/image-url
+npm i date-fns
 #for the sending mail
 npm i nodemailer
 #in terminal of project folder

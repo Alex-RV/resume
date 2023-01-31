@@ -27,7 +27,7 @@ export default function projects({posts}: Props) {
           {posts.map(post => (
             <ProjectLink
             key={post._id}
-            slug={`"projects/"${post.slug.current}`}
+            slug={`projects/${post.slug.current}`}
             file={post.mainImage == null ? "" :post.mainImage.asset}
             title={post.title}
             description={post.description}/>

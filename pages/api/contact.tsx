@@ -1,6 +1,8 @@
 export default async (req, res) => {
   require('dotenv').config()
   const PASSWORD_KEY = process.env.PASSWORD_KEY
+  const EMAIL_OUT = process.env.EMAIL_OUT
+  const EMAIL_TO = process.env.EMAIL_TO
 
   let nodemailer = require('nodemailer')
   const transporter = nodemailer.createTransport({
@@ -8,7 +10,7 @@ export default async (req, res) => {
     secureConnection: false, // use SSL
     port: 587, // port for secure SMTP
     auth: {
-      user: 'alex-riabov-resume@outlook.com',
+      user: EMAIL_OUT,
       pass: PASSWORD_KEY,
     },
     tls: {
@@ -16,9 +18,9 @@ export default async (req, res) => {
   }
   })
   const mailData = {
-    from: 'alex-riabov-resume@outlook.com',
-    to: 'alexsandrr2005@gmail.com',
-    subject: `[Lead from website] : ${req.body.subject}`,
+    from: EMAIL_OUT,
+    to: EMAIL_TO,
+    subject: `${req.body.subject}`,
     text: req.body.message + " | Sent from: " + req.body.email,
     html: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
     <html lang="en">

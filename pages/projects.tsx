@@ -26,8 +26,9 @@ export default function projects({posts}: Props) {
         <div className='grid-cols-2 grid gap-5 sm:grid-cols-3 mx-auto container w-full max-w-2xl justify-center items-start'>
           {posts.map(post => (
             <ProjectLink
+            key={post._id}
             slug={`"projects/"${post.slug.current}`}
-            file={post.mainImage.asset}
+            file={post.mainImage == null ? "" :post.mainImage.asset}
             title={post.title}
             description={post.description}/>
           ))}

@@ -17,7 +17,6 @@ export default function App({ Component, pageProps }: AppProps) {
     Aos.init({duration: 2000});
   }, []);
   useEffect(() => {
-    console.log(globalThis.age)
     if(globalThis.age == ""|| null || undefined || "undefined"){
       globalThis.age = 0
     };}, [])

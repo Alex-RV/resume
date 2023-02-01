@@ -6,17 +6,17 @@ import PortableText from "react-portable-text";
 import Container from '../components/Container';
 import {Post} from "../typings" 
 import { urlFor } from '../sanity.config';
+import { useTheme } from 'next-themes';
 // import Subscribe from 'components/Subscribe';
 // import ViewCounter from 'components/ViewCounter';
 // import { Post } from 'lib/types';
 // import { urlForImage } from 'lib/sanity';
 
 export default function Project({post}) {
-  // const author_image = urlFor(post.author.image).url();
-  console.log(post.githubLink)
+  const { resolvedTheme, setTheme } = useTheme();
   return (
     <Container
-      title={`${post.title} – Lee Robinson`}
+      title={`${post.title} – Alex Riabov`}
       description={post.description}
     //   image={urlFor(post.mainImage).url()}
     //   date={new Date(post._createdAt).toISOString()}
@@ -46,17 +46,22 @@ export default function Project({post}) {
           <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 min-w-32 md:mt-0">
           </p>
           <div className="mt-10 text-black dark:text-white">
+          
             <PortableText
             className=""
             dataset={process.env.NEXT_PUBLIC_SANITY_DATASET!}
             projectId={process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!}
             content={post.body}
             serializers={{
-                h1: (props) => <h1 style={{ color: "red" }} {...props} />,
-                // h2: (props: any)  =>(
-                //     <h2 className='text-2xl font-bold my-5 text-black dark:text-[#ffffff]' {props.children} />,
-                // ),
-                h2: (props) => <h2 className='text-2xl font-bold my-5 text-black dark:text-white' {...props} />,
+                h1: (props) => <h1  
+                style={resolvedTheme == "dark" ? 
+                {color:"red", fontWeight: 'bold', fontSize: "2rem",}:
+                {color:"green", fontWeight: 'bold', fontSize: "2rem", }} {...props} />,
+                h2: (props) => <h2  
+                style={resolvedTheme == "dark" ? 
+                {color:"white", marginTop: '2rem', fontWeight: 'bold', fontSize: "1.5rem",}:
+                {color:"black", marginTop: '2rem', fontWeight: 'bold', fontSize: "1.5rem", }} {...props} />,
+                // h2: (props) => <h2 className='text-2xl font-bold my-5 text-black dark:text-white' {...props} />,
                 li: (children: any)  =>(
                     <li className="ml-4 list-disc text-black dark:text-white">{children}</li>
                 ),

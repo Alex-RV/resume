@@ -8,7 +8,9 @@ import InfoCard from '../components/InfoCard'
 
 export default function About() {
   return (
-    <Container>
+    <Container
+    title="About Me – Alex Riabov"
+    description="About Me Page">
       <div className="flex flex-col items-start max-w-2xl mx-auto mb-16">
         <div className='flex flex-row sm:mb-1 mb-5'>
           <div className='flex flex-col h-full '>

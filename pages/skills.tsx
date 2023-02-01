@@ -9,7 +9,7 @@ export default function Skills() {
   return (
     <Container 
     title="Skills – Alex Riabov"
-    description="Languages and other">
+    description="Languages and skills">
       <div className="flex flex-col justify-start items-start max-w-2xl w-full mx-auto mb-16">
       <div className='flex flex-col max-w-2xl w-full mx-auto'>
           <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">

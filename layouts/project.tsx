@@ -56,7 +56,7 @@ export default function Project({post}) {
                 // h2: (props: any)  =>(
                 //     <h2 className='text-2xl font-bold my-5 text-black dark:text-[#ffffff]' {props.children} />,
                 // ),
-                h2: (props) => <h2 className='text-2xl font-bold my-5 text-black dark:text-[#ffffff]' {...props} />,
+                h2: (props) => <h2 className='text-2xl font-bold my-5 text-black dark:text-white' {...props} />,
                 li: (children: any)  =>(
                     <li className="ml-4 list-disc text-black dark:text-white">{children}</li>
                 ),

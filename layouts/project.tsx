@@ -1,16 +1,10 @@
 import Image from 'next/image';
-import { parseISO, format } from 'date-fns';
-import { PropsWithChildren, Suspense } from 'react';
+import { Suspense } from 'react';
 import PortableText from "react-portable-text";
 
 import Container from '../components/Container';
-import {Post} from "../typings" 
 import { urlFor } from '../sanity.config';
 import { useTheme } from 'next-themes';
-// import Subscribe from 'components/Subscribe';
-// import ViewCounter from 'components/ViewCounter';
-// import { Post } from 'lib/types';
-// import { urlForImage } from 'lib/sanity';
 
 export default function Project({post}) {
   const { resolvedTheme, setTheme } = useTheme();
@@ -18,8 +12,6 @@ export default function Project({post}) {
     <Container
       title={`${post.title} – Alex Riabov`}
       description={post.description}
-    //   image={urlFor(post.mainImage).url()}
-    //   date={new Date(post._createdAt).toISOString()}
       type="article"
     >
       <article className="flex flex-col items-start justify-center w-full max-w-2xl mx-auto mb-16">
@@ -55,8 +47,8 @@ export default function Project({post}) {
             serializers={{
                 h1: (props) => <h1  
                 style={resolvedTheme == "dark" ? 
-                {color:"red", fontWeight: 'bold', fontSize: "2rem",}:
-                {color:"green", fontWeight: 'bold', fontSize: "2rem", }} {...props} />,
+                {color:"white", marginTop: '2rem', fontWeight: 'bold', fontSize: "2rem",}:
+                {color:"black", marginTop: '2rem', fontWeight: 'bold', fontSize: "2rem", }} {...props} />,
                 h2: (props) => <h2  
                 style={resolvedTheme == "dark" ? 
                 {color:"white", marginTop: '2rem', fontWeight: 'bold', fontSize: "1.5rem",}:

@@ -57,8 +57,8 @@ export default function Home() {
             <div data-aos="fade-up" className="flex gap-6 flex-col w-full md:flex-row">
               <ProjectCard
                 title="Play in the game with your motions"
-                slug="ai-game-raspberry"
-                name="AI game on Raspberry PI"
+                slug="ml-pi-game"
+                name="ML game on Raspberry PI"
               />
               <ProjectCard
                 title="App to control your spendings"

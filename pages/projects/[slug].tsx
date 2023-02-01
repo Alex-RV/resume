@@ -1,11 +1,6 @@
 import { GetStaticProps } from "next";
-import Image from 'next/image';
-// import { parseISO, format } from 'date-fns';
-import { PropsWithChildren, Suspense } from 'react';
-import PortableText from "react-portable-text";
 
 import {Post} from "../../typings" 
-import Container from "../../components/Container"
 import { sanityClient, urlFor} from "../../sanity.config"
 import Project from "../../layouts/project";
 

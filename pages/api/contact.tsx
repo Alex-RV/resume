@@ -10,7 +10,7 @@ export default async (req, res) => {
     secureConnection: false, // use SSL
     // port: 587, // port for secure SMTP
     auth: {
-      user: "alex-riabov-resume@outlook.com",
+      user: CONTACT_FORM_EMAIL_OUT,
       pass: CONTACT_FORM_PASSWORD_KEY,
     },
     tls: {
@@ -18,8 +18,8 @@ export default async (req, res) => {
   }
   })
   const mailData = {
-    from: "alex-riabov-resume@outlook.com",
-    to: "alexsandrr2005@gmail.com",
+    from: CONTACT_FORM_EMAIL_OUT,
+    to: CONTACT_FORM_EMAIL_TO,
     subject: `${req.body.subject}`,
     text: req.body.message + " | Sent from: " + req.body.email,
     html: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

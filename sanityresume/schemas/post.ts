@@ -50,6 +50,15 @@ export default defineType({
       type: 'datetime',
     }),
     defineField({
+      name: 'githubLink',
+      title: 'GithubLink',
+      type: 'slug',
+      options: {
+        source: 'title',
+        maxLength: 96,
+      },
+    }),
+    defineField({
       name: 'body',
       title: 'Body',
       type: 'blockContent',

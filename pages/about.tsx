@@ -37,8 +37,8 @@ export default function About() {
         
         <div data-aos="fade-up" className="mb-8">
           <p className="text-gray-600 dark:text-gray-400 mb-4">
-          As a self-taught programmer, 
-          I have developed my skills through learning and collaborating with other developers. 
+          I have developed my skills through learning and collaborating with other developers 
+          as a self-taught programmer. 
           As a political refugee, I have experienced first-hand the challenges and uncertainties 
           that come with navigating a new country and culture. Recently, I have settled in the 
           San Francisco Bay Area of the United States and am currently a student at San Leandro High School. 

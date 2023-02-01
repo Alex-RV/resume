@@ -15,7 +15,7 @@ export default function Skills() {
           <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">
             Professional Skills :</h1>
             <p className="text-xl tracking-tight mb-4 text-black dark:text-white">
-          The percentages below are representative of my proficiency in each skill
+          The percentages below are representations of my proficiency in each skill
         </p>
       </div>
       </div>

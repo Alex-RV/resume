@@ -62,6 +62,10 @@ export default function Project({post}) {
                 style={resolvedTheme == "dark" ? 
                 {color:"white", marginTop: '0.5rem', fontSize: "1rem",}:
                 {color:"black", marginTop: '0.5rem', fontSize: "1rem",}} {...props} />,
+                blockquote: (props) => <blockquote  
+                style={resolvedTheme == "dark" ? 
+                {color:"white", marginTop: '0.5rem', fontSize: "1rem",}:
+                {color:"black", marginTop: '0.5rem', fontSize: "1rem",}} {...props} />,
                 // li: (children: any)  =>(
                 //     <li className="ml-4 list-disc text-black dark:text-white">{children}</li>
                 // ),

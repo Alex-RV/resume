@@ -13,7 +13,7 @@ export default function ProjectLink({posts}) {
     <div key={post._id} data-aos="flip-left" data-aos-duration="1000" className='rounded-xl w-full bg-black p-[0.2rem]'>
     
     <Link
-    href={`projects/${post.slug.current}`}
+    href={post.slug == null ? "projects" :`projects/${post.slug.current}`}
     className='transform hover:scale-[1.01] transition-all
      ease-in-out overflow-hidden'
     // className={cn(''
@@ -24,7 +24,7 @@ export default function ProjectLink({posts}) {
 
       <div className="relative flex ">
         <a className="absolute inset-0 z-10 bg-black text-center flex flex-col items-center justify-center opacity-0 hover:opacity-90 bg-opacity-90 duration-300">
-          <h1  className="mx-auto text-[3vw] sm:text-[1.5vw] flex text-white px-1 overflow-hidden" >{post.description}</h1>
+          <h1  className="mx-auto text-[3vw] sm:text-[1.5vw] flex text-white px-1 overflow-hidden" >{post.description == null ? "Description" : post.description}</h1>
         </a>
         <div className="flex flex-wrap content-center">
           <img src={post.mainImage == null ? "/logo.jpg" : urlFor(post.mainImage.asset).url()!} className="mx-auto filter w-auto h-auto"/>
@@ -34,7 +34,7 @@ export default function ProjectLink({posts}) {
       </div>
       <div className="flex items-center text-gray-800 dark:text-gray-200 capsize">
           <h2 className="leading-7 text-[3vw] sm:text-[1.5vw] pt-1 font-medium w-full text-gray-900 dark:text-gray-300 tracking-tight">
-              {post.title}
+              {post.title == null ? "Title" : post.title}
           </h2>
       </div>
     </div>

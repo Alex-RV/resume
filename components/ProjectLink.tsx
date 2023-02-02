@@ -10,11 +10,9 @@ export default function ProjectLink({posts}) {
     <div className='grid-cols-2 grid gap-5 sm:grid-cols-3 mx-auto container w-full max-w-2xl justify-center items-start' >
       {posts.map(post => (
     
-    <div data-aos="flip-left" data-aos-duration="1000" className='rounded-xl w-full bg-black p-[0.2rem]'>
+    <div key={post._id} data-aos="flip-left" data-aos-duration="1000" className='rounded-xl w-full bg-black p-[0.2rem]'>
     
     <Link
-    
-    key={post._id}
     href={`projects/${post.slug.current}`}
     className='transform hover:scale-[1.01] transition-all
      ease-in-out overflow-hidden'

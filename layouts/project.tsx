@@ -58,14 +58,19 @@ export default function Project({post}) {
                 style={resolvedTheme == "dark" ? 
                 {color:"white",listStyleType: "disc", marginLeft:"1rem", marginTop: '2rem', }:
                 {color:"black",listStyleType: "disc", marginLeft:"1rem", marginTop: '2rem', }} {...props} />,
+                normal: (props) => <p  
+                style={resolvedTheme == "dark" ? 
+                {color:"white", marginTop: '0.5rem', fontSize: "1rem",}:
+                {color:"black", marginTop: '0.5rem', fontSize: "1rem",}} {...props} />,
                 // li: (children: any)  =>(
                 //     <li className="ml-4 list-disc text-black dark:text-white">{children}</li>
                 // ),
-                link: ({children, href}: any)  =>(
-                    <a href={href} className="text-blue-600 hover:underline">
-                        {children}
-                    </a>
-                ),
+                link: (props,href) => <a
+                href={href} 
+                style={resolvedTheme == "dark" ? 
+                {color:"#2ea6ff",listStyleType: "disc", marginLeft:"1rem", marginTop: '2rem', }:
+                {color:"#2ea6ff",listStyleType: "disc", marginLeft:"1rem", marginTop: '2rem', }} {...props} />,
+                
             }}/>
           </div>
         </div>

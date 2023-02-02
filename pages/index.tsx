@@ -48,7 +48,7 @@ export default function Home() {
                 <span className="font-semibold">Google Code Next</span>
               </h2>
               <p className="text-gray-600 text-xl dark:text-gray-400 ">
-                Coder, full-stack developer focused on back-end development. 
+                Coder, full-stack developer. 
               </p>
             </div>
 

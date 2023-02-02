@@ -25,11 +25,11 @@ export default function Project({post}) {
               height={24}
               width={24}
               sizes="20vw"
-              src={post.author.image == null ? "/logo.jpg" : urlFor(post.author.image).url()}
+              src={post.author == null ? "/logo.jpg" : urlFor(post.author.image).url()}
               className="rounded-full"
             />
             <p className="ml-2 text-sm text-gray-700 dark:text-gray-300">
-              {post.author.name == null ? "Alex" : post.author.name}
+              {post.author == null ? "Alex" : post.author.name}
             </p>
             <p className="ml-2 text-sm text-gray-700 dark:text-gray-300">
             {post.publishedAt == null ? "Jan 1, 2023" :new Date(post.publishedAt).toLocaleString('en-us', { year:"numeric", month:"short",day: 'numeric'})}

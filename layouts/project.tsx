@@ -54,9 +54,13 @@ export default function Project({post}) {
                 {color:"white", marginTop: '2rem', fontWeight: 'bold', fontSize: "1.5rem",}:
                 {color:"black", marginTop: '2rem', fontWeight: 'bold', fontSize: "1.5rem", }} {...props} />,
                 // h2: (props) => <h2 className='text-2xl font-bold my-5 text-black dark:text-white' {...props} />,
-                li: (children: any)  =>(
-                    <li className="ml-4 list-disc text-black dark:text-white">{children}</li>
-                ),
+                li: (props) => <li  
+                style={resolvedTheme == "dark" ? 
+                {color:"white",listStyleType: "disc", marginLeft:"1rem", marginTop: '2rem', }:
+                {color:"black",listStyleType: "disc", marginLeft:"1rem", marginTop: '2rem', }} {...props} />,
+                // li: (children: any)  =>(
+                //     <li className="ml-4 list-disc text-black dark:text-white">{children}</li>
+                // ),
                 link: ({children, href}: any)  =>(
                     <a href={href} className="text-blue-600 hover:underline">
                         {children}

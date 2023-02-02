@@ -11,12 +11,12 @@ export default function Project({post}) {
   return (
     <Container
       title={`${post.title} – Alex Riabov`}
-      description={post.description}
+      description={post.description == null ? "Description" : post.description}
       type="article"
     >
       <article className="flex flex-col items-start justify-center w-full max-w-2xl mx-auto mb-16">
         <h1 className="mb-4 text-3xl font-bold tracking-tight text-black md:text-5xl dark:text-white">
-          {post.title}
+          {post.title == null ? "Title" : post.title}
         </h1>
         <div className="flex flex-col items-start justify-between w-full mt-2  md:items-center">
           <div className="flex items-center rotate-90">
@@ -25,14 +25,14 @@ export default function Project({post}) {
               height={24}
               width={24}
               sizes="20vw"
-              src={urlFor(post.author.image).url()}
+              src={post.author.image == null ? "/logo.jpg" : urlFor(post.author.image).url()}
               className="rounded-full"
             />
             <p className="ml-2 text-sm text-gray-700 dark:text-gray-300">
-              {post.author.name}
+              {post.author.name == null ? "Alex" : post.author.name}
             </p>
             <p className="ml-2 text-sm text-gray-700 dark:text-gray-300">
-            {new Date(post.publishedAt).toLocaleString('en-us', { year:"numeric", month:"short",day: 'numeric'})}
+            {post.publishedAt == null ? "Jan 1, 2023" :new Date(post.publishedAt).toLocaleString('en-us', { year:"numeric", month:"short",day: 'numeric'})}
             </p>
           </div>
           <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 min-w-32 md:mt-0">
@@ -43,7 +43,7 @@ export default function Project({post}) {
             className=""
             dataset={process.env.NEXT_PUBLIC_SANITY_DATASET!}
             projectId={process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!}
-            content={post.body}
+            content={post.body == null ? "No content yet" : post.body}
             serializers={{
                 h1: (props) => <h1  
                 style={resolvedTheme == "dark" ? 
@@ -82,7 +82,7 @@ export default function Project({post}) {
           </div>
           <div className="text-sm text-gray-700 dark:text-gray-300">
             <a
-              href="/"
+              href="/#contactForm"
               // target="_blank"
               // rel="noopener noreferrer"
             >
@@ -90,7 +90,7 @@ export default function Project({post}) {
             </a>
             {` • `}
             <a
-              href={post.githubLink == null ? "" : post.githubLink.current}
+              href={post.githubLink == null ? "https://github.com/Alex-RV" : post.githubLink.current}
               target="_blank"
               // rel="noopener noreferrer"
             >

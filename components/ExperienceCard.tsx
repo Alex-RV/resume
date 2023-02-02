@@ -7,7 +7,7 @@ export default function ExperienceCard({title, name, date, description,letter}) 
                 <div className="card timeline-content">
                     <div className="card-content bg-slate-100 dark:bg-slate-600 ">
                         <h6 className="timeline-title text-black dark:text-white ">{title}</h6>
-                        <div className="timeline-info text-black dark:text-white ">
+                        <div className="timeline-info text-black dark:text-white mb-2">
                             <h6>
                                 <small>{name}</small>
                             </h6>

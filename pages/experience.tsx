@@ -15,39 +15,39 @@ export default function experience() {
         </h1>
         <Experience>
         <ExperienceCard
-          title={"Hackathon"}
-          letter={"terminal"}
-          name={"Online Git-Init"}
-          date={"Jan 2022"}
-          description={"Online Git Init"}/>
-        <ExperienceCard
-          title={"CodeNext Club Part II"}
+          title={"Unity Part II"}
           letter={"code"}
-          name={"Unity"}
-          date={"Jan 2022 - Jan 2022"}
+          name={"CodeNext Club"}
+          date={"Jan 2023 - Apr 2023"}
           description={"Game Development on Unity(C#)"}/>
           <ExperienceCard
-          title={"CodeNext Club"}
+          title={"3D Modeling"}
           letter={"code"}
-          name={"3D Modeling"}
+          name={"CodeNext Club"}
           date={"Jan 2023 - Mar 2023"}
           description={"Club about 3D modeling"}/>
           <ExperienceCard
-          title={"Hackathon"}
+          title={"Git-Init"}
           letter={"terminal"}
-          name={"EPOCH"}
-          date={"Dec 31 2022"}
-          description={"Hackathon in the end of year. Provided by HackClub"}/>
+          name={"Online Hackathon"}
+          date={"Jan 2023"}
+          description={"We created game and website to help people understand importance of mental health and how mental problems feels for people"}/>
           <ExperienceCard
-          title={"CodeNext Club Part I"}
+          title={"EPOCH"}
+          letter={"terminal"}
+          name={"Hackathon"}
+          date={"Dec 31 2022"}
+          description={"Hackathon in the end of year when we created memeware. Provided by HackClub"}/>
+          <ExperienceCard
+          title={"Unity Part I"}
           letter={"code"}
-          name={"Unity"}
+          name={"CodeNext Club"}
           date={"Sep 2022 - Dec 2022"}
           description={"Game Development on Unity(C#)"}/>
           <ExperienceCard
-          title={"CodeNext Club"}
+          title={"IOS Development"}
           letter={"code"}
-          name={"IOS Development"}
+          name={"CodeNext Club"}
           date={"Sep 2022 - Dec 2022"}
           description={"Development on Swift for the IOS in Xcode"}/>
           <ExperienceCard

@@ -188,7 +188,7 @@ a {
 }
 .card{position:relative;transition:box-shadow .25s;-webkit-transition:box-shadow .25s;border-radius:0 !important;margin:8px 0;}
 .card .card-content{padding:40px;border-radius:0 0 2px 2px;}
-.card .card-content p{margin:0;text-align:center;}
+.card .card-content p{margin:0;text-align:center;line-height:1;}
 
 .timeline-block{position:relative;}
 .timeline-block::after{clear:both;content:"";display:table;}

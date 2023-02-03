@@ -53,6 +53,14 @@ export default function Project({post}) {
                 style={resolvedTheme == "dark" ? 
                 {color:"white", marginTop: '2rem', fontWeight: 'bold', fontSize: "1.5rem",}:
                 {color:"black", marginTop: '2rem', fontWeight: 'bold', fontSize: "1.5rem", }} {...props} />,
+                h3: (props) => <h3  
+                style={resolvedTheme == "dark" ? 
+                {color:"white", marginTop: '2rem', fontWeight: 'bold'}:
+                {color:"black", marginTop: '2rem', fontWeight: 'bold'}} {...props} />,
+                h4: (props) => <h4  
+                style={resolvedTheme == "dark" ? 
+                {color:"white", marginTop: '2rem', fontWeight: 'bold', fontSize: "1rem",}:
+                {color:"black", marginTop: '2rem', fontWeight: 'bold', fontSize: "1rem", }} {...props} />,
                 // h2: (props) => <h2 className='text-2xl font-bold my-5 text-black dark:text-white' {...props} />,
                 li: (props) => <li  
                 style={resolvedTheme == "dark" ? 
@@ -62,7 +70,7 @@ export default function Project({post}) {
                 style={resolvedTheme == "dark" ? 
                 {color:"white", marginTop: '0.5rem', fontSize: "1rem",}:
                 {color:"black", marginTop: '0.5rem', fontSize: "1rem",}} {...props} />,
-                blockquote: (props) => <blockquote  
+                blockquote: (props) => <q  
                 style={resolvedTheme == "dark" ? 
                 {color:"white", marginTop: '0.5rem', fontSize: "1rem",}:
                 {color:"black", marginTop: '0.5rem', fontSize: "1rem",}} {...props} />,

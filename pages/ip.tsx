@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Container from '../components/Container';
 
-export default function ip() {
+export default function Ip() {
     const [dataIP, setDataIP] = useState('')
     
     function getIP() {

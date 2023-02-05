@@ -21,7 +21,7 @@ export default function SkillsCard({scale, color, description, img, level}) {
         <div className='flex flex-col w-full'>
         <div className='flex bg-gray-300 dark:bg-slate-500 rounded-2xl mt-2 mx-2' >
             <div style={{width:scale, backgroundColor:color}} className='flex p-[0.1rem] rounded-2xl justify-end'>
-              <p className='text-[12px] text-[#ffffff] mr-1'>{level}</p>
+              <p className='text-[12px] text-[#ffffff] mr-1 font-bold'>{level}</p>
             </div>
         </div> 
         

@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import Link from 'next/link';
 import useDelayedRender from 'use-delayed-render';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, createRef } from 'react';
 import styles from 'styles/mobile-menu.module.css';
 
 export default function MobileMenu() {
@@ -32,6 +32,7 @@ export default function MobileMenu() {
 
   return (
     <>
+    <div className='visible md:hidden'>
       <button
         className={cn(styles.burger, 'visible md:hidden')}
         aria-label="Toggle menu"
@@ -91,6 +92,7 @@ export default function MobileMenu() {
           </li>
         </ul>
       )}
+    </div>
     </>
   );
 }

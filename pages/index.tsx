@@ -23,7 +23,7 @@ export default function Home() {
       <div className="flex flex-col justify-start items-start max-w-2xl w-full mx-auto mb-16 border-gray-200 dark:border-gray-700">
           <div data-aos="fade-up" className="flex flex-col items-start mb-5 pb-6 p-10 bg-white dark:bg-[#18222d] shadow-2xl rounded-2xl dark:shadow-transparent">
             <div className="flex sm:flex-row grid-cols-2 content-center ">
-            <div className="flex flex-col sm:mr-0 mr-10">
+            <div className="flex flex-col">
               <h1 className=" items-center font-bold text-5xl md:text-7xl tracking-tight mb-1 text-[#2ea6ff] dark:text-[#2ea6ff]">
                 Alex Riabov
               </h1>

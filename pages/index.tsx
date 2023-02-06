@@ -56,7 +56,8 @@ export default function Home() {
             <h3 data-aos="fade-up" className="font-bold text-2xl md:text-4xl tracking-tight mb-6 text-[#2ea6ff] dark:text-[#2ea6ff]">
               Most popular projects
             </h3>
-            <div data-aos="fade-up" className="flex gap-6 flex-col w-full md:flex-row">
+            <div data-aos="fade-up" className="w-full">
+            <div className="flex gap-6 flex-col w-full md:flex-row">
               <ProjectCard
                 title="Play in the game with your motions"
                 slug="ml-pi-game"
@@ -95,6 +96,7 @@ export default function Home() {
               </svg>
             </>
           </Link>
+          </div>
           <ContactForm/>
           </div>
       </Container>

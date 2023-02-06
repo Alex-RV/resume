@@ -195,23 +195,28 @@ export default function ContactForm() {
             errors?.message && (
             <p className="text-red-500">Message body cannot be empty.</p>
           )}
-            
             <div className="flex flex-row items-center justify-start">
               <button
                 type="submit"
-                className="px-10 mt-8 py-2 bg-[#2ea6ff] text-gray-50 font-light rounded-md text-lg flex flex-row items-center"
+                className="px-10 mt-8 py-2 bg-[#2ea6ff] text-gray-700 dark:text-gray-50 font-light rounded-md text-lg flex flex-row items-center"
               >
                 {buttonText}
+                {/* <svg aria-hidden="true" 
+                className="w-5 h-5 text-blue-600 dark:text-blue-500" 
+                focusable="false" data-prefix="fas" data-icon="paper-plane" 
+                role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                  <path fill="currentColor" 
+                  d="M511.6 36.86l-64 415.1c-1.5 9.734-7.375 18.22-15.97 23.05c-4.844 2.719-10.27 4.097-15.68 4.097c-4.188 0-8.319-.8154-12.29-2.472l-122.6-51.1l-50.86 76.29C226.3 508.5 219.8 512 212.8 512C201.3 512 192 502.7 192 491.2v-96.18c0-7.115 2.372-14.03 6.742-19.64L416 96l-293.7 264.3L19.69 317.5C8.438 312.8 .8125 302.2 .0625 289.1s5.469-23.72 16.06-29.77l448-255.1c10.69-6.109 23.88-5.547 34 1.406S513.5 24.72 511.6 36.86z"></path></svg> */}
                 <svg
                   width="24"
                   height="24"
-                  viewBox="0 0 24 24"
+                  viewBox="0 0 512 512"
                   className={`${ plane ? "animatePlane " : ""}text-black dark:text-white inline-block ml-2`}
                   fill="currentColor"
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    d="M9.00967 5.12761H11.0097C12.1142 5.12761 13.468 5.89682 14.0335 6.8457L16.5089 11H21.0097C21.562 11 22.0097 11.4477 22.0097 12C22.0097 12.5523 21.562 13 21.0097 13H16.4138L13.9383 17.1543C13.3729 18.1032 12.0191 18.8724 10.9145 18.8724H8.91454L12.4138 13H5.42485L3.99036 15.4529H1.99036L4.00967 12L4.00967 11.967L2.00967 8.54712H4.00967L5.44417 11H12.5089L9.00967 5.12761Z"
+                    d="M511.6 36.86l-64 415.1c-1.5 9.734-7.375 18.22-15.97 23.05c-4.844 2.719-10.27 4.097-15.68 4.097c-4.188 0-8.319-.8154-12.29-2.472l-122.6-51.1l-50.86 76.29C226.3 508.5 219.8 512 212.8 512C201.3 512 192 502.7 192 491.2v-96.18c0-7.115 2.372-14.03 6.742-19.64L416 96l-293.7 264.3L19.69 317.5C8.438 312.8 .8125 302.2 .0625 289.1s5.469-23.72 16.06-29.77l448-255.1c10.69-6.109 23.88-5.547 34 1.406S513.5 24.72 511.6 36.86z"
                     fill="currentColor"
                   />
                 </svg>

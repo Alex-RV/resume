@@ -20,3 +20,16 @@ export interface Post{
     };
     body:[object];
 }
+
+export interface Projects{
+    title:string;
+    mainImage:{
+        asset:{
+            url:string;
+        };
+    };
+    slug:{
+        current:string;
+    };
+    description:string;
+}

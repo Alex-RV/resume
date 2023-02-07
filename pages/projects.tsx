@@ -4,11 +4,12 @@ import Link from 'next/link'
 
 import ProjectLink from '../components/ProjectLink'
 import { sanityClient, urlFor} from "../sanity.config"
-import {Post} from "../typings"
+import {Post, Projects} from "../typings"
+import { queryProject, queryProjectsTab } from '../lib/queries'
 
 
 interface Props {
-  posts: [Post];
+  posts: [Projects];
 }
 
 export default function projects({posts}: Props) {
@@ -32,19 +33,8 @@ export default function projects({posts}: Props) {
   );
 }
 export const getServerSideProps = async () => {
-  const query = `*[_type == "post"]{
-    _id,
-      title,
-      slug,
-      author -> {
-        name,
-        image,
-      },
-      description,
-      mainImage,
-      slug
-  }`;
-  const posts = await sanityClient.fetch(query);
+  
+  const posts = await sanityClient.fetch(queryProject);
 
   return{
     props:{

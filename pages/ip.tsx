@@ -4,8 +4,8 @@ import Container from '../components/Container';
 function LiElement({ text, element }) {
   return (
     <li className='flex flex-row gap-3 items-start max-w-2xl w-full mx-auto'>
-      <h1 className="text-[1.5rem] md:text-[2rem] text-black dark:text-white">{text}</h1>
-      <h1 className="text-[1.5rem] md:text-[2rem] font-bold text-black dark:text-gray-100">{element}</h1>
+      <h1 className="text-[1rem] sm:text-[2rem] text-black dark:text-white">{text}</h1>
+      <h1 className="text-[1rem] sm:text-[2rem] font-bold text-black dark:text-gray-100">{element}</h1>
     </li>
   );
 }

@@ -14,14 +14,12 @@ export default function Skills() {
       <div className='flex flex-col max-w-2xl w-full mx-auto'>
           <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">
             Professional Skills :</h1>
-            {/* <p className="text-xl tracking-tight mb-4 text-black dark:text-white">
-          The percentages below are representations of my proficiency in each skill</p> */}
       </div>
       </div>
       <div className='flex flex-col'>
             <SkillsCard
             scale={"90%"}
-            level={"Master"}
+            level={"Proficient"}
             color={back_end}
             img={"skills/python-icon.svg"}
             description={"Python"}/>
@@ -33,7 +31,7 @@ export default function Skills() {
             description={"Java"}/>
             <SkillsCard
             scale={"90%"}
-            level={"Master"}
+            level={"Proficient"}
             color={back_end}
             img={"skills/c-icon.svg"}
             description={"C#"}/>

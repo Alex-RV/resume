@@ -3,9 +3,9 @@ import Container from '../components/Container';
 
 function LiElement({ text, element }) {
   return (
-    <li className='flex flex-row gap-3' >
-      <h1 className="text-[1.5rem] md:text-[2.5rem] text-black dark:text-white ">{text}</h1>
-      <h1 className="text-[1.5rem] md:text-[2.5rem] font-bold text-black dark:text-gray-100">{element}</h1>
+    <li className='flex flex-row gap-3 items-start max-w-2xl w-full mx-auto'>
+      <h1 className="text-[1.5rem] md:text-[2rem] text-black dark:text-white">{text}</h1>
+      <h1 className="text-[1.5rem] md:text-[2rem] font-bold text-black dark:text-gray-100">{element}</h1>
     </li>
   );
 }
@@ -22,9 +22,10 @@ export default function Ip() {
     const [state, setState] = useState('')
     const [ip, setIP] = useState('')
     const [version, setVersion] = useState('')
+    const [org, setOrg] = useState('')
     useEffect(() => {
 
-        let data,country_code,country_name,city,postal,latitude,longitude,IPv4,state,version,ip  = ''
+        let data,country_code,country_name,city,postal,latitude,longitude,IPv4,state,version,ip,org  = ''
         fetch('https://ipapi.co/json/')
         .then(function(response) {
             return response.json();
@@ -33,8 +34,10 @@ export default function Ip() {
 
           version=myJson.version
           ip=myJson.ip
+          org=myJson.org
         setVersion(version)
         setIP(ip)
+        setOrg(org)
         });
         fetch('https://geolocation-db.com/json/')
         .then(function(response) {
@@ -84,6 +87,7 @@ export default function Ip() {
           <LiElement text={"Longitude: "} element={longitude}/>
           <LiElement text={`${version}: `} element={dataIP}/>
           <LiElement text={"State: "} element={state}/>
+          <LiElement text={"Provider: "} element={org}/>
         </ul>
         {/* <button role="button"className='button-ip' onClick={() =>getIPData()}>Get my IP</button> */}
     </div>

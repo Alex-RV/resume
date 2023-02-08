@@ -37,6 +37,12 @@ export default function Footer() {
           <ExternalLink href="https://www.youtube.com/channel/UCCh82KoX6F34PY1lxoqEW3g">
             YouTube
           </ExternalLink>
+          <Link
+            href="/ip"
+            className="text-gray-500 hover:text-gray-600 transition"
+          >
+            Your IP
+          </Link>
         </div>
         <div className="flex flex-col space-y-4">
           <Link

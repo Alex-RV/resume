@@ -53,7 +53,7 @@ export default function Ip() {
   return (
     <Container>
         <div className="flex flex-col items-start max-w-2xl w-full mx-auto mb-16">
-        <ul className="font-bold grid-cols-2 justify-start text-3xl md:text-5xl tracking-tight mb-16 text-black dark:text-white">
+        <ul className="font-bold justify-start flex-col text-3xl md:text-5xl tracking-tight mb-16 text-black dark:text-white">
           <li>IP : {dataIP}</li>
           <li>Country Code : {country_code}</li>
           <li>Country Name : {country_name}</li>

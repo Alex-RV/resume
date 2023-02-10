@@ -6,6 +6,7 @@ import ProjectLink from '../components/ProjectLink'
 import { sanityClient, urlFor} from "../sanity.config"
 import {Post, Projects} from "../typings"
 import { queryProject, queryProjectsTab } from '../lib/queries'
+import LoadingScreen from '../components/LoadingScreen'
 
 
 interface Props {
@@ -25,7 +26,7 @@ export default function projects({posts}: Props) {
         <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-16 text-black dark:text-white">
           Projects :
         </h1>
-        <Suspense fallback={null}>
+        <Suspense fallback={<LoadingScreen/>}>
         <ProjectLink
             posts={posts}
             />

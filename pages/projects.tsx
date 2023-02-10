@@ -34,7 +34,7 @@ export default function projects({posts}: Props) {
 }
 export const getServerSideProps = async () => {
   
-  const posts = await sanityClient.fetch(queryProject);
+  const posts = await sanityClient.fetch(queryProjectsTab);
 
   return{
     props:{

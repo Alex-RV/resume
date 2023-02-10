@@ -11,10 +11,16 @@ export const queryProject = `*[_type == "post"]{
       slug
   }`;
 
-export const queryProjectsTab = `*[_type == "post"] {
+export const queryProjectsTab = ` *[_type == "post"] {
+    title,
+    description,
+  }`;
+
+  export const queryProjectImageUrl = `*[_type == "post"] {
     title,
     description,
     mainImage{
       asset->{url}
     }
   }`;
+ 

@@ -15,6 +15,6 @@ export const queryProjectsTab = `*[_type == "post"] {
     title,
     description,
     mainImage{
-      asset->url
+      asset->{url}
     }
   }`;

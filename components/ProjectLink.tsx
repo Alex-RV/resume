@@ -27,7 +27,7 @@ export default function ProjectLink({posts}) {
           <h1  className="mx-auto text-[3vw] sm:text-[1.5vw] flex text-white px-1 overflow-hidden" >{post.description == null ? "Description" : post.description}</h1>
         </a>
         <div className="flex flex-wrap content-center">
-          <img src={post.mainImage == null ? "/logo.jpg" : urlFor(post.mainImage.asset).url()!} className="mx-auto filter w-auto h-auto"/>
+          <img alt={post.slug} src={post.mainImage == null ? "/logo.jpg" : urlFor(post.mainImage.asset).url()!} className="mx-auto filter w-auto h-auto"/>
         </div>
       </div>
       

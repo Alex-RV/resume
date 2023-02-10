@@ -17,7 +17,8 @@ export default function projects({posts}: Props) {
   //   post.slug
   // )))
   return (
-    <Container
+    <Suspense fallback={null}>
+      <Container
     title="Projects – Alex Riabov"
     description="All my projects">
         <div className="flex flex-col justify-start items-start max-w-2xl w-full mx-auto mb-16">
@@ -30,11 +31,13 @@ export default function projects({posts}: Props) {
       </div>
       
     </Container>
+    </Suspense>
+    
   );
 }
 export const getServerSideProps = async () => {
   
-  const posts = await sanityClient.fetch(queryProjectsTab);
+  const posts = await sanityClient.fetch(queryProject);
 
   return{
     props:{

@@ -17,7 +17,7 @@ export default function projects({posts}: Props) {
   //   post.slug
   // )))
   return (
-    <Suspense fallback={null}>
+    
       <Container
     title="Projects – Alex Riabov"
     description="All my projects">
@@ -25,13 +25,14 @@ export default function projects({posts}: Props) {
         <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-16 text-black dark:text-white">
           Projects :
         </h1>
-            <ProjectLink
+        <Suspense fallback={null}>
+        <ProjectLink
             posts={posts}
             />
+        </Suspense>
       </div>
       
     </Container>
-    </Suspense>
     
   );
 }

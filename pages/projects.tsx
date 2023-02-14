@@ -7,16 +7,16 @@ import { sanityClient, urlFor} from "../sanity.config"
 import {Post, Projects} from "../typings"
 import { queryProject, queryProjectsTab } from '../lib/queries'
 import LoadingScreen from '../components/LoadingScreen'
+import { InferGetStaticPropsType } from 'next'
 
 
 interface Props {
   posts: [Projects];
 }
 
-export default function projects({posts}: Props) {
-  // console.log("POST from posts log: "+ posts.map(post => (
-  //   post.slug
-  // )))
+export default function projects({
+  posts
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     
       <Container
@@ -37,13 +37,17 @@ export default function projects({posts}: Props) {
     
   );
 }
-export const getServerSideProps = async () => {
-  
-  const posts = await sanityClient.fetch(queryProject);
+export async function getStaticProps({ preview = false }) {
+  const posts: Post[] = await sanityClient.fetch(queryProject);
 
-  return{
-    props:{
-      posts,
-    },
-  };
-};
+  return { props: { posts } };
+}
+
+// export const getServerSideProps = async () => {
+//   const posts = await sanityClient.fetch(queryProject);
+//   return{
+//     props:{
+//       posts,
+//     },
+//   };
+// };

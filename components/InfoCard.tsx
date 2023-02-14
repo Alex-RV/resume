@@ -12,7 +12,6 @@ export default function InfoCard({ title, name }) {
             <h4 className="text-lg md:text-lg font-medium mb-6 sm:mb-10 w-full sm:w-fit text-gray-500 dark:text-gray-100 tracking-tight">
                 {title}
             </h4>
-            
         </div>
         <div className="flex items-center text-gray-800 dark:text-gray-200 capsize">
             <h2 className="text-lg md:text-lg font-medium w-full text-gray-900 dark:text-gray-500 tracking-tight">

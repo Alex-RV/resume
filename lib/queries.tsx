@@ -1,19 +1,24 @@
-export const queryProject = `*[_type == "post"]{
+export const queryProject = `*[_type == "post" && slug.current == $slug][0]{
     _id,
-      title,
-      slug,
-      author -> {
-        name,
-        image,
-      },
-      description,
-      mainImage,
-      slug
+    publishedAt,
+    title,
+    author->{
+      name,
+      image
+    },
+    description,
+    mainImage,
+    slug,
+    body,
+    githubLink,
+      
   }`;
 
 export const queryProjectsTab = ` *[_type == "post"] {
     title,
     description,
+    mainImage,
+    slug,
   }`;
 
   export const queryProjectImageUrl = `*[_type == "post"] {

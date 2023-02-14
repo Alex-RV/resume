@@ -3,6 +3,7 @@ import { GetStaticProps } from "next";
 import {Post} from "../../typings" 
 import { sanityClient, urlFor} from "../../sanity.config"
 import Project from "../../layouts/project";
+import { queryProject, } from "../../lib/queries"
 
 // import Project 
 
@@ -45,22 +46,7 @@ export const getStaticPaths = async() => {
 };
 
 export const getStaticProps: GetStaticProps = async({params}) => {
-    const query = `*[_type == "post" && slug.current == $slug][0]{
-        _id,
-        publishedAt,
-        title,
-        author->{
-          name,
-          image
-        },
-        description,
-        mainImage,
-        slug,
-        body,
-        githubLink,
-          
-      }`
-    const post = await sanityClient.fetch(query, {
+    const post = await sanityClient.fetch(queryProject, {
         slug: params?.slug,
     });
 

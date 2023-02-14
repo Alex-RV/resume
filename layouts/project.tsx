@@ -12,8 +12,7 @@ export default function Project({post}) {
     <Container
       title={`${post.title} – Alex Riabov`}
       description={post.description == null ? "Description" : post.description}
-      type="article"
-    >
+      type="article">
       <article className="flex flex-col items-start justify-center w-full max-w-2xl mx-auto mb-16">
         <h1 className="mb-4 text-3xl font-bold tracking-tight text-black md:text-5xl dark:text-white">
           {post.title == null ? "Title" : post.title}
@@ -72,8 +71,8 @@ export default function Project({post}) {
                 {color:"black", marginTop: '0.5rem', fontSize: "1rem",}} {...props} />,
                 blockquote: (props) =>
                 <blockquote style={resolvedTheme == "dark" ? 
-                {color:"white", fontStyle: "italic", fontWeight: 500, borderLeftWidth: "4px", borderColor:"gray", marginTop: '1rem', padding:"1rem", backgroundColor:"#343434", fontSize: "1rem",}:
-                {color:"black", fontStyle: "italic", fontWeight: 500, borderLeftWidth: "4px", borderColor:"gray", marginTop: '1rem', padding:"1rem", backgroundColor:"#DCDCDC", fontSize: "1rem",}} {...props} />,
+                {color:"white", fontStyle: "italic", fontWeight: 500, borderLeftWidth: "4px", borderColor:"gray", marginBottom:"1 rem", marginTop: '1rem', padding:"1rem", backgroundColor:"#343434", fontSize: "1rem",}:
+                {color:"black", fontStyle: "italic", fontWeight: 500, borderLeftWidth: "4px", borderColor:"gray", marginBottom:"1 rem", marginTop: '1rem', padding:"1rem", backgroundColor:"#DCDCDC", fontSize: "1rem",}} {...props} />,
                 link: (props,href) => <a
                 href={href} 
                 style={resolvedTheme == "dark" ? 

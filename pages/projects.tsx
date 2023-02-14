@@ -33,6 +33,6 @@ export default function projects({
   );
 }
 export async function getStaticProps({ preview = false }) {
-  const posts: Post[] = await sanityClient.fetch(queryProject);
+  const posts: Post[] = await sanityClient.fetch(queryProjectsTab);
   return { props: { posts } };
 }

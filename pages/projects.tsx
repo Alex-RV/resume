@@ -9,11 +9,6 @@ import { queryProject, queryProjectsTab } from '../lib/queries'
 import LoadingScreen from '../components/LoadingScreen'
 import { InferGetStaticPropsType } from 'next'
 
-
-interface Props {
-  posts: [Projects];
-}
-
 export default function projects({
   posts
 }: InferGetStaticPropsType<typeof getStaticProps>) {
@@ -39,15 +34,5 @@ export default function projects({
 }
 export async function getStaticProps({ preview = false }) {
   const posts: Post[] = await sanityClient.fetch(queryProject);
-
   return { props: { posts } };
 }
-
-// export const getServerSideProps = async () => {
-//   const posts = await sanityClient.fetch(queryProject);
-//   return{
-//     props:{
-//       posts,
-//     },
-//   };
-// };

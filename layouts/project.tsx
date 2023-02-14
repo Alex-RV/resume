@@ -70,19 +70,16 @@ export default function Project({post}) {
                 style={resolvedTheme == "dark" ? 
                 {color:"white", marginTop: '0.5rem', fontSize: "1rem",}:
                 {color:"black", marginTop: '0.5rem', fontSize: "1rem",}} {...props} />,
-                blockquote: (props) => <q  
-                style={resolvedTheme == "dark" ? 
-                {color:"white", marginTop: '0.5rem', fontSize: "1rem",}:
-                {color:"black", marginTop: '0.5rem', fontSize: "1rem",}} {...props} />,
-                // li: (children: any)  =>(
-                //     <li className="ml-4 list-disc text-black dark:text-white">{children}</li>
-                // ),
+                blockquote: (props) =>
+                <blockquote style={resolvedTheme == "dark" ? 
+                {color:"white", fontStyle: "italic", fontWeight: 500, borderLeftWidth: "4px", borderColor:"gray", marginTop: '1rem', padding:"1rem", backgroundColor:"#343434", fontSize: "1rem",}:
+                {color:"black", fontStyle: "italic", fontWeight: 500, borderLeftWidth: "4px", borderColor:"gray", marginTop: '1rem', padding:"1rem", backgroundColor:"#DCDCDC", fontSize: "1rem",}} {...props} />,
                 link: (props,href) => <a
                 href={href} 
                 style={resolvedTheme == "dark" ? 
-                {color:"#2ea6ff",listStyleType: "disc", marginLeft:"1rem", marginTop: '2rem', }:
-                {color:"#2ea6ff",listStyleType: "disc", marginLeft:"1rem", marginTop: '2rem', }} {...props} />,
-                
+                {color:"#2ea6ff",listStyleType: "disc",  marginTop: '2rem', }:
+                {color:"#2ea6ff",listStyleType: "disc", marginTop: '2rem', }} {...props} />,
+                // image: (props,asset) => <figure className='rounded-full' src={asset._ref} {...props} />
             }}/>
           </div>
         </div>

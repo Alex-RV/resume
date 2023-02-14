@@ -6,7 +6,6 @@ import {urlFor} from "../sanity.config"
 
 export default function ProjectLink({posts}) {
   return (
-    
     <div className='grid-cols-2 grid gap-5 sm:grid-cols-3 mx-auto container w-full max-w-2xl justify-center items-start' >
       {posts.map(post => (
     
@@ -15,10 +14,7 @@ export default function ProjectLink({posts}) {
     <Link
     href={post.slug == null ? "projects" :`projects/${post.slug.current}`}
     className='transform hover:scale-[1.01] transition-all
-     ease-in-out overflow-hidden'
-    // className={cn(''
-    // )}
-  >
+     ease-in-out overflow-hidden'>
     <div className="flex flex-col justify-between shadow-2xl bg-white dark:bg-[#18222d] rounded-lg p-3">
       <div className="flex flex-col md:flex-col justify-between">
 

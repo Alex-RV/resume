@@ -75,7 +75,9 @@ export default function Ip() {
 
     }, [])
   return (
-    <Container>
+    <Container 
+    title="IP – Alex Rabov"
+    description="Find out information about your IP">
         <div className="flex flex-col items-start max-w-2xl w-full mx-auto mb-16">
         <ul className=" justify-start flex-col tracking-tight mb-16 ">
           <LiElement text={"IP: "} element={ip}/>
@@ -89,7 +91,6 @@ export default function Ip() {
           <LiElement text={"State: "} element={state}/>
           <LiElement text={"Provider: "} element={org}/>
         </ul>
-        {/* <button role="button"className='button-ip' onClick={() =>getIPData()}>Get my IP</button> */}
     </div>
     </Container>
     

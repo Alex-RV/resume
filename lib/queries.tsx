@@ -38,9 +38,11 @@ export const queryProjectsTab = ` *[_type == "post"] {
   }`
   export const queryAuthorPage = `{
     "author": *[_type == "author" && slug.current == $slug] | order(_updatedAt desc) [0] {
-      content,
-      _id,
+    _id,
     name,
+    "authorImage": image.asset->url,
+    "authorDarkImage": imageDarkTheme.asset->url,
+    bio,
     "slug": slug.current,
     }
   }`

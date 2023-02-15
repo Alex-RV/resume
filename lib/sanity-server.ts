@@ -8,8 +8,13 @@ export const config = {
   useCdn: true,
 };
 export const sanityClient = createClient(config);
-
+export const previewClient = createClient({
+  ...config,
+  useCdn: false,
+  token: process.env.SANITY_API_TOKEN
+});
 export const urlFor = (source: any) => createImageUrlBuilder(config).image(source);
 
+export const getClient = (preview) => (preview ? previewClient : sanityClient);
 
 // export const useCurrentser = createCurrentUserHook(config);

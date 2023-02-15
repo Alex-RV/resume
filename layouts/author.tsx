@@ -4,9 +4,10 @@ import Container from '../components/Container';
 
 
 export default function author({author}) {
+  console.log(author)
   return (
     <Container
-      title={`${author} – Alex Riabov`}
+      title={`${author.name} – Alex Riabov`}
       // description={post.description == null ? "Description" : post.description}
       type="article">
       {/* <article className="flex flex-col items-start justify-center w-full max-w-2xl mx-auto mb-16">

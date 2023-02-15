@@ -1,7 +1,7 @@
 import { GetStaticProps } from "next";
 
 import {Post} from "../../typings" 
-import { sanityClient, urlFor} from "../../sanity.config"
+import { sanityClient, urlFor} from "../../lib/sanity-server"
 import Project from "../../layouts/project";
 import { queryProject, } from "../../lib/queries"
 

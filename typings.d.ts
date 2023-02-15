@@ -5,6 +5,7 @@ export interface Post{
     author: {
         name:string;
         image:string;
+        imageDarkTheme:string;
     }
     description:string;
     mainImage:{

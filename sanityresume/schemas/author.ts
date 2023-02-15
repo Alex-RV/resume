@@ -28,6 +28,14 @@ export default defineType({
       },
     }),
     defineField({
+      name: 'imageDarkTheme',
+      title: 'Image Dark Theme',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    }),
+    defineField({
       name: 'bio',
       title: 'Bio',
       type: 'array',

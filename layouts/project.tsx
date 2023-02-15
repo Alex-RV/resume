@@ -3,11 +3,12 @@ import { Suspense } from 'react';
 import PortableText from "react-portable-text";
 
 import Container from '../components/Container';
-import { urlFor } from '../sanity.config';
+import { urlFor } from '../lib/sanity-server';
 import { useTheme } from 'next-themes';
 import Link from 'next/link';
 
 export default function Project({post}) {
+  console.log(post)
   const { resolvedTheme, setTheme } = useTheme();
   return (
     <Container
@@ -23,10 +24,10 @@ export default function Project({post}) {
           <div className="flex items-center rotate-90">
             <Image
               alt="Alex Riabov"
-              height={24}
-              width={24}
+              height={32}
+              width={32}
               sizes="20vw"
-              src={post.author == null ? "/logo.jpg" : urlFor(post.author.image).url()}
+              src={post.author == null ? "/logo.jpg" : resolvedTheme == "dark" ? post.author.imageDarkTheme == null ? urlFor(post.author.image).url() : urlFor(post.author.imageDarkTheme).url() : urlFor(post.author.image).url()}
               className="rounded-full"
             />
             <p className="ml-2 text-sm text-gray-700 dark:text-gray-300">
@@ -55,7 +56,7 @@ export default function Project({post}) {
                 style={resolvedTheme == "dark" ? 
                 {color:"white", marginTop: '2rem', fontWeight: 'bold', fontSize: "1.5rem",}:
                 {color:"black", marginTop: '2rem', fontWeight: 'bold', fontSize: "1.5rem", }} {...props} />,
-                h3: (props) => <h3  
+                h3: (props) => <text  
                 style={resolvedTheme == "dark" ? 
                 {color:"white", marginTop: '2rem', fontWeight: 'bold'}:
                 {color:"black", marginTop: '2rem', fontWeight: 'bold'}} {...props} />,
@@ -63,6 +64,10 @@ export default function Project({post}) {
                 style={resolvedTheme == "dark" ? 
                 {color:"white", marginTop: '2rem', fontWeight: 'bold', fontSize: "1rem",}:
                 {color:"black", marginTop: '2rem', fontWeight: 'bold', fontSize: "1rem", }} {...props} />,
+                ColorText: (props) => <h4  
+                style={resolvedTheme == "dark" ? 
+                {color:"red", marginTop: '2rem', fontWeight: 'bold', fontSize: "2rem",}:
+                {color:"red", marginTop: '2rem', fontWeight: 'bold', fontSize: "2rem", }} {...props} />,
                 // h2: (props) => <h2 className='text-2xl font-bold my-5 text-black dark:text-white' {...props} />,
                 li: (props) => <li  
                 style={resolvedTheme == "dark" ? 
@@ -73,9 +78,11 @@ export default function Project({post}) {
                 {color:"white", marginTop: '0.5rem', fontSize: "1rem",}:
                 {color:"black", marginTop: '0.5rem', fontSize: "1rem",}} {...props} />,
                 blockquote: (props) =>
-                <blockquote style={resolvedTheme == "dark" ? 
-                {color:"white", fontStyle: "italic", fontWeight: 500, borderLeftWidth: "4px", borderColor:"gray", marginBottom:"1 rem", marginTop: '1rem', padding:"1rem", backgroundColor:"#343434", fontSize: "1rem",}:
-                {color:"black", fontStyle: "italic", fontWeight: 500, borderLeftWidth: "4px", borderColor:"gray", marginBottom:"1 rem", marginTop: '1rem', padding:"1rem", backgroundColor:"#DCDCDC", fontSize: "1rem",}} {...props} />,
+                <blockquote 
+                className='my-4'
+                style={resolvedTheme == "dark" ? 
+                {color:"white", fontStyle: "italic", fontWeight: 500, borderLeftWidth: "4px", borderColor:"gray", padding:"1rem", backgroundColor:"#343434", fontSize: "1rem",}:
+                {color:"black", fontStyle: "italic", fontWeight: 500, borderLeftWidth: "4px", borderColor:"gray", padding:"1rem", backgroundColor:"#DCDCDC", fontSize: "1rem",}} {...props} />,
                 link: (props,href) => <a
                 href={href} 
                 style={resolvedTheme == "dark" ? 

@@ -5,6 +5,7 @@ export const queryProject = `*[_type == "post" && slug.current == $slug][0]{
     author->{
       name,
       image,
+      imageDarkTheme,
       slug,
     },
     description,
@@ -35,13 +36,12 @@ export const queryProjectsTab = ` *[_type == "post"] {
     slug,
     "authorImage": image.asset->url,
   }`
-  export const queryAuthorPage = `*[_type == "author"]{
+  export const queryAuthorPage = `{
+    "author": *[_type == "author" && slug.current == $slug] | order(_updatedAt desc) [0] {
+      content,
+      _id,
     name,
-    bio,
-    "authorImage": image.asset->url,
-    "posts": *[_type == "post" && author._ref in *[_type=="author" && name == name ]._id ]{
-      title,
-      "slug": slug.current,
+    "slug": slug.current,
     }
   }`
  

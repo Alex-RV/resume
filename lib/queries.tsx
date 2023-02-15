@@ -4,7 +4,8 @@ export const queryProject = `*[_type == "post" && slug.current == $slug][0]{
     title,
     author->{
       name,
-      image
+      image,
+      slug,
     },
     description,
     mainImage,
@@ -28,4 +29,19 @@ export const queryProjectsTab = ` *[_type == "post"] {
       asset->{url}
     }
   }`;
+
+  export const queryAuthor = `*[_type == "author"]{
+    name,
+    slug,
+    "authorImage": image.asset->url,
+  }`
+  export const queryAuthorPage = `*[_type == "author"]{
+    name,
+    bio,
+    "authorImage": image.asset->url,
+    "posts": *[_type == "post" && author._ref in *[_type=="author" && name == name ]._id ]{
+      title,
+      "slug": slug.current,
+    }
+  }`
  

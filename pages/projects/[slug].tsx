@@ -5,8 +5,6 @@ import { sanityClient, urlFor} from "../../sanity.config"
 import Project from "../../layouts/project";
 import { queryProject, } from "../../lib/queries"
 
-// import Project 
-
 interface Props{
     post: Post,
 } 

@@ -20,7 +20,13 @@ export interface Post{
     };
     body:[object];
 }
-
+export interface Author{
+    _id:string;
+    name: string,
+    slug:{
+        current:string;
+    };
+}
 export interface Projects{
     title:string;
     mainImage:{

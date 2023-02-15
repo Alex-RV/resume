@@ -5,6 +5,7 @@ import PortableText from "react-portable-text";
 import Container from '../components/Container';
 import { urlFor } from '../sanity.config';
 import { useTheme } from 'next-themes';
+import Link from 'next/link';
 
 export default function Project({post}) {
   const { resolvedTheme, setTheme } = useTheme();
@@ -18,6 +19,7 @@ export default function Project({post}) {
           {post.title == null ? "Title" : post.title}
         </h1>
         <div className="flex flex-col items-start justify-between w-full mt-2  md:items-center">
+          <Link href={`../author/${post.author.slug.current}`}>
           <div className="flex items-center rotate-90">
             <Image
               alt="Alex Riabov"
@@ -34,6 +36,7 @@ export default function Project({post}) {
             {post.publishedAt == null ? "Jan 1, 2023" :new Date(post.publishedAt).toLocaleString('en-us', { year:"numeric", month:"short",day: 'numeric'})}
             </p>
           </div>
+          </Link>
           <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 min-w-32 md:mt-0">
           </p>
           <div className="mt-10 text-black dark:text-white">

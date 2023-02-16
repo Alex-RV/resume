@@ -1,9 +1,11 @@
+import { useTheme } from 'next-themes';
 import Image from 'next/image';
 import { Suspense } from 'react';
 import Container from '../components/Container';
 
 
 export default function author({author}) {
+  const { resolvedTheme, setTheme } = useTheme();
   console.log(author.author)
   return (
     <Container
@@ -21,7 +23,7 @@ export default function author({author}) {
               height={150}
               width={150}
               sizes="20vw"
-              src={author.author.authorImage == null ? "/logo.jpg" : author.author.authorImage}
+              src={author.author.authorImage == null ? "/logo.jpg" : resolvedTheme == "dark" ? author.author.authorDarkImage : author.author.authorImage}
               className="rounded-full"
             />
             <p className="ml-2 text-sm text-gray-700 dark:text-gray-300">
@@ -29,6 +31,9 @@ export default function author({author}) {
             </p>
             <p className="ml-2 text-sm text-gray-700 dark:text-gray-300">
             {author.author.publishedAt == null ? "Jan 1, 2023" :new Date(author.author.publishedAt).toLocaleString('en-us', { year:"numeric", month:"short",day: 'numeric'})}
+            </p>
+            <p className="ml-2 text-sm text-gray-700 dark:text-gray-300">
+            {author.author.posts.title}
             </p>
           </div>
         </div>

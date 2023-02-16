@@ -84,6 +84,8 @@ export default function Project({post}) {
                 {color:"white", fontStyle: "italic", fontWeight: 500, borderLeftWidth: "4px", borderColor:"gray", padding:"1rem", backgroundColor:"#343434", fontSize: "1rem",}:
                 {color:"black", fontStyle: "italic", fontWeight: 500, borderLeftWidth: "4px", borderColor:"gray", padding:"1rem", backgroundColor:"#DCDCDC", fontSize: "1rem",}} {...props} />,
                 link: (props,href) => <a
+                target="_blank"
+                rel="noopener noreferrer"
                 href={href} 
                 style={resolvedTheme == "dark" ? 
                 {color:"#2ea6ff",listStyleType: "disc",  marginTop: '2rem', }:
@@ -110,7 +112,7 @@ export default function Project({post}) {
             <a
               href={post.githubLink == null ? "https://github.com/Alex-RV" : post.githubLink.current}
               target="_blank"
-              // rel="noopener noreferrer"
+              rel="noopener noreferrer"
             >
               {'Suggest Change'}
             </a>

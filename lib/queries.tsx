@@ -54,4 +54,4 @@ var _id = '';
     },
     }
   }`
- 
+  // "mainImage": mainImage.asset->{url},

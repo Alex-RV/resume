@@ -19,31 +19,32 @@ export default function author({author}) {
       description="Author Info"
       type="article">
       <article className="flex flex-col items-start justify-center w-full max-w-2xl mx-auto mb-16">
-        <h1 className="mb-4 text-3xl font-bold tracking-tight text-black md:text-5xl dark:text-white">
-          {author.author.name == null ? "Title" : author.author.name}
-        </h1>
-        <div className="flex flex-col items-start justify-between w-full mt-2  md:items-center">
-          <div className="flex items-center rotate-90">
-            <Image
-              alt="Alex Riabov"
-              height={150}
-              width={150}
-              sizes="20vw"
-              src={author.author.authorImage == null ? "/logo.jpg" : resolvedTheme == "dark" ? author.author.authorDarkImage : author.author.authorImage}
-              className="rounded-full"
-            />
-            <p className="ml-2 text-sm text-gray-700 dark:text-gray-300">
-              {author.author.name == null ? "Alex" : author.author.name}
-            </p>
-            <p className="ml-2 text-sm text-gray-700 dark:text-gray-300">
-            {author.author.publishedAt == null ? "Jan 1, 2023" :new Date(author.author.publishedAt).toLocaleString('en-us', { year:"numeric", month:"short",day: 'numeric'})}
-            </p>
-            <p className="ml-2 text-sm text-gray-700 dark:text-gray-300">
-            {author.author.posts.title}
-            </p>
-          </div>
-        </div>
+        <div className='flex flex-col'>
+            <div className="flex flex-row w-full mt-2">
+              <div className="flex items-center  rotate-90 w-1/3">
+                <Image
+                  alt="Alex Riabov"
+                  height={150}
+                  width={150}
+                  sizes="20vw"
+                  src={author.author.authorImage == null ? "/logo.jpg" : resolvedTheme == "dark" ? author.author.authorDarkImage : author.author.authorImage}
+                  className="rounded-full"
+                />
+              </div>
+              <div className='flex flex-col justify-start w-2/3'>
+                <h1 className="mb-4 text-3xl font-bold tracking-tight text-black md:text-5xl dark:text-white">
+                  {author.author.name == null ? "Title" : author.author.name}
+                </h1>
+                <p className="ml-2 text-sm text-gray-700 dark:text-gray-300">
+                {author.author.publishedAt == null ? "Jan 1, 2023" :new Date(author.author.publishedAt).toLocaleString('en-us', { year:"numeric", month:"short",day: 'numeric'})}
+                </p>
+              </div>
+            </div>
         <div  data-aos="fade-up" className="flex flex-col justify-center items-start max-w-2xl mx-auto mb-16">
+        
+        
+        
+        
         <Splide
           options={ {
             type   : 'loop',
@@ -70,8 +71,8 @@ export default function author({author}) {
            {console.log("MAIN IMAGE!!!",post.mainImage)}
            <SplideSlide>
             <div style={{ backgroundPosition: 'center',
-  backgroundSize: 'cover',
-  backgroundRepeat: 'no-repeat',backgroundImage:`url(${post.mainImage == null ? "/logo.jpg" : urlFor(post.mainImage.asset).url()!})`}} className={`w-full h-full border-[0.15rem] border-[#2ea6ff] rounded-xl p-1 transform hover:scale-[1.01] transition-all`}>
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',backgroundImage:`url(${post.mainImage == null ? "/logo.jpg" : urlFor(post.mainImage.asset).url()!})`}} className={`w-full h-full border-[0.15rem] border-[#2ea6ff] rounded-xl p-1 transform hover:scale-[1.01] transition-all`}>
             <Link
               href={`/projects/${post.slug.current}`}
             >
@@ -80,7 +81,6 @@ export default function author({author}) {
                     <h4 className="text-lg md:text-lg font-medium mb-5 sm:mb-9 w-full bg-white  bg-opacity-60 text-gray-500 dark:text-gray-100 tracking-tight">
                         {post.title}
                     </h4>
-                    
                 </div>
                 <div>
                 </div>
@@ -96,6 +96,8 @@ export default function author({author}) {
            </> 
           ))}
         </Splide>
+        </div>
+
         </div>
         </article>
         </Container>

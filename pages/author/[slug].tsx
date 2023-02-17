@@ -45,13 +45,6 @@ export const getStaticProps: GetStaticProps = async({ params, preview = false })
       if (!author) {
         return { notFound: true };
       }
-    // const author = await sanityClient.fetch(queryAuthorPage, {
-    //     slug: params?.slug,
-    // });
-
-    // if(!author){
-    //     return{notFound: true};
-    // }
     
     return{
         props: {

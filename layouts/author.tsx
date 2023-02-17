@@ -64,7 +64,6 @@ export default function author({author}) {
             }
             
           } }
-          aria-label="My Favorite Images"
           className='w-full px-12 py-5'>
           {author.author.posts.map(post => (
            <>

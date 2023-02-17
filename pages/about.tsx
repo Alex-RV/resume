@@ -80,7 +80,6 @@ export default function About() {
             }
             
           } }
-          aria-label="My Favorite Images"
           className='w-full px-12 py-5'>
           <SplideSlide>
             <InfoCard 

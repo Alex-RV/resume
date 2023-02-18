@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import cn from 'classnames';
 
-import {urlFor} from "../lib/sanity-server"
+import {urlFor} from "../sanity.config"
 
 
 export default function ProjectLink({posts}) {

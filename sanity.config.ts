@@ -7,14 +7,22 @@ export const config = {
   apiVersion: "2023-01-30",
   useCdn: true,
 };
+
 export const sanityClient = createClient(config);
+
 export const previewClient = createClient({
   ...config,
   useCdn: false,
-  token: process.env.SANITY_API_TOKEN
+  token: process.env.SANITY_API_TOKEN,
 });
+
 export const urlFor = (source: any) => createImageUrlBuilder(config).image(source);
-
 export const getClient = (preview) => (preview ? previewClient : sanityClient);
+const defaultExport = {
+  config,
+  sanityClient,
+  previewClient,
+  urlFor,
+};
 
-// export const useCurrentser = createCurrentUserHook(config);
+export default defaultExport;

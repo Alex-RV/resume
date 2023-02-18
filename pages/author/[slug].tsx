@@ -1,7 +1,7 @@
-import { GetStaticProps } from "next";
+import { GetStaticProps, GetStaticPaths } from "next";
 
 import { Author} from "../../typings" 
-import { sanityClient, urlFor, getClient} from "../../lib/sanity-server"
+import { sanityClient, urlFor, getClient} from "../../sanity.config"
 import AuthorPage from "../../layouts/author";
 import { queryProject, queryAuthorPage, queryAuthor} from "../../lib/queries"
 
@@ -20,7 +20,7 @@ function Author({author}:Props) {
 }
 export default Author
 
-export const getStaticPaths = async() => {
+export const getStaticPaths: GetStaticPaths = async() => {
     const query = `*[_type == "author"]{
         _id,
           slug{current},

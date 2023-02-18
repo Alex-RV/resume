@@ -302,3 +302,8 @@ a {
       transform: translateY(0);
     }
   }
+
+  #first_div {
+    margin-right: 100px;
+  }
+  

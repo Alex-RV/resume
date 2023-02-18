@@ -4,48 +4,48 @@ import { Suspense } from 'react';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import Link from 'next/link';
+import BlockContent from '@sanity/block-content-to-react';
 
 import Container from '../components/Container';
 import ProjectCard from '../components/ProjectCard';
-import {urlFor} from "../lib/sanity-server"
-
+import {urlFor} from "../sanity.config"
+import { serializers } from '../lib/serializers'
 
 export default function author({author}) {
   const { resolvedTheme, setTheme } = useTheme();
-  console.log(author.author.posts)
+  const formattedDate = new Date(author.author.publishedAt).toLocaleString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+  console.log(author.author);
+  const authorImage = author.author?.authorImage || "/logo.jpg";
+  const authorImageDarkTheme = author.author?.authorDarkImage || authorImage;
   return (
     <Container
       title={`${author.author.name} – Alex Riabov`}
       description="Author Info"
       type="article">
-      <article className="flex flex-col items-start justify-center w-full max-w-2xl mx-auto mb-16">
-        <div className='flex flex-col'>
-            <div className="flex flex-row w-full mt-2">
-              <div className="flex items-center  rotate-90 w-1/3">
-                <Image
-                  alt="Alex Riabov"
-                  height={150}
-                  width={150}
-                  sizes="20vw"
-                  src={author.author.authorImage == null ? "/logo.jpg" : resolvedTheme == "dark" ? author.author.authorDarkImage : author.author.authorImage}
-                  className="rounded-full"
-                />
-              </div>
-              <div className='flex flex-col justify-start w-2/3'>
-                <h1 className="mb-4 text-3xl font-bold tracking-tight text-black md:text-5xl dark:text-white">
-                  {author.author.name == null ? "Title" : author.author.name}
-                </h1>
-                <p className="ml-2 text-sm text-gray-700 dark:text-gray-300">
-                {author.author.publishedAt == null ? "Jan 1, 2023" :new Date(author.author.publishedAt).toLocaleString('en-us', { year:"numeric", month:"short",day: 'numeric'})}
-                </p>
-              </div>
-            </div>
-        <div  data-aos="fade-up" className="flex flex-col justify-center items-start max-w-2xl mx-auto mb-16">
-        
-        
-        
-        
-        <Splide
+      <div className="flex flex-col items-center max-w-2xl mx-auto my-12 px-4 sm:px-6 lg:px-8">
+      <div className="flex flex-col items-center justify-center">
+        <Image
+          src={resolvedTheme == "dark"? authorImageDarkTheme : authorImage}
+          alt={`${author.author.name}'s photo`}
+          width={150}
+          height={150}
+          className="rounded-full"
+        />
+        <h1 className="mt-4 text-4xl font-bold tracking-tight text-gray-900 dark:text-gray-100 text-center">
+          {author.author.name}
+        </h1>
+        <p className="text-gray-500 dark:text-gray-400 text-lg font-medium">
+        {author.author.publishedAt == null ? "Jan 1, 2023" : formattedDate}
+        </p>
+      </div>
+      <div className="mt-10 prose prose-indigo prose-lg text-gray-500 dark:text-gray-400">
+        <BlockContent blocks={author.author.bio} serializers={serializers} />
+      </div>
+      <Splide
           options={ {
             type   : 'loop',
             perPage: 3,
@@ -68,38 +68,29 @@ export default function author({author}) {
           className='w-full px-12 py-5'>
           {author.author.posts.map(post => (
            <>
-           {console.log("MAIN IMAGE!!!",post.mainImage)}
            <SplideSlide>
             <div style={{ backgroundPosition: 'center',
             backgroundSize: 'cover',
-            backgroundRepeat: 'no-repeat',backgroundImage:`url(${post.mainImage == null ? "/logo.jpg" : urlFor(post.mainImage.asset).url()!})`}} className={`w-full h-full border-[0.15rem] border-[#2ea6ff] rounded-xl p-1 transform hover:scale-[1.01] transition-all`}>
-            <Link
-              href={`/projects/${post.slug.current}`}
-            >
-              <div className="flex flex-col justify-between h-full shadow-2xl  dark:bg-[#18222d] rounded-lg p-4">
-                <div className="flex flex-col md:flex-row justify-between">
-                    <h4 className="text-lg md:text-lg font-medium mb-5 sm:mb-9 w-full bg-white  bg-opacity-60 text-gray-500 dark:text-gray-100 tracking-tight">
-                        {post.title}
-                    </h4>
-                </div>
-                <div>
-                </div>
-                <div className="flex items-center bg-white  bg-opacity-60 text-gray-800 dark:text-gray-200 capsize">
-                    <h2 className="text-lg md:text-lg font-medium w-full text-gray-900 dark:text-gray-500 tracking-tight">
-                        {post.description}
-                    </h2>
-                </div>
-              </div>
-            </Link>
+            backgroundRepeat: 'no-repeat',
+            // backgroundImage:`url(${post.mainImage == null ? "/logo.jpg" : urlFor(post.mainImage.asset).url()!})`
+          }} 
+            className={`w-full h-full border-[0.15rem] border-[#2ea6ff] rounded-xl p-1 transform hover:scale-[1.01] transition-all`}>
+              <Link href={`/projects/${post.slug.current}`} >
+              <div className="relative flex ounded-xl">
+        <a className="absolute inset-0 z-10 rounded-xl bg-black text-center flex flex-col items-center justify-center opacity-0 hover:opacity-90 bg-opacity-90 duration-300">
+          <h1  className="mx-auto text-[3vw] sm:text-[1.5vw] flex text-white px-1 overflow-hidden" >{post.description == null ? "Description" : post.description}</h1>
+        </a>
+        <div className="flex flex-wrap content-center">
+          <img alt={post.slug} src={post.mainImage == null ? "/logo.jpg" : urlFor(post.mainImage.asset).url()!} className="mx-auto filter w-auto h-auto"/>
+        </div>
+      </div>
+              </Link>
             </div>
           </SplideSlide>
            </> 
           ))}
         </Splide>
-        </div>
-
-        </div>
-        </article>
+    </div>
         </Container>
   )
 }

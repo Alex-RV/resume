@@ -1,15 +1,28 @@
 import Image from 'next/image';
 import { Suspense } from 'react';
-import PortableText from "react-portable-text";
+import BlockContent from '@sanity/block-content-to-react';
 
 import Container from '../components/Container';
-import { urlFor } from '../lib/sanity-server';
+import { urlFor } from '../sanity.config';
 import { useTheme } from 'next-themes';
 import Link from 'next/link';
+import { serializers } from '../lib/serializers'
 
 export default function Project({post}) {
   console.log(post)
   const { resolvedTheme, setTheme } = useTheme();
+  const authorName = post.author?.name || "Alex";
+  const authorImage = post.author?.image || "/logo.jpg";
+  const authorImageDarkTheme = post.author?.imageDarkTheme;
+
+  const publishedAt = post.publishedAt
+    ? new Date(post.publishedAt).toLocaleString("en-us", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      })
+    : "Jan 1, 2023";
+
   return (
     <Container
       title={`${post.title} – Alex Riabov`}
@@ -27,71 +40,22 @@ export default function Project({post}) {
               height={32}
               width={32}
               sizes="20vw"
-              src={post.author == null ? "/logo.jpg" : resolvedTheme == "dark" ? post.author.imageDarkTheme == null ? urlFor(post.author.image).url() : urlFor(post.author.imageDarkTheme).url() : urlFor(post.author.image).url()}
+              src={post.author == null ? "/logo.jpg" : resolvedTheme == "dark" ? authorImageDarkTheme == null ? urlFor(authorImage).url() : urlFor(authorImageDarkTheme).url() : urlFor(authorImage).url()}
               className="rounded-full"
             />
             <p className="ml-2 text-sm text-gray-700 dark:text-gray-300">
-              {post.author == null ? "Alex" : post.author.name}
+              {post.author == null ? "Alex" : authorName}
             </p>
             <p className="ml-2 text-sm text-gray-700 dark:text-gray-300">
-            {post.publishedAt == null ? "Jan 1, 2023" :new Date(post.publishedAt).toLocaleString('en-us', { year:"numeric", month:"short",day: 'numeric'})}
+            {post.publishedAt == null ? "Jan 1, 2023" : publishedAt}
             </p>
           </div>
           </Link>
           <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 min-w-32 md:mt-0">
           </p>
           <div className="mt-10 text-black dark:text-white">
-          
-            <PortableText
-            className=""
-            dataset={process.env.NEXT_PUBLIC_SANITY_DATASET!}
-            projectId={process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!}
-            content={post.body == null ? "No content yet" : post.body}
-            serializers={{
-                h1: (props) => <h1  
-                style={resolvedTheme == "dark" ? 
-                {color:"white", marginTop: '2rem', fontWeight: 'bold', fontSize: "2rem",}:
-                {color:"black", marginTop: '2rem', fontWeight: 'bold', fontSize: "2rem", }} {...props} />,
-                h2: (props) => <h2  
-                style={resolvedTheme == "dark" ? 
-                {color:"white", marginTop: '2rem', fontWeight: 'bold', fontSize: "1.5rem",}:
-                {color:"black", marginTop: '2rem', fontWeight: 'bold', fontSize: "1.5rem", }} {...props} />,
-                h3: (props) => <text  
-                style={resolvedTheme == "dark" ? 
-                {color:"white", marginTop: '2rem', fontWeight: 'bold'}:
-                {color:"black", marginTop: '2rem', fontWeight: 'bold'}} {...props} />,
-                h4: (props) => <h4  
-                style={resolvedTheme == "dark" ? 
-                {color:"white", marginTop: '2rem', fontWeight: 'bold', fontSize: "1rem",}:
-                {color:"black", marginTop: '2rem', fontWeight: 'bold', fontSize: "1rem", }} {...props} />,
-                ColorText: (props) => <h4  
-                style={resolvedTheme == "dark" ? 
-                {color:"red", marginTop: '2rem', fontWeight: 'bold', fontSize: "2rem",}:
-                {color:"red", marginTop: '2rem', fontWeight: 'bold', fontSize: "2rem", }} {...props} />,
-                // h2: (props) => <h2 className='text-2xl font-bold my-5 text-black dark:text-white' {...props} />,
-                li: (props) => <li  
-                style={resolvedTheme == "dark" ? 
-                {color:"white",listStyleType: "disc", marginLeft:"1rem", marginTop: '2rem', }:
-                {color:"black",listStyleType: "disc", marginLeft:"1rem", marginTop: '2rem', }} {...props} />,
-                normal: (props) => <p  
-                style={resolvedTheme == "dark" ? 
-                {color:"white", marginTop: '0.5rem', fontSize: "1rem",}:
-                {color:"black", marginTop: '0.5rem', fontSize: "1rem",}} {...props} />,
-                blockquote: (props) =>
-                <blockquote 
-                className='my-4'
-                style={resolvedTheme == "dark" ? 
-                {color:"white", fontStyle: "italic", fontWeight: 500, borderLeftWidth: "4px", borderColor:"gray", padding:"1rem", backgroundColor:"#343434", fontSize: "1rem",}:
-                {color:"black", fontStyle: "italic", fontWeight: 500, borderLeftWidth: "4px", borderColor:"gray", padding:"1rem", backgroundColor:"#DCDCDC", fontSize: "1rem",}} {...props} />,
-                link: (props,href) => <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href={href} 
-                style={resolvedTheme == "dark" ? 
-                {color:"#2ea6ff",listStyleType: "disc",  marginTop: '2rem', }:
-                {color:"#2ea6ff",listStyleType: "disc", marginTop: '2rem', }} {...props} />,
-                // image: (props,asset) => <figure className='rounded-full' src={asset._ref} {...props} />
-            }}/>
+          <BlockContent dataset={process.env.NEXT_PUBLIC_SANITY_DATASET!}
+            projectId={process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!} blocks={post.body == null ? "No content yet" : post.body} serializers={serializers} />
           </div>
         </div>
         
@@ -103,8 +67,6 @@ export default function Project({post}) {
           <div className="text-sm text-gray-700 dark:text-gray-300">
             <a
               href="/#contactForm"
-              // target="_blank"
-              // rel="noopener noreferrer"
             >
               {'Contact me'}
             </a>

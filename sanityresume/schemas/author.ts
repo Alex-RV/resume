@@ -12,7 +12,7 @@ export default defineType({
     }),
     defineField({
       name: 'publishedAt',
-      title: 'Published at',
+      title: 'Created At',
       type: 'datetime',
     }),
     defineField({
@@ -43,6 +43,11 @@ export default defineType({
     defineField({
       name: 'bio',
       title: 'Bio',
+      type: 'blockContent',
+    }),
+    defineField({
+      name: 'bioOld',
+      title: 'BioOld',
       type: 'array',
       of: [
         {

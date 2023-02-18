@@ -1,7 +1,7 @@
-import { GetStaticProps } from "next";
+import { GetStaticProps, GetStaticPaths } from "next";
 
 import {Post} from "../../typings" 
-import { sanityClient, urlFor} from "../../lib/sanity-server"
+import { sanityClient, urlFor} from "../../sanity.config"
 import Project from "../../layouts/project";
 import { queryProject, } from "../../lib/queries"
 
@@ -21,7 +21,7 @@ function Post({post}:Props) {
 }
 export default Post;
 
-export const getStaticPaths = async() => {
+export const getStaticPaths : GetStaticPaths = async() => {
     const query = `*[_type == "post"]{
         _id,
         slug{

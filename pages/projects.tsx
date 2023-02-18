@@ -3,7 +3,7 @@ import Container from '../components/Container'
 import Link from 'next/link'
 
 import ProjectLink from '../components/ProjectLink'
-import { sanityClient, urlFor} from "../lib/sanity-server"
+import { sanityClient, urlFor} from "../sanity.config"
 import {Post, Projects} from "../typings"
 import { queryProject, queryProjectsTab } from '../lib/queries'
 import LoadingScreen from '../components/LoadingScreen'

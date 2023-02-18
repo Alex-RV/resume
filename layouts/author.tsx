@@ -45,6 +45,7 @@ export default function author({author}) {
       <div className="mt-10 prose prose-indigo prose-lg text-gray-500 dark:text-gray-400">
         <BlockContent blocks={author.author.bio} serializers={serializers} />
       </div>
+      <div className='w-full px-12 sm:px-0 py-5 justify-center mx-auto'>
       <Splide
           options={ {
             type   : 'loop',
@@ -65,7 +66,8 @@ export default function author({author}) {
             }
             
           } }
-          className='w-full px-12 sm:px-0 py-5'>
+          className='w-full justify-center mx-auto'
+          >
           {author.author.posts.map(post => (
            <>
            <SplideSlide>
@@ -78,7 +80,7 @@ export default function author({author}) {
               <Link href={`/projects/${post.slug.current}`} >
               <div className="relative flex rounded-xl transform hover:scale-[1.01] transition-all">
               <a className="absolute inset-0 z-10 rounded-xl bg-black text-center flex flex-col items-center justify-center opacity-0 hover:opacity-90 bg-opacity-90 duration-300">
-                <h1  className="mx-auto text-[3vw] sm:text-[1.5vw] flex text-white px-1 overflow-hidden" >{post.description == null ? "Description" : post.description}</h1>
+                <h1  className="mx-auto text-[3vw] sm:text-[1.5vw] flex text-white p-1 overflow-hidden" >{post.description == null ? "Description" : post.description}</h1>
               </a>
               <div className="flex flex-wrap content-center">
                 <img alt={post.slug} src={post.mainImage == null ? "/logo.jpg" : urlFor(post.mainImage.asset).url()!} className="mx-auto filter w-auto h-auto rounded-xl "/>
@@ -90,6 +92,7 @@ export default function author({author}) {
            </> 
           ))}
         </Splide>
+        </div>
     </div>
         </Container>
   )

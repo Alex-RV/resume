@@ -1,10 +1,7 @@
 import { useTheme } from 'next-themes';
 
-export const serializers = {
-    
-    types: {
-      block: props => {
-        const { resolvedTheme, setTheme } = useTheme();
+function Block(props) {
+    const { resolvedTheme, setTheme } = useTheme();
         switch (props.node.style) {
           case 'h1':
             return <h1 className="text-4xl my-4 font-bold text-black dark:text-white">{props.children}</h1>;
@@ -36,9 +33,12 @@ export const serializers = {
           default:
             return <p className="my-4">{props.children}</p>;
         }
+}
+
+export const serializers = {
+    types: {
+        block: Block,
       },
-    },
-    
     marks: {
         link: (props) => {
           return <a

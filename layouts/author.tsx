@@ -74,16 +74,16 @@ export default function author({author}) {
             backgroundRepeat: 'no-repeat',
             // backgroundImage:`url(${post.mainImage == null ? "/logo.jpg" : urlFor(post.mainImage.asset).url()!})`
           }} 
-            className={`w-full h-full border-[0.15rem] border-[#2ea6ff] rounded-xl p-1 transform hover:scale-[1.01] transition-all`}>
+            className={`w-full h-full border-[0.15rem] border-[#2ea6ff] rounded-xl p-1 `}>
               <Link href={`/projects/${post.slug.current}`} >
-              <div className="relative flex ounded-xl">
-        <a className="absolute inset-0 z-10 rounded-xl bg-black text-center flex flex-col items-center justify-center opacity-0 hover:opacity-90 bg-opacity-90 duration-300">
-          <h1  className="mx-auto text-[3vw] sm:text-[1.5vw] flex text-white px-1 overflow-hidden" >{post.description == null ? "Description" : post.description}</h1>
-        </a>
-        <div className="flex flex-wrap content-center">
-          <img alt={post.slug} src={post.mainImage == null ? "/logo.jpg" : urlFor(post.mainImage.asset).url()!} className="mx-auto filter w-auto h-auto"/>
-        </div>
-      </div>
+              <div className="relative flex rounded-xl transform hover:scale-[1.01] transition-all">
+              <a className="absolute inset-0 z-10 rounded-xl bg-black text-center flex flex-col items-center justify-center opacity-0 hover:opacity-90 bg-opacity-90 duration-300">
+                <h1  className="mx-auto text-[3vw] sm:text-[1.5vw] flex text-white px-1 overflow-hidden" >{post.description == null ? "Description" : post.description}</h1>
+              </a>
+              <div className="flex flex-wrap content-center">
+                <img alt={post.slug} src={post.mainImage == null ? "/logo.jpg" : urlFor(post.mainImage.asset).url()!} className="mx-auto filter w-auto h-auto rounded-xl "/>
+              </div>
+            </div>
               </Link>
             </div>
           </SplideSlide>

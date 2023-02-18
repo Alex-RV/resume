@@ -26,7 +26,7 @@ export default function author({author}) {
       title={`${author.author.name} – Alex Riabov`}
       description="Author Info"
       type="article">
-      <div className="flex flex-col items-center max-w-2xl mx-auto my-12 px-4 sm:px-6 lg:px-8">
+      <div className="flex flex-col items-center justify-center max-w-2xl mx-auto my-12 px-4 sm:px-6 lg:px-8">
       <div className="flex flex-col items-center justify-center">
         <Image
           src={resolvedTheme == "dark"? authorImageDarkTheme : authorImage}
@@ -65,7 +65,7 @@ export default function author({author}) {
             }
             
           } }
-          className='w-full px-12 py-5'>
+          className='w-full px-12 sm:px-0 py-5'>
           {author.author.posts.map(post => (
            <>
            <SplideSlide>
@@ -74,7 +74,7 @@ export default function author({author}) {
             backgroundRepeat: 'no-repeat',
             // backgroundImage:`url(${post.mainImage == null ? "/logo.jpg" : urlFor(post.mainImage.asset).url()!})`
           }} 
-            className={`w-full h-full border-[0.15rem] border-[#2ea6ff] rounded-xl p-1 `}>
+            className={`w-full h-full min-w-max border-[0.15rem] border-[#2ea6ff] rounded-xl p-1 `}>
               <Link href={`/projects/${post.slug.current}`} >
               <div className="relative flex rounded-xl transform hover:scale-[1.01] transition-all">
               <a className="absolute inset-0 z-10 rounded-xl bg-black text-center flex flex-col items-center justify-center opacity-0 hover:opacity-90 bg-opacity-90 duration-300">

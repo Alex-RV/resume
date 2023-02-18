@@ -62,6 +62,7 @@ export default function author({author}) {
               550: {
                 perPage: 1,
                 width : "50%",
+                arrows: false,
               }
             }
             

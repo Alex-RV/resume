@@ -17,7 +17,7 @@ const createSitemap = (slugs) => `<?xml version="1.0" encoding="UTF-8"?>
 export async function getServerSideProps({ res }) {
   const allPosts = await sanityClient.fetch(postSlugsQuery);
   const allPages = [
-    ...allPosts.map((slug) => `blog/${slug}`),
+    ...allPosts.map((slug) => `projects/${slug}`),
     ...[
       '',
       'about',

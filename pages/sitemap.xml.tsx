@@ -1,5 +1,5 @@
 import { sanityClient } from '../sanity.config';
-import { postSlugsQuery } from '../lib/queries';
+import { postSlugsQuery, authorSlugsQuery } from '../lib/queries';
 
 const createSitemap = (slugs) => `<?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -16,8 +16,10 @@ const createSitemap = (slugs) => `<?xml version="1.0" encoding="UTF-8"?>
 `;
 export async function getServerSideProps({ res }) {
   const allPosts = await sanityClient.fetch(postSlugsQuery);
+  const allAuthors = await sanityClient.fetch(authorSlugsQuery);
   const allPages = [
     ...allPosts.map((slug) => `projects/${slug}`),
+    ...allAuthors.map((slug) => `author/${slug}`),
     ...[
       '',
       'about',

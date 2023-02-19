@@ -27,7 +27,7 @@ export default function About() {
             alt="Logo"
             height={250}
             width={250}
-            src="/logo.jpg"
+            src="/logo.png"
             sizes="30vw"
             priority
             className="rounded-full filter"

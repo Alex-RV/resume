@@ -16,6 +16,10 @@ export const queryProject = `*[_type == "post" && slug.current == $slug][0]{
       
   }`;
 
+export const postSlugsQuery = `
+  *[_type == "post" && defined(slug.current)][].slug.current
+  `;
+
 export const queryProjectsTab = ` *[_type == "post"] {
     title,
     description,

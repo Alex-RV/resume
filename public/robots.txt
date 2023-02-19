@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://alex-riabov.vercel.app/sitemap.xml

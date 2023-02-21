@@ -6,31 +6,17 @@ export default function ContactForm() {
     const [email, setEmail] = useState("");
     const [subject, setSubject] = useState("");
     const [message, setMessage] = useState("");
+    const [plane, setPlane] =useState(false)
 
-  //for plane animation
-  // const myRef = useRef();
-  // const [myElementIsVisible, updateMyElementIsVisible] = useState(false);
-  const [plane, setPlane] =useState(false)
-  // console.log('myElementIsVisible', myElementIsVisible)
-  // useEffect(() => {
-  //   const observer = new IntersectionObserver((entries, observer) => {
-  //     const entry = entries[0];
-  //     console.log('entry', entry);
-  //     console.log('entry.isIntersecting', entry.isIntersecting);
-  //     updateMyElementIsVisible(entry.isIntersecting);
-  //   });
-  //   observer.observe(myRef.current);
-  // }, []);
+    //   Form validation state
+    const [errors, setErrors] = useState({});
 
-  //   Form validation state
-  const [errors, setErrors] = useState({});
+    //   Setting button text on form submission
+    const [buttonText, setButtonText] = useState("Submit");
 
-  //   Setting button text on form submission
-  const [buttonText, setButtonText] = useState("Submit");
-
-  // Setting success or failure messages states
-  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-  const [showFailureMessage, setShowFailureMessage] = useState(false);
+    // Setting success or failure messages states
+    const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+    const [showFailureMessage, setShowFailureMessage] = useState(false);
 
   // Validation check method
   const handleValidation = () => {

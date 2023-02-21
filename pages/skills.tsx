@@ -21,67 +21,67 @@ export default function Skills() {
             scale={"90%"}
             level={"Proficient"}
             color={back_end}
-            img={"skills/python-icon.svg"}
+            img={"static/images/skills/python-icon.svg"}
             description={"Python"}/>
             <SkillsCard
             scale={"80%"}
             level={"Advanced"}
             color={back_end}
-            img={"skills/java-icon.svg"}
+            img={"static/images/skills/java-icon.svg"}
             description={"Java"}/>
             <SkillsCard
             scale={"90%"}
             level={"Proficient"}
             color={back_end}
-            img={"skills/c-icon.svg"}
+            img={"static/images/skills/c-icon.svg"}
             description={"C#"}/>
             <SkillsCard
             scale={"60%"}
             level={"Intermediate"}
             color={back_end}
-            img={"skills/swift-icon.svg"}
+            img={"static/images/skills/swift-icon.svg"}
             description={"Swift"}/>
             <SkillsCard
             scale={"80%"}
             level={"Advanced"}
             color={back_end}
-            img={"skills/firebase-icon.svg"}
+            img={"static/images/skills/firebase-icon.svg"}
             description={"Firebase"}/>
             <SkillsCard
             scale={"60%"}
             level={"Intermediate"}
             color={web}
-            img={"skills/typescript-icon.svg"}
+            img={"static/images/skills/typescript-icon.svg"}
             description={"TypeScript"}/>
             <SkillsCard
             scale={"70%"}
             level={"Intermediate"}
             color={web}
-            img={"skills/javascript-icon.svg"}
+            img={"static/images/skills/javascript-icon.svg"}
             description={"JavaScript"}/>
             <SkillsCard
             scale={"80%"}
             level={"Advanced"}
             color={web}
-            img={"skills/nextjs-icon.svg"}
+            img={"static/images/skills/nextjs-icon.svg"}
             description={"NexJS"}/>
             <SkillsCard
             scale={"80%"}
             level={"Advanced"}
             color={web}
-            img={"skills/react-icon.svg"}
+            img={"static/images/skills/react-icon.svg"}
             description={"React"}/>
             <SkillsCard
             scale={"70%"}
             level={"Intermediate"}
             color={web}
-            img={"skills/tailwind-icon.svg"}
+            img={"static/images/skills/tailwind-icon.svg"}
             description={"TailWind"}/>
             <SkillsCard
             scale={"30%"}
             level={"Beginer"}
             color={back_end}
-            img={"skills/c-plus-icon.svg"}
+            img={"static/images/skills/c-plus-icon.svg"}
             description={"C++"}/>
       </div>
         

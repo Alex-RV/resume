@@ -63,9 +63,9 @@ export default function Home() {
                 name="ML game on Raspberry PI"
               />
               <ProjectCard
-                title="App to control your spending"
-                slug="accounting-app"
-                name="Accounting app"
+                title="Find what you don't want"
+                slug="elgoog"
+                name="Elgoog"
               />
               <ProjectCard
                 title="Maleware, but with memes"

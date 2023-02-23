@@ -13,7 +13,7 @@ export default function projects({
   posts
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
-    
+    <Suspense fallback={<LoadingScreen/>}>
       <Container
     title="Projects – Alex Riabov"
     description="All my projects">
@@ -27,8 +27,8 @@ export default function projects({
             />
         </Suspense>
       </div>
-      
     </Container>
+    </Suspense>
     
   );
 }

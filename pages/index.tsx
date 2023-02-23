@@ -1,21 +1,18 @@
 import React, {useEffect, useState} from "react"
 import Link from 'next/link'
 import Image from 'next/image'
-import { Inter } from '@next/font/google'
 import { Suspense } from 'react';
 
 
 import Container from '../components/Container'
 import ProjectCard from '../components/ProjectCard';
 import ContactForm from "../components/ContactForm"
+import LoadingScreen from "../components/LoadingScreen";
 
-
-const inter = Inter({ subsets: ['latin'] })
-// [#141524]
 
 export default function Home() {
   return (
-    <Suspense fallback={null}>
+    <Suspense fallback={<LoadingScreen/>}>
       <Container
       title="Alex Riabov"
       description="Home page">
@@ -26,7 +23,6 @@ export default function Home() {
               <h1 className=" items-center font-bold text-5xl sm:text-7xl tracking-tight mb-1 text-[#2ea6ff] dark:text-[#2ea6ff]">
                 Alex Riabov
               </h1>
-              
             </div>
             <div className="w-[80px] sm:w-[250px] relative mb-8 sm:mb-0 mx-auto">
               <Image
@@ -100,7 +96,5 @@ export default function Home() {
           </div>
       </Container>
     </Suspense>
-    
-      
   )
 }

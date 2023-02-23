@@ -19,6 +19,7 @@ export default function Document() {
       <meta content="#ffffff" name="msapplication-TileColor" />
       <meta content="/static/favicons/browserconfig.xml" name="msapplication-config" />
       <meta content="max-snippet:-1, max-image-preview:large, max-video-preview:-1" name="robots" />
+      <meta />
       </Head>
       <body className='bg-gray-50 dark:bg-[#131415] text-white dark:text-black'>
         <Main />

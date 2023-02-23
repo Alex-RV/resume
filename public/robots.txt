@@ -1,2 +1,3 @@
 User-agent: *
+Allow: /*.png
 Sitemap: https://alex-riabov.vercel.app/sitemap.xml

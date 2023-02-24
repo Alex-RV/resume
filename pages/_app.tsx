@@ -7,9 +7,6 @@ import { useState, useEffect } from 'react';
 import Aos from 'aos';
 import "aos/dist/aos.css"
 
-
-
-const interVariable = Inter();
 var age: number;
 
 export default function App({ Component, pageProps }: AppProps) {

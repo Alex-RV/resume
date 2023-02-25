@@ -13,7 +13,6 @@ export default function projects({
   posts
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
-    <Suspense fallback={<LoadingScreen/>}>
       <Container
     title="Projects – Alex Riabov"
     description="All my projects">
@@ -21,14 +20,13 @@ export default function projects({
         <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-16 text-black dark:text-white">
           Projects :
         </h1>
-        <Suspense fallback={<LoadingScreen/>}>
+        <Suspense fallback={<p>Loading feed...</p>}>
         <ProjectLink
             posts={posts}
             />
         </Suspense>
       </div>
     </Container>
-    </Suspense>
     
   );
 }

@@ -10,6 +10,10 @@
         "source": "/github",
         "destination": "https://github.com/Alex-RV"
       }
-    ]
+    ],
+    "crons": [{
+        "path": "/api/contact",
+        "schedule": "0 10 * * *"
+      }]
   }
   

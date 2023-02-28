@@ -1,3 +1,2 @@
 User-agent: *
-Allow: /static/favicons/*
 Sitemap: https://alex-riabov.vercel.app/sitemap.xml

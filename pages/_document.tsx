@@ -7,7 +7,7 @@ export default function Document() {
       <meta name="google-site-verification" content="AByyjgspGOVnEQSxTYO7SUBa2Af93DGcOaqthjhoDR8" />
       <link href="/static/favicons/favicon.ico" rel="shortcut icon" />
       <link href="/static/favicons/site.webmanifest" rel="manifest" />
-      <link rel="icon" href="/static/favicons/favicon.ico"/>
+      <link rel="icon" href="https://alex-riabov.vercel.app/_next/image?url=%2Flogo.jpg&w=3840&q=75"/>
       <link rel="shortcut icon" sizes="196x196" href="/static/favicons/android-chrome-192x192.png"/>
       <link href="/static/favicons/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180" />
       <link href="/static/favicons/favicon-144x144.png" rel="icon" sizes="144x144" type="image/png" />

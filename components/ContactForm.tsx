@@ -101,7 +101,7 @@ export default function ContactForm() {
             onSubmit={handleSubmit}
             className=" flex flex-col px-8 py-8 shadow-2xl dark:shadow-transparent rounded-xl p-6 my-4 w-full bg-white dark:bg-[#18222d]">
             <h1 className="text-2xl font-bold text-[#2ea6ff] dark:text-[#2ea6ff]">
-              Contact with me
+              Contact Me
             </h1>
             
   

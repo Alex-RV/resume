@@ -69,7 +69,7 @@ export default function experience() {
           date={"Feb 2022 - Jun 2023"}
           description={"My second school"}/>
           <ExperienceCard
-          title={"Schcool"}
+          title={"School"}
           letter={"school"}
           name={"Samara School"}
           date={"Sep 2012 - Feb 2022"}

@@ -3,6 +3,7 @@ import React from 'react'
 import ExperienceCard from '../components/ExperienceCard'
 import Experience from '../components/Experience'
 import Container from '../components/Container'
+import Link from 'next/link'
 
 export default function experience() {
   return (
@@ -14,6 +15,12 @@ export default function experience() {
           Experience :
         </h1>
         <Experience>
+        <ExperienceCard
+          title={"Lancer Hacks"}
+          letter={"terminal"}
+          name={"Hackathon"}
+          date={"Feb 11 2023"}
+          description={`Hackathon on the theme "Upside Down" with Major League Hacking. Me and my team create Elgoog`}/>
         <ExperienceCard
           title={"Unity Part II"}
           letter={"code"}

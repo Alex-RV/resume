@@ -11,7 +11,7 @@ export default function ExperienceCard({title, name, date, description,letter}) 
                             <h6>
                                 <small>{name}</small>
                             </h6>
-                            <h6>
+                            <h6 className='font-bold'>
                                 <small>{date}</small>
                             </h6>
                         </div>

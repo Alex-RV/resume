@@ -31,7 +31,7 @@ export default function experience() {
           letter={"terminal"}
           name={"Online Hackathon"}
           date={"Jan 2023"}
-          description={"We created game and website to help people understand importance of mental health and how mental problems feels for people"}/>
+          description={"Created game and website to help people understand importance of mental health and how mental problems feels for people"}/>
           <ExperienceCard
           title={"EPOCH"}
           letter={"terminal"}
@@ -55,25 +55,31 @@ export default function experience() {
           letter={"terminal"}
           name={"Google 5th Annual Hackathon"}
           date={"26 Aug 2022 - 30 Aug 2022"}
-          description={"Participated in Google Hackathon after summer program"}/>
+          description={"Participated in Google Hackathon after Team Edge, won 2nd place"}/>
           <ExperienceCard
-          title={"CodeNext Program"}
+          title={"Google CodeNext"}
           letter={"code"}
           name={"TeamEdge"}
           date={"Jun 25 2022"}
-          description={"Joined Google CodeNext Summer Program"}/>
+          description={"Google CodeNext Summer Program (5 weeks, 5 days a week, 8 hours per day)"}/>
           <ExperienceCard
           title={"School"}
           letter={"school"}
           name={"School San Leandro"}
           date={"Feb 2022 - Jun 2023"}
-          description={"My second school"}/>
+          description={"Public School in San Leandro"}/>
+          <ExperienceCard
+          title={"Intership"}
+          letter={"code"}
+          name={"Russian Railways Software"}
+          date={"Aug 11 2021 - Sep 1 2021"}
+          description={"Work experience with .NET Core on C#"}/>
           <ExperienceCard
           title={"School"}
           letter={"school"}
           name={"Samara School"}
           date={"Sep 2012 - Feb 2022"}
-          description={"I've been in this shool during whole my life"}/>
+          description={"Samara Technical Lyceum (School with Math and Physics major)"}/>
           
         </Experience>
       </div>

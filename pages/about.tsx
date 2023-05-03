@@ -59,7 +59,7 @@ export default function About() {
           Quotes from people about me
         </p> */}
       </div>
-      <div  data-aos="fade-up" className="flex flex-col justify-center items-start max-w-2xl mx-auto mb-16">
+      {/* <div  data-aos="fade-up" className="flex flex-col justify-center items-start max-w-2xl mx-auto mb-16">
         <Splide
           options={ {
             type   : 'loop',
@@ -107,7 +107,7 @@ export default function About() {
             name={"Someone"}/>
           </SplideSlide>
         </Splide>
-        </div>
+        </div> */}
         
     </Container>
   )

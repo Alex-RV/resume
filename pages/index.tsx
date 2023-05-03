@@ -39,7 +39,7 @@ export default function Home() {
             
             <div >
             <h2 className="text-gray-700 dark:text-gray-200 mb-4 text-2xl">
-                Full-stack developer. <br/>Student-Engineer at {' '}
+                Full-stack developer <br/>Student-Engineer at {' '}
                 <span className="font-semibold">Google Code Next</span>
               </h2>
               <p className="text-gray-600 text-xl dark:text-gray-400 ">

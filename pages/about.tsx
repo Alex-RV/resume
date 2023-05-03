@@ -52,9 +52,9 @@ export default function About() {
         </div>
         <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 my-2 w-full">
         </div>
-        <h2 data-aos="fade-up" className="font-bold text-3xl tracking-tight mb-4 mt-16 text-[#2ea6ff]">
+        {/* <h2 data-aos="fade-up" className="font-bold text-3xl tracking-tight mb-4 mt-16 text-[#2ea6ff]">
           Top Quotes
-        </h2>
+        </h2> */}
         {/* <p className="text-gray-600 dark:text-gray-400 mb-4">
           Quotes from people about me
         </p> */}

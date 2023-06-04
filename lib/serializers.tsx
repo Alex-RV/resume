@@ -1,4 +1,6 @@
 import { useTheme } from 'next-themes';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { darcula } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
 function Block(props) {
     const { resolvedTheme, setTheme } = useTheme();
@@ -39,9 +41,9 @@ export const serializers = {
     types: {
         block: Block,
         codeBlock: props => (
-          <pre data-language={props.node.language}>
-            <code>{props.node.code}</code>
-          </pre>
+          <SyntaxHighlighter language={props.node.language} style={darcula}>
+            {props.node.code}
+          </SyntaxHighlighter>
         )
       },
     marks: {

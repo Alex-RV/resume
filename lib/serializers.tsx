@@ -4,6 +4,9 @@ import { darcula } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
 function Block(props) {
     const { resolvedTheme, setTheme } = useTheme();
+        // if (props.node.marks == "red"){
+        //   return <style className='text-red'></style>
+        // }
         switch (props.node.style) {
           case 'h1':
             return <h1 className="text-4xl my-4 font-bold text-black dark:text-white">{props.children}</h1>;
@@ -35,6 +38,7 @@ function Block(props) {
           default:
             return <p className="my-4">{props.children}</p>;
         }
+
 }
 
 export const serializers = {
@@ -46,7 +50,27 @@ export const serializers = {
           </SyntaxHighlighter>
         )
       },
+    // lists: {
+      
+    // },
     marks: {
+        bullet : (props) =>{
+        return <li style={{
+          listStyleType: "disc",
+          marginLeft: "1rem",
+          marginTop: "0.5rem",
+        }}>{props.children}</li>;
+      },
+        red: (props) => {
+          return <text style={{
+            color: "#ea4335",
+          }}>{props.children}</text>
+        },
+        blue: (props) => {
+          return <text style={{
+            color: "#4285f4",
+          }}>{props.children}</text>
+        },
         link: (props) => {
           return <a
                       href={props.mark.href}

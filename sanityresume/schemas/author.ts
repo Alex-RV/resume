@@ -45,19 +45,6 @@ export default defineType({
       title: 'Bio',
       type: 'blockContent',
     }),
-    defineField({
-      name: 'bioOld',
-      title: 'BioOld',
-      type: 'array',
-      of: [
-        {
-          title: 'Block',
-          type: 'block',
-          styles: [{title: 'Normal', value: 'normal'}],
-          lists: [],
-        },
-      ],
-    }),
   ],
   preview: {
     select: {

@@ -38,6 +38,11 @@ function Block(props) {
 export const serializers = {
     types: {
         block: Block,
+        codeBlock: props => (
+          <pre data-language={props.node.language}>
+            <code>{props.node.code}</code>
+          </pre>
+        )
       },
     marks: {
         link: (props) => {

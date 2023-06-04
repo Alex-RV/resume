@@ -42,6 +42,8 @@ export default defineType({
           {title: 'Strong', value: 'strong'},
           {title: 'Emphasis', value: 'em'},
           { title: 'Code', value: 'code' },
+          {title: 'Highlight', value: 'highlight' },
+          {title: 'RedText', value: 'red'},
         ],
         // Annotations can be any object structure – e.g. a link or a footnote.
         annotations: [

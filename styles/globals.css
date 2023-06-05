@@ -76,6 +76,13 @@
     --card-border-rgb: 200, 200, 200;
   }
 }
+.flexible-element {
+  white-space: nowrap;
+  overflow-x: scroll;
+  width: 90vw;
+}
+
+
 
 * {
   box-sizing: border-box;

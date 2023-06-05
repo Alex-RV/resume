@@ -45,11 +45,13 @@ export const serializers = {
     types: {
         block: Block,
         codeBlock: props => (
-          <div className='mx-2'>
-            <SyntaxHighlighter language={props.node.language} style={darcula}>
-            {props.node.code}
-          </SyntaxHighlighter>
-          </div>
+          <div className='overflow-auto text-justify w-[5%]'>
+  <SyntaxHighlighter language={props.node.language} style={darcula} className="flexible-element">
+    {props.node.code}
+  </SyntaxHighlighter>
+</div>
+
+
         )
       },
     // lists: {

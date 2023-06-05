@@ -45,9 +45,11 @@ export const serializers = {
     types: {
         block: Block,
         codeBlock: props => (
-          <SyntaxHighlighter language={props.node.language} style={darcula}>
+          <div className='mx-2'>
+            <SyntaxHighlighter language={props.node.language} style={darcula}>
             {props.node.code}
           </SyntaxHighlighter>
+          </div>
         )
       },
     // lists: {

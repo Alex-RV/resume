@@ -80,6 +80,7 @@
   white-space: nowrap;
   overflow-x: scroll;
   width: 90vw;
+  max-width: 42rem;
   @media screen and (max-width: 480px) {
     font-size: 14px;
   }

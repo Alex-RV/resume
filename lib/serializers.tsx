@@ -71,6 +71,11 @@ export const serializers = {
             color: "#4285f4",
           }}>{props.children}</text>
         },
+        green: (props) => {
+          return <text style={{
+            color: "#34a853",
+          }}>{props.children}</text>
+        },
         link: (props) => {
           return <a
                       href={props.mark.href}

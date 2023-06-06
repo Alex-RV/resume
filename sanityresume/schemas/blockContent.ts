@@ -41,10 +41,10 @@ export default defineType({
         decorators: [
           {title: 'Strong', value: 'strong'},
           {title: 'Emphasis', value: 'em'},
-          { title: 'Code', value: 'code' },
           {title: 'Highlight', value: 'highlight' },
           {title: 'RedText', value: 'red'},
           {title: 'BlueText', value: 'blue'},
+          {title: 'GreenText', value: 'green'},
           {title: 'Bullet', value: 'bullet'},
         ],
         // Annotations can be any object structure – e.g. a link or a footnote.

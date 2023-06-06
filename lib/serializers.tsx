@@ -19,8 +19,8 @@ function Block(props) {
           case 'li':
             return <li style={{
                               listStyleType: "disc",
-                              marginLeft: "1rem",
-                              marginTop: "2rem",
+                              marginLeft: "0.5rem",
+                              marginTop: "0.5rem",
                             }} className="text-2xl my-4 list-disc text-black dark:text-white">{props.children}</li>;
           case 'blockquote':
             return <blockquote
@@ -46,12 +46,10 @@ export const serializers = {
         block: Block,
         codeBlock: props => (
           <div className='overflow-auto text-justify w-[5%]'>
-  <SyntaxHighlighter language={props.node.language} style={darcula} className="flexible-element">
-    {props.node.code}
-  </SyntaxHighlighter>
-</div>
-
-
+            <SyntaxHighlighter language={props.node.language} style={darcula} className="flexible-element">
+              {props.node.code}
+            </SyntaxHighlighter>
+          </div>
         )
       },
     // lists: {

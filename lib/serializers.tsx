@@ -15,12 +15,11 @@ function Block(props) {
           case 'h3':
             return <h3 className="text-2xl my-4 font-bold text-black dark:text-white">{props.children}</h3>;
           case 'h4':
-            return <h4 className="text-2xl my-4 font-bold text-black dark:text-white">{props.children}</h4>;
+            return <h4 className="text-xl my-4 font-bold text-black dark:text-white">{props.children}</h4>;
           case 'li':
             return <li style={{
                               listStyleType: "disc",
                               marginLeft: "0.5rem",
-                              marginTop: "0.5rem",
                             }} className="text-2xl my-4 list-disc text-black dark:text-white">{props.children}</li>;
           case 'blockquote':
             return <blockquote
@@ -60,7 +59,8 @@ export const serializers = {
         return <li style={{
           listStyleType: "disc",
           marginLeft: "1rem",
-          marginTop: "0.5rem",
+          // marginTop: "0.5rem",
+          // marginBottom:"0.5rem",
         }}>{props.children}</li>;
       },
         red: (props) => {

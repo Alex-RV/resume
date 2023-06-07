@@ -4,9 +4,6 @@ import { darcula } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
 function Block(props) {
     const { resolvedTheme, setTheme } = useTheme();
-        // if (props.node.marks == "red"){
-        //   return <style className='text-red'></style>
-        // }
         switch (props.node.style) {
           case 'h1':
             return <h1 className="text-4xl my-4 font-bold text-black dark:text-white">{props.children}</h1>;

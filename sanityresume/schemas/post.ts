@@ -52,11 +52,7 @@ export default defineType({
     defineField({
       name: 'githubLink',
       title: 'GithubLink',
-      type: 'slug',
-      options: {
-        source: 'title',
-        maxLength: 96,
-      },
+      type: 'string',
     }),
     defineField({
       name: 'body',

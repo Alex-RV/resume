@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 export default function AutocompleteInput({ onChange, value, options, defaultValue }) {
   const [filteredOptions, setFilteredOptions] = useState([]);
@@ -6,6 +6,8 @@ export default function AutocompleteInput({ onChange, value, options, defaultVal
   const [showDropdown, setShowDropdown] = useState(false);
   const [selectedOptionIndex, setSelectedOptionIndex] = useState(-1);
   const [inputDisabled, setInputDisabled] = useState(false);
+
+  const inputRef = useRef(null);
 
   const handleInputChange = (event) => {
     const inputValue = event.target.value;
@@ -69,6 +71,19 @@ export default function AutocompleteInput({ onChange, value, options, defaultVal
     }
   }, [selectedOptionIndex, filteredOptions, inputValue]);
 
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (inputRef.current && !inputRef.current.contains(event.target)) {
+        setShowDropdown(false);
+      }
+    };
+
+    window.addEventListener('click', handleOutsideClick);
+    return () => {
+      window.removeEventListener('click', handleOutsideClick);
+    };
+  }, []);
+
   return (
     <div className="relative">
       <input
@@ -80,6 +95,7 @@ export default function AutocompleteInput({ onChange, value, options, defaultVal
         disabled={inputDisabled}
         className="border rounded p-2 w-full text-black"
         placeholder="Search..."
+        ref={inputRef}
       />
 
       <button

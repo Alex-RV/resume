@@ -9,14 +9,16 @@ export default function AutocompleteInput({ onChange, value, options, defaultVal
 
   const handleInputChange = (event) => {
     const inputValue = event.target.value;
+    setInputValue(inputValue);
+    setShowDropdown(true);
+    setInputDisabled(false);
+  
     const filteredOptions = options.filter(option =>
       option.toLowerCase().includes(inputValue.toLowerCase())
     );
-    setInputValue(inputValue);
     setFilteredOptions(filteredOptions);
-    setShowDropdown(true);
-    setInputDisabled(false);
     onChange(inputValue);
+    setSelectedOptionIndex(-1);
   };
 
   const handleDropdownToggle = () => {
@@ -63,7 +65,7 @@ export default function AutocompleteInput({ onChange, value, options, defaultVal
     if (selectedOptionIndex !== -1) {
       setInputValue(filteredOptions[selectedOptionIndex]);
     } else {
-      setInputValue(inputValue); // Added this line to handle no selected option
+      setInputValue(inputValue); 
     }
   }, [selectedOptionIndex, filteredOptions, inputValue]);
 

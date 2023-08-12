@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Container from '../components/Container';
+import AutocompleteInput from '../components/AutocompleteInput';
 
 function LiElement({ text, element }) {
   return (
@@ -11,6 +12,12 @@ function LiElement({ text, element }) {
 }
 
 export default function Ip() {
+  const options = ['San Francisco', 'Oakland', 'San Leandro', 'Lake Merrit', 'Stanford'];
+  const [selectedValue, setSelectedValue] = useState('');
+
+  const handleAutocompleteChange = (value) => {
+    setSelectedValue(value);
+  };
     const [dataIP, setDataIP] = useState('')
     const [country_code, setCountry_code] = useState('')
     const [country_name, setCountry_name] = useState('')
@@ -92,6 +99,14 @@ export default function Ip() {
           <LiElement text={"Provider: "} element={org}/>
         </ul>
     </div>
+    
+
+    <AutocompleteInput
+        options={options}
+        value={selectedValue}
+        onChange={handleAutocompleteChange}
+        defaultValue={null}      
+        />
     </Container>
     
   )

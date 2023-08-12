@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 export default function AutocompleteInput({ onChange, value, options, defaultValue }) {
-  const [filteredOptions, setFilteredOptions] = useState([]);
+  const [filteredOptions, setFilteredOptions] = useState(options);
   const [inputValue, setInputValue] = useState(value || defaultValue || '');
   const [showDropdown, setShowDropdown] = useState(false);
   const [selectedOptionIndex, setSelectedOptionIndex] = useState(-1);
@@ -24,14 +24,18 @@ export default function AutocompleteInput({ onChange, value, options, defaultVal
   };
 
   const handleDropdownToggle = () => {
+    console.log(filteredOptions.length, inputValue, showDropdown, inputDisabled)
     if (filteredOptions.length >= 1 || !inputValue) {
+        console.log("sdssdsadd", !showDropdown)
       setShowDropdown(!showDropdown);
-    } else {
+    }else {
+        console.log("sdsd")
       setInputDisabled(true);
     }
   };
 
   const handleOptionClick = (selectedOption) => {
+    console.log("handleOptionClick")
     setInputValue(selectedOption);
     setFilteredOptions([]);
     setShowDropdown(false);
@@ -47,20 +51,6 @@ export default function AutocompleteInput({ onChange, value, options, defaultVal
     setInputDisabled(false);
     setSelectedOptionIndex(-1);
     onChange('');
-  };
-
-  const handleKeyDown = (event) => {
-    if (showDropdown) {
-      if (event.key === 'ArrowUp') {
-        event.preventDefault();
-        setSelectedOptionIndex(prevIndex => (prevIndex > 0 ? prevIndex - 1 : prevIndex));
-      } else if (event.key === 'ArrowDown') {
-        event.preventDefault();
-        setSelectedOptionIndex(prevIndex => (prevIndex < filteredOptions.length - 1 ? prevIndex + 1 : prevIndex));
-      } else if (event.key === 'Enter' && selectedOptionIndex !== -1) {
-        handleOptionClick(filteredOptions[selectedOptionIndex]);
-      }
-    }
   };
 
   useEffect(() => {
@@ -84,17 +74,30 @@ export default function AutocompleteInput({ onChange, value, options, defaultVal
     };
   }, []);
 
+  const handleKeyDown = (event) => {
+    if (showDropdown) {
+      if (event.key === 'ArrowUp') {
+        event.preventDefault();
+        setSelectedOptionIndex(prevIndex => (prevIndex > 0 ? prevIndex - 1 : prevIndex));
+      } else if (event.key === 'ArrowDown') {
+        event.preventDefault();
+        setSelectedOptionIndex(prevIndex => (prevIndex < filteredOptions.length - 1 ? prevIndex + 1 : prevIndex));
+      } else if (event.key === 'Enter' && selectedOptionIndex !== -1) {
+        handleOptionClick(filteredOptions[selectedOptionIndex]);
+      }
+    }
+  };
+
   return (
-    <div className="relative">
+    <div className="relative" onKeyDown={handleKeyDown}>
       <input
         type="text"
         value={inputValue}
         onChange={handleInputChange}
         onFocus={handleDropdownToggle}
-        onKeyDown={handleKeyDown}
         disabled={inputDisabled}
         className="border rounded p-2 w-full text-black"
-        placeholder="Search..."
+        placeholder="🔎 Search..."
         ref={inputRef}
       />
 
@@ -102,7 +105,7 @@ export default function AutocompleteInput({ onChange, value, options, defaultVal
         onClick={handleDropdownToggle}
         className="absolute right-0 top-0 h-full px-3 focus:outline-none text-gray-300"
       >
-        {showDropdown ? '▲' : '▼'}
+        {showDropdown ? '🔺' : '🔻'}
       </button>
 
       <button
@@ -118,7 +121,7 @@ export default function AutocompleteInput({ onChange, value, options, defaultVal
             <li
               key={index}
               onClick={() => handleOptionClick(option)}
-              className={`cursor-pointer p-2 hover:bg-gray-100 ${selectedOptionIndex === index ? 'bg-gray-100' : ''}`}
+              className={`cursor-pointer p-2 hover:bg-gray-100 ${selectedOptionIndex === index ? 'bg-blue-300' : ''}`}
             >
               {option}
             </li>

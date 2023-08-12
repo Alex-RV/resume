@@ -23,19 +23,17 @@ export default function AutocompleteInput({ onChange, value, options, defaultVal
     setSelectedOptionIndex(-1);
   };
 
-  const handleDropdownToggle = () => {
+  const handleDropdownToggle = (event) => {
     console.log(filteredOptions.length, inputValue, showDropdown, inputDisabled)
     if (filteredOptions.length >= 1 || !inputValue) {
-        console.log("sdssdsadd", !showDropdown)
+        event.stopPropagation();
       setShowDropdown(!showDropdown);
     }else {
-        console.log("sdsd")
       setInputDisabled(true);
     }
   };
 
   const handleOptionClick = (selectedOption) => {
-    console.log("handleOptionClick")
     setInputValue(selectedOption);
     setFilteredOptions([]);
     setShowDropdown(false);

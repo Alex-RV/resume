@@ -82,28 +82,30 @@ export default function AutocompleteInput({ onChange, value, options, defaultVal
         setSelectedOptionIndex(prevIndex => (prevIndex < filteredOptions.length - 1 ? prevIndex + 1 : prevIndex));
       } else if (event.key === 'Enter' && selectedOptionIndex !== -1) {
         handleOptionClick(filteredOptions[selectedOptionIndex]);
+      } else if (event.key === 'Escape') {
+        setShowDropdown(!showDropdown);
       }
     }
   };
 
   return (
-    <div className="relative" onKeyDown={handleKeyDown}>
+    <div className="relative rounded-md" onKeyDown={handleKeyDown}>
       <input
         type="text"
         value={inputValue}
         onChange={handleInputChange}
         onFocus={handleDropdownToggle}
         disabled={inputDisabled}
-        className="border rounded p-2 w-full text-black"
+        className="border rounded p-2 w-full text-black dark:text-white"
         placeholder="🔎 Search..."
         ref={inputRef}
       />
 
       <button
         onClick={handleDropdownToggle}
-        className="absolute right-0 top-0 h-full px-3 focus:outline-none text-gray-300"
+        className="absolute right-0 top-0 h-full px-3 focus:outline-none text-gray-300 transition-transform transform ${showDropdown ? 'rotate-180' : ''}"
       >
-        {showDropdown ? '🔺' : '🔻'}
+        🔻
       </button>
 
       <button
@@ -114,12 +116,12 @@ export default function AutocompleteInput({ onChange, value, options, defaultVal
       </button>
 
       {showDropdown && (
-        <ul className="absolute z-10 w-full bg-white border border-gray-300 mt-2 text-black">
+        <ul className="absolute z-10 w-full text-black dark:text-white bg-white dark:bg-slate-600 border border-gray-300 mt-2 shadow-md">
           {(filteredOptions.length > 0 ? filteredOptions : options).map((option, index) => (
             <li
               key={index}
               onClick={() => handleOptionClick(option)}
-              className={`cursor-pointer p-2 hover:bg-gray-100 ${selectedOptionIndex === index ? 'bg-blue-300' : ''}`}
+              className={`cursor-pointer p-2 hover:bg-gray-100 dark:hover:bg-gray-600 ${selectedOptionIndex === index ? 'bg-gray-200 dark:bg-gray-500' : ''}`}
             >
               {option}
             </li>

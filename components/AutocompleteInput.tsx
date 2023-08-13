@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 
 export default function AutocompleteInput({ onChange, value, options, defaultValue }) {
   const [filteredOptions, setFilteredOptions] = useState(options);
-  const [inputValue, setInputValue] = useState(value || defaultValue || '');
+  const [inputValue, setInputValue] = useState(value !== '' ? value : defaultValue || '');
   const [showDropdown, setShowDropdown] = useState(false);
   const [selectedOptionIndex, setSelectedOptionIndex] = useState(-1);
   const [inputDisabled, setInputDisabled] = useState(false);
@@ -14,8 +14,8 @@ export default function AutocompleteInput({ onChange, value, options, defaultVal
     setInputValue(inputValue);
     setShowDropdown(true);
     setInputDisabled(false);
-  
-    const filteredOptions = options.filter(option =>
+
+    const filteredOptions = options.filter((option) =>
       option.toLowerCase().includes(inputValue.toLowerCase())
     );
     setFilteredOptions(filteredOptions);
@@ -24,27 +24,29 @@ export default function AutocompleteInput({ onChange, value, options, defaultVal
   };
 
   const handleDropdownToggle = (event) => {
-    console.log(filteredOptions.length, inputValue, showDropdown, inputDisabled)
+    event.stopPropagation();
+    event.preventDefault();
     if (filteredOptions.length >= 1 || !inputValue) {
-        event.stopPropagation();
       setShowDropdown(!showDropdown);
-    }else {
+    } else {
       setInputDisabled(true);
     }
   };
 
   const handleOptionClick = (selectedOption) => {
     setInputValue(selectedOption);
-    setFilteredOptions([]);
+    setFilteredOptions(options);
     setShowDropdown(false);
     setInputDisabled(false);
     setSelectedOptionIndex(-1);
     onChange(selectedOption);
   };
 
-  const handleClear = () => {
+  const handleClear = (event) => {
+    event.stopPropagation();
+    event.preventDefault();
     setInputValue('');
-    setFilteredOptions([]);
+    setFilteredOptions(options);
     setShowDropdown(false);
     setInputDisabled(false);
     setSelectedOptionIndex(-1);
@@ -55,7 +57,7 @@ export default function AutocompleteInput({ onChange, value, options, defaultVal
     if (selectedOptionIndex !== -1) {
       setInputValue(filteredOptions[selectedOptionIndex]);
     } else {
-      setInputValue(inputValue); 
+      setInputValue(inputValue);
     }
   }, [selectedOptionIndex, filteredOptions, inputValue]);
 
@@ -76,10 +78,12 @@ export default function AutocompleteInput({ onChange, value, options, defaultVal
     if (showDropdown) {
       if (event.key === 'ArrowUp') {
         event.preventDefault();
-        setSelectedOptionIndex(prevIndex => (prevIndex > 0 ? prevIndex - 1 : prevIndex));
+        setSelectedOptionIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : prevIndex));
       } else if (event.key === 'ArrowDown') {
         event.preventDefault();
-        setSelectedOptionIndex(prevIndex => (prevIndex < filteredOptions.length - 1 ? prevIndex + 1 : prevIndex));
+        setSelectedOptionIndex((prevIndex) =>
+          prevIndex < filteredOptions.length - 1 ? prevIndex + 1 : prevIndex
+        );
       } else if (event.key === 'Enter' && selectedOptionIndex !== -1) {
         handleOptionClick(filteredOptions[selectedOptionIndex]);
       } else if (event.key === 'Escape') {
@@ -103,9 +107,11 @@ export default function AutocompleteInput({ onChange, value, options, defaultVal
 
       <button
         onClick={handleDropdownToggle}
-        className="absolute right-0 top-0 h-full px-3 focus:outline-none text-gray-300 transition-transform transform ${showDropdown ? 'rotate-180' : ''}"
+        className={`absolute right-0 top-0 h-full px-3 focus:outline-none text-gray-300 transition-transform transform ${
+          showDropdown ? 'rotate-180' : ''
+        }`}
       >
-        🔻
+        {showDropdown ? '🔺' : '🔻'}
       </button>
 
       <button
@@ -121,7 +127,9 @@ export default function AutocompleteInput({ onChange, value, options, defaultVal
             <li
               key={index}
               onClick={() => handleOptionClick(option)}
-              className={`cursor-pointer p-2 hover:bg-gray-100 dark:hover:bg-gray-600 ${selectedOptionIndex === index ? 'bg-gray-200 dark:bg-gray-500' : ''}`}
+              className={`cursor-pointer p-2 hover:bg-gray-100 dark:hover:bg-gray-600 ${
+                selectedOptionIndex === index ? 'bg-gray-200 dark:bg-gray-500' : ''
+              }`}
             >
               {option}
             </li>

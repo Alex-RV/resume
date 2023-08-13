@@ -116,7 +116,7 @@ export default function AutocompleteInput({ onChange, value, options, defaultVal
       </button>
 
       {showDropdown && (
-        <ul className="absolute z-10 w-full text-black dark:text-white bg-white dark:bg-slate-600 border border-gray-300 mt-2 shadow-md">
+        <ul className="absolute z-10 w-full text-black dark:text-white bg-white dark:bg-slate-600 border border-gray-300 mt-2 shadow-md max-h-48 overflow-y-auto">
           {(filteredOptions.length > 0 ? filteredOptions : options).map((option, index) => (
             <li
               key={index}

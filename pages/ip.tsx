@@ -12,7 +12,7 @@ function LiElement({ text, element }) {
 }
 
 export default function Ip() {
-  const options = ['San Francisco', 'Oakland', 'San Leandro', 'Lake Merrit', 'Stanford'];
+  const options = ['San Francisco', 'Oakland', 'San Leandro', 'Lake Merrit', 'Stanford','San Francisco', 'Oakland', 'San Leandro', 'Lake Merrit', 'Stanford','San Francisco', 'Oakland', 'San Leandro', 'Lake Merrit', 'Stanford','San Francisco', 'Oakland', 'San Leandro', 'Lake Merrit', 'Stanford','San Francisco', 'Oakland', 'San Leandro', 'Lake Merrit', 'Stanford','San Francisco', 'Oakland', 'San Leandro', 'Lake Merrit', 'Stanford','San Francisco', 'Oakland', 'San Leandro', 'Lake Merrit', 'Stanford',];
   const [selectedValue, setSelectedValue] = useState('');
 
   const handleAutocompleteChange = (value) => {

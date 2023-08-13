@@ -6,6 +6,7 @@ export default function Windborne() {
   const options = ['San Francisco', 'Oakland', 'San Leandro', 'Lake Merritt', 'Stanford'];
 
   const [selectedValue, setSelectedValue] = useState('');
+  const [selectionRequired, setSelectionRequired] = useState(false);
 
   const handleAutocompleteChange = (value) => {
     setSelectedValue(value);
@@ -15,9 +16,11 @@ export default function Windborne() {
     event.preventDefault();
 
     if (selectedValue) {
-      alert(`Selected value: ${selectedValue}`);
+        setSelectionRequired(false);
+        alert(`Selected value: ${selectedValue}`);
     } else {
-      alert('Please select an option before submitting.');
+        setSelectionRequired(true);
+        // alert('Please select an option before submitting.');
     }
   };
 
@@ -40,10 +43,10 @@ export default function Windborne() {
               defaultValue={null}
             />
           </div>
+          {selectionRequired && <p className='text-red-700'>Chose the option first</p>}
           <button
             type="submit"
             className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300"
-            disabled={!selectedValue}
           >
             Submit
           </button>

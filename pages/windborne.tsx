@@ -3,7 +3,18 @@ import AutocompleteInput from '../components/AutocompleteInput';
 import Container from '../components/Container';
 
 export default function Windborne() {
-  const options = ['San Francisco', 'Oakland', 'San Leandro', 'Lake Merritt', 'Stanford'];
+    const options = [
+        'San Francisco',
+        'Oakland',
+        'San Leandro',
+        'Lake Merritt',
+        'Stanford',
+        'Berkeley',
+        'Palo Alto',
+        'Fremont',
+        'Mountain View',
+        'Sunnyvale'
+      ];
 
   const [selectedValue, setSelectedValue] = useState('');
   const [selectionRequired, setSelectionRequired] = useState(false);

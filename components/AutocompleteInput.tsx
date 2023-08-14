@@ -61,7 +61,9 @@ export default function AutocompleteInput({
     setInputValue(selectedOption);
     setFilteredOptions(options);
     setShowDropdown(false);
-    setInputDisabled(true);
+    if (selectedOption) {
+      setInputDisabled(true);
+    }
     setSelectedOptionIndex(-1);
     onChange(selectedOption);
   };

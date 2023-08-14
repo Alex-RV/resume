@@ -1,6 +1,22 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-export default function AutocompleteInput({ onChange, value, options, defaultValue }) {
+interface SortingOptions {
+  sortingOption: 'alphabetical' | 'includes';
+}
+
+export default function AutocompleteInput({
+  onChange,
+  value,
+  options,
+  defaultValue,
+  sortingOption,
+}: {
+  onChange: (value: string) => void;
+  value: string;
+  options: string[];
+  defaultValue: string;
+  sortingOption: SortingOptions['sortingOption'];
+}) {
   const [filteredOptions, setFilteredOptions] = useState(options);
   const [inputValue, setInputValue] = useState(value !== '' ? value : defaultValue || '');
   const [showDropdown, setShowDropdown] = useState(false);
@@ -15,11 +31,19 @@ export default function AutocompleteInput({ onChange, value, options, defaultVal
     setShowDropdown(true);
     setInputDisabled(false);
 
-    const filteredOptions = options.filter((option) =>
-      option.toLowerCase().includes(inputValue.toLowerCase())
-    );
+    let filteredOptions;
+
+    if (sortingOption === 'alphabetical') {
+      filteredOptions = options.filter((option) =>
+        option.toLowerCase().includes(inputValue.toLowerCase())
+      ).sort();
+    } else if (sortingOption === 'includes') {
+      filteredOptions = options.filter((option) =>
+        option.toLowerCase().includes(inputValue.toLowerCase())
+      );
+    }
+
     setFilteredOptions(filteredOptions);
-    onChange(inputValue);
     setSelectedOptionIndex(-1);
   };
 
@@ -37,7 +61,7 @@ export default function AutocompleteInput({ onChange, value, options, defaultVal
     setInputValue(selectedOption);
     setFilteredOptions(options);
     setShowDropdown(false);
-    setInputDisabled(false);
+    setInputDisabled(true);
     setSelectedOptionIndex(-1);
     onChange(selectedOption);
   };
@@ -93,41 +117,54 @@ export default function AutocompleteInput({ onChange, value, options, defaultVal
   };
 
   return (
-    <div className="relative rounded-md" onKeyDown={handleKeyDown}>
+    <div className="relative w-full" onKeyDown={handleKeyDown}>
       <input
         type="text"
         value={inputValue}
         onChange={handleInputChange}
         onFocus={handleDropdownToggle}
         disabled={inputDisabled}
-        className="border rounded p-2 w-full text-black dark:text-white"
+        className={`w-full p-2 border rounded focus:outline-none ${
+          showDropdown
+            ? 'border-blue-400 dark:border-gray-700 dark:bg-gray-800 text-black dark:text-white'
+            : 'border-gray-300 dark:border-gray-600 dark:bg-gray-700 text-black dark:text-white'
+        }`}
         placeholder="🔎 Search..."
         ref={inputRef}
       />
 
       <button
         onClick={handleDropdownToggle}
-        className={`absolute right-0 top-0 h-full px-3 focus:outline-none text-gray-300 transition-transform transform ${
+        disabled={inputDisabled}
+        className={`absolute right-0 top-0 h-full px-3 text-gray-500 transition-transform transform ${
           showDropdown ? 'rotate-180' : ''
         }`}
       >
-        {showDropdown ? '🔺' : '🔻'}
+        🔻
       </button>
 
       <button
         onClick={handleClear}
-        className="absolute right-10 top-0 h-full px-3 focus:outline-none text-gray-300"
+        className={`absolute right-10 top-0 h-full px-3 text-gray-500 focus:outline-none ${
+          showDropdown ? 'hover:text-gray-700' : ''
+        }`}
       >
         Clear
       </button>
 
       {showDropdown && (
-        <ul className="absolute z-10 w-full text-black dark:text-white bg-white dark:bg-slate-600 border border-gray-300 mt-2 shadow-md max-h-48 overflow-y-auto">
-          {(filteredOptions.length > 0 ? filteredOptions : options).map((option, index) => (
+        <ul className={`absolute z-10 w-full py-2 mt-2 rounded-md shadow-lg max-h-48 overflow-y-auto ${
+          options.length === 0 ? '' : 'border dark:border-gray-600 border-gray-300'
+        } ${
+          showDropdown
+            ? 'bg-white dark:bg-gray-700 text-black dark:text-white'
+            : 'bg-white dark:bg-gray-700 text-black dark:text-white'
+        }`}>
+          {filteredOptions.map((option, index) => (
             <li
               key={index}
               onClick={() => handleOptionClick(option)}
-              className={`cursor-pointer p-2 hover:bg-gray-100 dark:hover:bg-gray-600 ${
+              className={`cursor-pointer px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 ${
                 selectedOptionIndex === index ? 'bg-gray-200 dark:bg-gray-500' : ''
               }`}
             >
@@ -135,7 +172,7 @@ export default function AutocompleteInput({ onChange, value, options, defaultVal
             </li>
           ))}
           {filteredOptions.length === 0 && inputValue.length > 0 && (
-            <li className="p-2 text-gray-500">No options</li>
+            <li className="px-4 py-2 text-gray-500">No options</li>
           )}
         </ul>
       )}

@@ -28,6 +28,8 @@ function isImage(dataUrl) {
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     try {
+      res.status(200).json(req.method);
+
       const { dataUrl } = req.body;
 
       // let buffer;
@@ -46,7 +48,6 @@ export default async function handler(req, res) {
       const buffer = Buffer.from(base64Data, 'base64');
       const [result] = await client.textDetection(buffer);
       const detections = result.textAnnotations;
-      res.status(200).json(result);
       const textResults = detections.map(text => text.description);
       const jsonResponse = {
         text: textResults,

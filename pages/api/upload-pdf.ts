@@ -1,6 +1,6 @@
 const vision = require('@google-cloud/vision');
 const fs = require("fs");
-console.log("KEY",process.env.NEXT_PUBLIC_GOOGLE_SERVICE_KEY);
+
 const credential = JSON.parse(
   Buffer.from(process.env.NEXT_PUBLIC_GOOGLE_SERVICE_KEY, "base64").toString().replace(/\n/g,"")
 );
@@ -26,6 +26,7 @@ function isImage(dataUrl) {
 }
 
 export default async function handler(req, res) {
+  return res.status(200).json(credential);;
   if (req.method === 'POST') {
     try {
       const { dataUrl } = req.body;

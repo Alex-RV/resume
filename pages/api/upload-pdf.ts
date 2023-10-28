@@ -1,5 +1,6 @@
 const vision = require('@google-cloud/vision');
 const fs = require("fs");
+console.log("KEY",process.env.GOOGLE_SERVICE_KEY);
 const credential = JSON.parse(
   Buffer.from(process.env.GOOGLE_SERVICE_KEY, "base64").toString().replace(/\n/g,"")
 );

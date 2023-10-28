@@ -1,5 +1,23 @@
+import Cors from 'cors';
 const vision = require('@google-cloud/vision');
 const fs = require("fs");
+
+const cors = Cors({
+  methods: ['POST'],
+  origin: ['http://localhost:3000', 'https://legal-lingua.vercel.app/'], 
+});
+
+function runMiddleware(req, res, fn) {
+  return new Promise((resolve, reject) => {
+      fn(req, res, (result) => {
+          if (result instanceof Error) {
+              return reject(result);
+          }
+          return resolve(result);
+      });
+  });
+}
+
 
 const credential = JSON.parse(
   Buffer.from(process.env.NEXT_PUBLIC_GOOGLE_SERVICE_KEY, "base64").toString().replace(/\n/g,"")
@@ -26,6 +44,7 @@ function isImage(dataUrl) {
 }
 
 export default async function handler(req, res) {
+  await runMiddleware(req, res, cors);
   if (req.method === 'POST') {
     try {
       const { dataUrl } = req.body;

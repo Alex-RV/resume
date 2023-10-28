@@ -3,23 +3,25 @@ const vision = require('@google-cloud/vision');
 const fs = require("fs");
 
 const cors = Cors({
-  methods: ['POST'],
-  origin: ['http://localhost:3000', 'https://legal-lingua.vercel.app/'], 
+  methods: ['POST', 'OPTIONS'],
+  origin: ['http://localhost:3000', 'https://legal-lingua.vercel.app'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
 });
 
-function runMiddleware(req, res, fn) {
-  return new Promise((resolve, reject) => {
-      fn(req, res, (result) => {
-          if (result instanceof Error) {
-              return reject(result);
-          }
-          return resolve(result);
-      });
+async function applyCors(req, res) {
+  await new Promise((resolve, reject) => {
+    cors(req, res, (result) => {
+      if (result instanceof Error) {
+        return reject(result);
+      }
+      return resolve(result);
+    });
   });
 }
 
 const credential = JSON.parse(
-  Buffer.from(process.env.NEXT_PUBLIC_GOOGLE_SERVICE_KEY, "base64").toString().replace(/\n/g,"")
+  Buffer.from(process.env.NEXT_PUBLIC_GOOGLE_SERVICE_KEY, "base64").toString().replace(/\n/g, "")
 );
 const client = new vision.ImageAnnotatorClient({
   projectId: "raspimon",
@@ -29,19 +31,13 @@ const client = new vision.ImageAnnotatorClient({
   }
 });
 
-function isPDF(dataUrl) {
-  return dataUrl.startsWith('data:application/pdf;');
-}
-
-function isImage(dataUrl) {
-  return (
-    dataUrl.startsWith('data:image/png;') ||
-    dataUrl.startsWith('data:image/jpeg;')
-  );
-}
-
 export default async function handler(req, res) {
-  await runMiddleware(req, res, cors);
+  await applyCors(req, res);
+
+  if (req.method === 'OPTIONS') { // Preflight request. Reply successfully:
+    res.status(200).end();
+    return;
+  }
 
   if (req.method !== 'POST') {
     res.status(404).json({ error: 'Invalid method' });

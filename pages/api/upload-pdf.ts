@@ -44,7 +44,8 @@ export default async function handler(req, res) {
     return;
   }
 
-  const { dataUrl } = req.body;
+  const { pngDataUrl: dataUrl } = req.body;
+
 
   if (!dataUrl) {
     res.status(400).json({ error: 'dataUrl not provided' });

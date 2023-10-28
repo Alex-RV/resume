@@ -26,10 +26,9 @@ function isImage(dataUrl) {
 }
 
 export default async function handler(req, res) {
+  res.status(200).json(req.method);
   if (req.method === 'POST') {
     try {
-      res.status(200).json(req.method);
-
       const { dataUrl } = req.body;
 
       // let buffer;

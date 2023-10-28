@@ -1,8 +1,8 @@
 const vision = require('@google-cloud/vision');
 const fs = require("fs");
-console.log("KEY",process.env.GOOGLE_SERVICE_KEY);
+console.log("KEY",process.env.NEXT_PUBLIC_GOOGLE_SERVICE_KEY);
 const credential = JSON.parse(
-  Buffer.from(process.env.GOOGLE_SERVICE_KEY, "base64").toString().replace(/\n/g,"")
+  Buffer.from(process.env.NEXT_PUBLIC_GOOGLE_SERVICE_KEY, "base64").toString().replace(/\n/g,"")
 );
 const client = new vision.ImageAnnotatorClient({
   projectId: "raspimon",

@@ -63,7 +63,7 @@ export default async function handler(req, res) {
 
     const [result] = await client.textDetection(buffer);
     const detections = result.textAnnotations;
-    const textResults = detections.map(text => text.description);
+    const textResults = detections[0].map(text => text.description);
     const jsonResponse = {
       text: textResults,
     };

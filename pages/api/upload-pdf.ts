@@ -63,15 +63,16 @@ export default async function handler(req, res) {
 
     const [result] = await client.textDetection(buffer);
     const detections = result.textAnnotations;
-    const textResults = detections.map(text => text.description);
+    const fullText = detections[0].description;
+
     const jsonResponse = {
-      text: textResults,
+      text: fullText,
     };
 
     console.log(jsonResponse);
     res.status(200).json(jsonResponse);
-  } catch (error) {
+} catch (error) {
     console.error('Error:', error);
     res.status(500).json({ error: 'An error occurred' });
-  }
+}
 }

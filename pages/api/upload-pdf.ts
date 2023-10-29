@@ -62,16 +62,13 @@ export default async function handler(req, res) {
     const buffer = Buffer.from(base64Data, 'base64');
 
     const [result] = await client.textDetection(buffer);
-    const detections = result.textAnnotations;
-    const textResults = detections[0].map(text => text.description);
-    const jsonResponse = {
-      text: textResults,
-    };
+    const fullText = result.textAnnotations[0].description;
 
-    console.log(jsonResponse);
-    res.status(200).json(jsonResponse);
-  } catch (error) {
+    console.log(fullText);
+    res.status(200).json({ text: fullText });
+} catch (error) {
     console.error('Error:', error);
     res.status(500).json({ error: 'An error occurred' });
-  }
+}
+
 }

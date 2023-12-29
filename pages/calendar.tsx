@@ -3,12 +3,14 @@ import Container from '../components/Container'
 import getAccessToken from "../lib/google/getAccessToken"
 import getCalendarIds from "../lib/google/getCalendarIds"
 import getEvents from "../lib/google/getCalendarEvents"
+import getAccessTokenPopUp from "../lib/google/getAccessTokenPopUp"
 
 export default function calendar() {
 
 
     async function handleGetCalendarId() {
-        const accessToken = await getAccessToken();
+        // const accessToken = await getAccessToken();
+        const accessToken = await getAccessTokenPopUp();
 
         const calendarId = await getCalendarIds(accessToken);
         console.log("calendarId: ",calendarId)

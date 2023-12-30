@@ -1,30 +1,40 @@
+// lib/google/auth.js
 /**
- * Retrieves an access token from Google.
+ * Initiates the OAuth 2.0 authorization code flow in a new window.
  *
  * @returns {Promise<string>} A promise that resolves to the access token.
- * @throws {Error} If any required environment variables are missing or if the process fails.
+ * @throws {Error} If any required environment variables are missing.
  */
 export default async function getAccessTokenPopUp(): Promise<string> {
     if (!process.env.NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID) {
       throw new Error("GOOGLE_OAUTH_CLIENT_ID not set");
     }
   
-    const redirectUri = encodeURIComponent(window.location.origin + "/calendar"); // Specify your redirect URI
+    const redirectUri = encodeURIComponent(window.location.origin + "/oauth-callback");
     const authorizationUrl = `https://accounts.google.com/o/oauth2/auth?client_id=${process.env.NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID}&redirect_uri=${redirectUri}&response_type=code&scope=https://www.googleapis.com/auth/calendar.readonly`;
   
-    // Redirect the user to the authorization URL
-    window.location.href = authorizationUrl;
+    const authWindow = window.open(authorizationUrl, '_blank');
   
-    // After user grants permission, obtain the code from the callback URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const authorizationCode = urlParams.get("code");
+    return new Promise((resolve, reject) => {
+      const handleTokenResponse = (event) => {
+        if (event.source === authWindow) {
+          window.removeEventListener('message', handleTokenResponse);
   
-    if (!authorizationCode) {
-      throw new Error("Authorization code not found in the callback URL");
-    }
+          authWindow.close();
   
-    // Exchange the authorization code for an access token
-    return exchangeCodeForAccessToken(authorizationCode);
+          const { authorizationCode, error } = event.data;
+          if (authorizationCode) {
+            exchangeCodeForAccessToken(authorizationCode)
+              .then(resolve)
+              .catch(reject);
+          } else {
+            reject(error || 'Failed to obtain authorization code');
+          }
+        }
+      };
+  
+      window.addEventListener('message', handleTokenResponse);
+    });
   }
   
   /**

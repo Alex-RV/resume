@@ -7,17 +7,18 @@ import getAccessTokenPopUp from "../lib/google/getAccessTokenPopUp"
 
 export default function calendar() {
 
-
     async function handleGetCalendarId() {
-        // const accessToken = await getAccessToken();
-        const accessToken = await getAccessTokenPopUp();
-
-        const calendarId = await getCalendarIds(accessToken);
-        console.log("calendarId: ",calendarId)
-
-        const events = await getEvents(accessToken);
-        console.log("Events: ",events);
-    }
+        try {
+          const accessToken = await getAccessTokenPopUp();
+          const calendarId = await getCalendarIds(accessToken);
+          console.log("calendarId: ", calendarId);
+    
+          const events = await getEvents(accessToken);
+          console.log("Events: ", events);
+        } catch (error) {
+          console.error("Error:", error);
+        }
+      }
   return (
     <Container>
         <div className='flex flex-col text-black justify-center items-center'>

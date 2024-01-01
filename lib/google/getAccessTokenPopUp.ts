@@ -2,51 +2,34 @@
 /**
  * Initiates the OAuth 2.0 authorization code flow in a new window.
  *
- * @returns {Promise<string>} A promise that resolves to the access token.
+ * @returns {Promise<string | null>} A promise that resolves to the access token.
  * @throws {Error} If any required environment variables are missing.
  */
-// lib/google/auth.js
 
-export default async function getAccessTokenPopUp(): Promise<string> {
-  if (!process.env.NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID) {
-    throw new Error("GOOGLE_OAUTH_CLIENT_ID not set");
-  }
+export default async function getAccessTokenPopup(windowObj: Window): Promise<string | null> {
+  return new Promise<string | null>((resolve) => {
+    const clientId = process.env.NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID;
+    const redirectUri = windowObj.location.origin + '/callback';
+    const authUrl = `https://accounts.google.com/o/oauth2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=https://www.googleapis.com/auth/calendar.readonly`;
 
-  const redirectUri = encodeURIComponent(window.location.origin + "/calendar");
-  const authorizationUrl = `https://accounts.google.com/o/oauth2/auth?client_id=${process.env.NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID}&redirect_uri=${redirectUri}&response_type=code&scope=https://www.googleapis.com/auth/calendar.readonly`;
+    // Open a new window for authentication
+    const popup = windowObj.open(authUrl, '_blank', 'width=600,height=600');
 
-  const authWindow = window.open(authorizationUrl, '_blank');
+    // Listen for messages from the popup
+    windowObj.addEventListener('message', async (event) => {
+      if (event.origin === windowObj.location.origin) {
+        // Close the popup
+        popup.close();
 
-  return new Promise((resolve, reject) => {
-    const handleTokenResponse = (event) => {
-      if (event.source === authWindow) {
-        window.removeEventListener('message', handleTokenResponse);
+        // Extract access token from the response
+        const accessToken = event.data.access_token;
 
-        authWindow.close();
-
-        const { authorizationCode, error } = event.data;
-        if (authorizationCode) {
-          exchangeCodeForAccessToken(authorizationCode)
-            .then(resolve)
-            .catch(reject);
-        } else {
-          reject(error || 'Failed to obtain authorization code');
-        }
+        // Resolve the promise with the access token
+        resolve(accessToken);
       }
-    };
-
-    window.addEventListener('message', handleTokenResponse);
-
-    // Check if the child window is closed every second
-    const checkChildWindow = setInterval(() => {
-      if (authWindow.closed) {
-        clearInterval(checkChildWindow);
-        reject('Authorization window closed');
-      }
-    }, 1000);
+    });
   });
 }
-
   
   /**
    * Exchanges the authorization code for an access token.

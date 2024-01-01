@@ -10,6 +10,7 @@ export default async function getAccessTokenPopup(windowObj: Window): Promise<st
   return new Promise<string | null>((resolve) => {
     const clientId = process.env.NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID;
     const redirectUri = windowObj.location.origin + '/callback';
+    console.log(redirectUri,"it was redirect url and client id is:", clientId)
     const authUrl = `https://accounts.google.com/o/oauth2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=https://www.googleapis.com/auth/calendar.readonly`;
 
     // Open a new window for authentication

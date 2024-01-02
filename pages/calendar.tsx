@@ -23,7 +23,7 @@ export default function calendar() {
 
     async function handleGetCalendarId() {
         try {
-          const accessToken = await getAccessTokenPopUp(window);
+          const accessToken = await getAccessToken();
           const calendarId = await getCalendarIds(accessToken);
           console.log("calendarId: ", calendarId);
     

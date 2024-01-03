@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { exchangeCodeForToken } from '../lib/google/exchangeCodeForToken'
 
-export default function callback() {
+export default function Callback() {
     useEffect(() => {
         const handleTokenExchange = async () => {
           try {
@@ -16,7 +16,7 @@ export default function callback() {
     
         handleTokenExchange();
       }, []);
-      
+
   return (
     <div>Redirecting...</div>
   )

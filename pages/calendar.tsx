@@ -3,18 +3,18 @@ import Container from '../components/Container'
 import getAccessToken from "../lib/google/getAccessToken"
 import getCalendarIds from "../lib/google/getCalendarIds"
 import getEvents from "../lib/google/getCalendarEvents"
-import getAccessTokenPopUp from "../lib/google/getAccessTokenPopUp"
+import getAuthInfoPopUp from "../lib/google/getAuthInfoPopUp"
 
 export default function calendar() {
 
     const handleGoogleLogin = async () => {
             try {
-                const accessToken = await getAccessTokenPopUp(window);
-                const calendarId = await getCalendarIds(accessToken);
-                console.log("calendarId: ", calendarId);
+                const authInfo = await getAuthInfoPopUp(window);
+                // const calendarId = await getCalendarIds(accessToken);
+                // console.log("calendarId: ", calendarId);
           
-                const events = await getEvents(accessToken);
-                console.log("Events: ", events);
+                // const events = await getEvents(accessToken);
+                // console.log("Events: ", events);
               } catch (error) {
                 console.error("Error:", error);
               }

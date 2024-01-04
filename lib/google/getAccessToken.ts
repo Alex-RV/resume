@@ -1,6 +1,7 @@
 /**
  * Retrieves an access token from Google using a refresh token.
  *
+ * @param {string} refresh_token - from AuthInfo.refresh_token from getAuthInfoPopUp
  * @returns {Promise<string>} A promise that resolves to the access token.
  * @throws {Error} If any required environment variables are missing,
  *                 or if no access token is returned.

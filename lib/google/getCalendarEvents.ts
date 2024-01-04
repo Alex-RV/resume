@@ -1,11 +1,15 @@
 /**
  * Retrieves events from the primary calendar for the authenticated user.
  *
- * @param {string} accessToken - The access token obtained from getAccessToken function.
+ * @param {string} accessToken - The access token obtained from getAccessToken token function.
  * @returns {Promise<object[]>} A promise that resolves to an array of events.
  * @throws {Error} If the request to the Google Calendar API fails or if no events are returned.
  */
+
 export default async function getEvents(accessToken: string): Promise<object[]> {
+  if (!accessToken) {
+    throw new Error("accessToken not provided correctly")
+  }
     const response = await fetch("https://www.googleapis.com/calendar/v3/calendars/primary/events", {
       method: "GET",
       headers: {

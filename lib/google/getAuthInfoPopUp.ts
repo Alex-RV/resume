@@ -1,6 +1,7 @@
 /**
  * Initiates the OAuth 2.0 authorization code flow in a new window.
  *
+ * @param {Window} windowObj - to make sure that it is here
  * @returns {Promise<AuthInfo | null>} A promise that resolves to the authInfo.
  * @throws {Error} If any required environment variables are missing.
  */
@@ -8,6 +9,15 @@
 import { AuthInfo } from "./types.google";
 
 export default async function getAuthInfoPopUp(windowObj: Window): Promise<AuthInfo | null> {
+  if (!process.env.NEXT_PUBLIC_GOOGLE_OAUTH_SECRET) {
+    throw new Error("GOOGLE_OAUTH_SECRET not set")
+  }
+  if (!windowObj) {
+    throw new Error("windowObj not provided correctly in getAuthInfoPopUp")
+  }
+  if (!process.env.NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID) {
+    throw new Error("GOOGLE_OAUTH_CLIENT_ID not set")
+  }
   return new Promise<AuthInfo | null>((resolve) => {
     const clientId = process.env.NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID;
     const redirectUri = windowObj.location.origin + '/callback';

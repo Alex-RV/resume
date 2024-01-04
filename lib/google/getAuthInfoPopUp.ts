@@ -1,13 +1,14 @@
-// lib/google/auth.js
 /**
  * Initiates the OAuth 2.0 authorization code flow in a new window.
  *
- * @returns {Promise<string | null>} A promise that resolves to the access token.
+ * @returns {Promise<AuthInfo | null>} A promise that resolves to the authInfo.
  * @throws {Error} If any required environment variables are missing.
  */
 
-export default async function getAuthInfoPopUp(windowObj: Window): Promise<string | null> {
-  return new Promise<string | null>((resolve) => {
+import { AuthInfo } from "./types.google";
+
+export default async function getAuthInfoPopUp(windowObj: Window): Promise<AuthInfo | null> {
+  return new Promise<AuthInfo | null>((resolve) => {
     const clientId = process.env.NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID;
     const redirectUri = windowObj.location.origin + '/callback';
     console.log(redirectUri,"it was redirect url and client id is:", clientId)
@@ -25,10 +26,10 @@ export default async function getAuthInfoPopUp(windowObj: Window): Promise<strin
         popup.close();
 
         // Extract access token from the response
-        const accessToken = event.data.access_token;
+        const authInfo:AuthInfo = event.data;
 
         // Resolve the promise with the access token
-        resolve(accessToken);
+        resolve(authInfo);
       }
     });
   });

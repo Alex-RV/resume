@@ -4,12 +4,15 @@ import getAccessToken from "../lib/google/getAccessToken"
 import getCalendarIds from "../lib/google/getCalendarIds"
 import getEvents from "../lib/google/getCalendarEvents"
 import getAuthInfoPopUp from "../lib/google/getAuthInfoPopUp"
+import { AuthInfo } from '../lib/google/types.google'
 
 export default function calendar() {
 
     const handleGoogleLogin = async () => {
             try {
-                const authInfo = await getAuthInfoPopUp(window);
+                const authInfo:AuthInfo = await getAuthInfoPopUp(window);
+                console.log(authInfo)
+                // const accessToken = await getAccessToken(authInfo.refreshToken);
                 // const calendarId = await getCalendarIds(accessToken);
                 // console.log("calendarId: ", calendarId);
           

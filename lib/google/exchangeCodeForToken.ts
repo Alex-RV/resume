@@ -1,11 +1,4 @@
-const AUTH_STORAGE_KEY = 'google_auth';
-
-interface AuthInfo {
-  accessToken: string;
-  refreshToken: string;
-}
-
-export const exchangeCodeForToken = async () => {
+export const exchangeCodeForToken = async (window) => {
   const code = new URLSearchParams(window.location.search).get('code');
 
   if (code) {
@@ -29,31 +22,9 @@ export const exchangeCodeForToken = async () => {
     });
 
     const data = await response.json();
-    const accessToken = data.access_token;
-    const refreshToken = data.refresh_token;
 
-    // Save the tokens to a secure storage (e.g., local storage)
-    saveAuthInfo({ accessToken, refreshToken });
-
-    return accessToken;
+    return data;
   }
 
   return null;
-};
-
-export const getAccessToken = (): string | null => {
-  // Retrieve the tokens from the secure storage
-  const authInfo = loadAuthInfo();
-  return authInfo?.accessToken || null;
-};
-
-const saveAuthInfo = (authInfo: AuthInfo): void => {
-  // Save the tokens to a secure storage (e.g., local storage)
-  localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(authInfo));
-};
-
-const loadAuthInfo = (): AuthInfo | null => {
-  // Retrieve the tokens from the secure storage
-  const storedAuthInfo = localStorage.getItem(AUTH_STORAGE_KEY);
-  return storedAuthInfo ? JSON.parse(storedAuthInfo) : null;
 };

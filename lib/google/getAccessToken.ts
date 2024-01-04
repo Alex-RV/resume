@@ -5,12 +5,12 @@
  * @throws {Error} If any required environment variables are missing,
  *                 or if no access token is returned.
  */
-export default async function getAccessToken(): Promise<string> {
+export default async function getAccessToken(refresh_token): Promise<string> {
     if (!process.env.NEXT_PUBLIC_GOOGLE_OAUTH_SECRET) {
       throw new Error("GOOGLE_OAUTH_SECRET not set")
     }
-    if (!process.env.NEXT_PUBLIC_GOOGLE_OAUTH_REFRESH) {
-      throw new Error("GOOGLE_OAUTH_REFRESH not set")
+    if (!refresh_token) {
+      throw new Error("refresh_token not provided correctly")
     }
     if (!process.env.NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID) {
       throw new Error("GOOGLE_OAUTH_CLIENT_ID not set")
@@ -19,7 +19,7 @@ export default async function getAccessToken(): Promise<string> {
     const params = new URLSearchParams({
       grant_type: "refresh_token",
       client_secret: process.env.NEXT_PUBLIC_GOOGLE_OAUTH_SECRET,
-      refresh_token: process.env.NEXT_PUBLIC_GOOGLE_OAUTH_REFRESH,
+      refresh_token: refresh_token,
       client_id: process.env.NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID,
     })
   

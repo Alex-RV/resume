@@ -26,7 +26,7 @@ export default async function getAuthInfoPopUp(windowObj: Window): Promise<AuthI
         popup.close();
 
         // Extract access token from the response
-        const authInfo:AuthInfo = event.data;
+        const authInfo:AuthInfo = event.data.authInfo;
 
         // Resolve the promise with the access token
         resolve(authInfo);

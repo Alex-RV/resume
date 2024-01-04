@@ -12,12 +12,14 @@ export default function calendar() {
             try {
                 const authInfo:AuthInfo = await getAuthInfoPopUp(window);
                 console.log(authInfo)
-                // const accessToken = await getAccessToken(authInfo.refreshToken);
+                console.log(authInfo.refresh_token)
+                const accessToken = await getAccessToken(authInfo.refresh_token);
+                console.log(accessToken)
                 // const calendarId = await getCalendarIds(accessToken);
                 // console.log("calendarId: ", calendarId);
           
-                // const events = await getEvents(accessToken);
-                // console.log("Events: ", events);
+                const events = await getEvents(accessToken);
+                console.log("Events: ", events);
               } catch (error) {
                 console.error("Error:", error);
               }

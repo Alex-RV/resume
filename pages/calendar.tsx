@@ -25,7 +25,9 @@ export default function Calendar() {
       const authInfo: AuthInfo = await getAuthInfoPopUp(window);
       setIsLoadingAuth(false);
       setIsLoggedIn(true);
+      console.log(authInfo)
       saveRefreshToken(encryptToken(authInfo.refresh_token));
+      
 
       const accessToken = await getAccessToken(authInfo.refresh_token);
       setIsLoadingEvents(true);

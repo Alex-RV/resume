@@ -21,7 +21,6 @@ export default async function getAuthInfoPopUp(windowObj: Window): Promise<AuthI
   return new Promise<AuthInfo | null>((resolve) => {
     const clientId = process.env.NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID;
     const redirectUri = windowObj.location.origin + '/callback';
-    console.log(redirectUri,"it was redirect url and client id is:", clientId)
     const authUrl = `https://accounts.google.com/o/oauth2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=https://www.googleapis.com/auth/calendar&access_type=offline`;
 
     // const authUrl = `https://accounts.google.com/o/oauth2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=https://www.googleapis.com/auth/calendar.readonly`;

@@ -26,14 +26,17 @@ export interface CalendarEvent {
     };
     start: {
       dateTime: string;
+      timeZone: string;
     };
     end: {
       dateTime: string;
+      timeZone: string;
     };
     iCalUID: string;
     sequence: number;
     reminders: {
       useDefault: boolean;
     };
+    eventType: string;
   }
   

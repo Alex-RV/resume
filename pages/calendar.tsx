@@ -97,16 +97,16 @@ export default function Calendar() {
             {isLoadingEvents ? (
               <div className="text-lg mt-4">Loading events...</div>
             ) : (
-              <div className="mt-8">
+              <div className="mt-8 ">
                 {events.length > 0 ? (
                   events.map((event: CalendarEvent) => (
                     <div
                       key={event.id}
-                      className="bg-gray-100 rounded shadow p-4 mb-4"
+                      className="bg-gray-100 dark:bg-slate-600 rounded shadow p-4 mb-4"
                     >
                       <h2 className="text-xl font-bold mb-2">{event.summary}</h2>
                       {event.start && event.end && (
-                        <p className="text-sm text-gray-500">
+                        <p className="text-sm text-gray-500 dark:text-gray-200">
                           {`${new Date(
                             event.start.dateTime
                           )?.toLocaleString()} - ${new Date(

@@ -12,7 +12,7 @@ import {
 } from '../lib/google/tokenStorage';
 import { encryptToken, decryptToken } from '../lib/google/tokenEncryption';
 
-export default function calendar() {
+export default function Calendar() {
   const [isLoadingAuth, setIsLoadingAuth] = useState(true);
   const [isLoadingEvents, setIsLoadingEvents] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);

@@ -87,37 +87,94 @@ export default function Calendar() {
         {isLoadingAuth ? (
           <div className="text-lg">Loading authentication...</div>
         ) : isLoggedIn ? (
-          <div>
+          <div className='flex flex-col'>
             <button
               onClick={handleLogout}
-              className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+              className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 w-36"
             >
               Logout
             </button>
             {isLoadingEvents ? (
               <div className="text-lg mt-4">Loading events...</div>
             ) : (
-              <div className="mt-8 ">
+              <div className="mt-8 flex flex-col overflow-auto max-w-2xl">
                 {events.length > 0 ? (
                   events.map((event: CalendarEvent) => (
                     <div
-                      key={event.id}
-                      className="bg-gray-100 dark:bg-slate-600 rounded shadow p-4 mb-4"
+                    key={event.id}
+                    className="flex flex-col bg-[#eeeeee] dark:bg-slate-600 rounded shadow p-4 mb-4 max-w-2xl overflow-auto"
                     >
-                      <h2 className="text-xl font-bold mb-2">{event.summary}</h2>
-                      {event.start && event.end && (
-                        <p className="text-sm text-gray-500 dark:text-gray-200">
-                          {`${new Date(
-                            event.start.dateTime
-                          )?.toLocaleString()} - ${new Date(
-                            event.end.dateTime
-                          )?.toLocaleString()}`}
-                        </p>
-                      )}
-                      {/* <p className="text-sm text-gray-700 mt-2">
-                        {event.description || 'No description available'}
-                      </p> */}
-                    </div>
+                    {event.status !== 'cancelled' ? (
+                        <>
+                        <div className="mb-2">
+                            <strong className="text-lg truncate">Summary:</strong> {event.summary}
+                        </div>
+                        <div className="flex flex-col md:flex-row mb-2">
+                            <div className="md:mr-4">
+                            <strong className="text-sm">Creator:</strong> {event.creator?.displayName} ({event.creator?.email})
+                            </div>
+                            <div>
+                            <strong className="text-sm">Organizer:</strong> {event.organizer?.displayName} ({event.organizer?.email})
+                            </div>
+                        </div>
+                        <div className='flex flex-col overflow-auto'>
+                            <div className="mb-2">
+                                <strong className="text-sm">Start:</strong> {event.start?.dateTime} ({event.start?.timeZone})
+                            </div>
+                            <div className="mb-2">
+                                <strong className="text-sm">End:</strong> {event.end?.dateTime} ({event.end?.timeZone})
+                            </div>
+                            <div className="mb-2">
+                                <strong className="text-sm">Status:</strong> {event.status}
+                            </div>
+                            <div className="mb-2">
+                                <strong className="text-sm">HTML Link:</strong> {event.htmlLink}
+                            </div>
+                            <div className="mb-2">
+                                <strong className="text-sm">Created:</strong> {event.created}
+                            </div>
+                            <div className="mb-2">
+                                <strong className="text-sm">Updated:</strong> {event.updated}
+                            </div>
+                            <div className="mb-2">
+                                <strong className="text-sm">Conference Data:</strong> {event.conferenceData?.conferenceId}
+                                <p className="text-sm">Conference Data:</p> {event.conferenceData?.entryPoints?.map((entryPoint) => (
+                                <div key={entryPoint.label} className="ml-2">
+                                    {entryPoint.label} Meeting Type: {entryPoint.entryPointType}
+                                </div>
+                                ))}
+                            </div>
+                            <div className="mb-2">
+                                <strong className="text-sm">Attendees:</strong>{' '}
+                                {event.attendees?.map((attendee) => (
+                                <div key={attendee.email} className="ml-2">
+                                    {attendee.email} (Status: {attendee.responseStatus})
+                                </div>
+                                ))}
+                            </div>
+                            <div className="mb-2">
+                                <strong className="text-sm">Extended Properties:</strong>{' '}
+                                {event.extendedProperties?.shared?.meetingId}
+                            </div>
+                            <div className="mb-2">
+                                <strong className="text-sm">Conference Data:</strong>{' '}
+                                {event.conferenceData?.conferenceId}
+                            </div>
+                            <div className="mb-2">
+                                <strong className="text-sm">Guests Can Modify:</strong> {event.guestsCanModify ? 'Yes' : 'No'}
+                            </div>
+                            <div className="mb-2">
+                                <strong className="text-sm">Reminders:</strong> {event.reminders?.useDefault ? 'Use Default' : 'Custom'}
+                            </div>
+                            <div className="mb-2">
+                                <strong className="text-sm">Event Type:</strong> {event.eventType}
+                            </div>
+                        </div>
+                            </>
+                        ) : (
+                            <div className="text-red-500">Event Cancelled</div>
+                        )}
+                        </div>
                   ))
                 ) : (
                   <div className="text-lg">No events found.</div>

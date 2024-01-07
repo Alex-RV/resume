@@ -60,6 +60,10 @@ export default function Calendar() {
 
           const fetchedEvents = await getEvents(accessToken);
           setEvents(fetchedEvents.reverse());
+          const futureEvents = fetchedEvents.filter(
+          (event: CalendarEvent) => new Date(event.start.dateTime) > new Date()
+        );
+          console.log("futureEvents:",futureEvents);
 
           setIsLoggedIn(true);
           setIsLoadingEvents(false);

@@ -4,7 +4,7 @@ import getAccessToken from '../lib/google/getAccessToken';
 import getCalendarIds from '../lib/google/getCalendarIds';
 import getEvents from '../lib/google/getCalendarEvents';
 import getAuthInfoPopUp from '../lib/google/getAuthInfoPopUp';
-import { AuthInfo, CalendarEvent } from '../lib/google/types.google';
+import { AuthInfo, CalendarEvent, ZoomMeetingInfo } from '../lib/google/types.google';
 import {
   saveRefreshToken,
   loadRefreshToken,
@@ -60,7 +60,9 @@ export default function Calendar() {
 
           try {
             const fetchedEvents = await getEvents(accessToken);
-            setEvents(fetchedEvents.reverse());
+            fetchedEvents.reverse();
+            setEvents(fetchedEvents);
+
             const futureEvents = fetchedEvents.filter((event: CalendarEvent) => {
               if (event.start && event.start.dateTime) {
                 const eventDate = new Date(event.start.dateTime);
@@ -70,8 +72,23 @@ export default function Calendar() {
                 return eventDate > currentDate;
               }
               return false;
-            });          
+            });  
             console.log("futureEvents:",futureEvents);
+
+            const zoomEvents = fetchedEvents.filter((event: CalendarEvent) => {
+              if (event.extendedProperties && event.extendedProperties?.shared.zmMeetingNum) {
+                return true;
+              }
+              return false;
+            });
+            // const zoomEventsViaConferenceData: ZoomMeetingInfo = fetchedEvents.filter((event: CalendarEvent) => {
+            //   if (event.conferenceData && event.conferenceData.entryPoints) {
+            //     return true;
+            //   }
+            //   return false;
+            // });
+            console.log("zoomEvents:",zoomEvents); 
+            
           } catch (e) {
             console.error('Error fetching events:', e);
           }

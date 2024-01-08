@@ -58,13 +58,23 @@ export default function Calendar() {
           const accessToken = await getAccessToken(refreshToken);
           setIsLoadingEvents(true);
 
-          const fetchedEvents = await getEvents(accessToken);
-          setEvents(fetchedEvents.reverse());
-          const futureEvents = fetchedEvents.filter(
-          (event: CalendarEvent) => new Date(event.start.dateTime) > new Date()
-        );
-          console.log("futureEvents:",futureEvents);
-
+          try {
+            const fetchedEvents = await getEvents(accessToken);
+            setEvents(fetchedEvents.reverse());
+            const futureEvents = fetchedEvents.filter((event: CalendarEvent) => {
+              if (event.start && event.start.dateTime) {
+                const eventDate = new Date(event.start.dateTime);
+                const currentDate = new Date();
+    
+                // Check if the event is in the future
+                return eventDate > currentDate;
+              }
+              return false;
+            });          
+            console.log("futureEvents:",futureEvents);
+          } catch (e) {
+            console.error('Error fetching events:', e);
+          }
           setIsLoggedIn(true);
           setIsLoadingEvents(false);
         } catch (error) {

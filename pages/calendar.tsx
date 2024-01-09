@@ -62,6 +62,7 @@ export default function Calendar() {
             const fetchedEvents = await getEvents(accessToken);
             fetchedEvents.reverse();
             setEvents(fetchedEvents);
+            console.log(fetchedEvents)
 
             const futureEvents = fetchedEvents.filter((event: CalendarEvent) => {
               if (event.start && event.start.dateTime) {
@@ -75,19 +76,17 @@ export default function Calendar() {
             });  
             console.log("futureEvents:",futureEvents);
 
-            const zoomEvents = fetchedEvents.filter((event: CalendarEvent) => {
-              if (event.extendedProperties && event.extendedProperties?.shared.zmMeetingNum) {
-                return true;
-              }
-              return false;
-            });
-            // const zoomEventsViaConferenceData: ZoomMeetingInfo = fetchedEvents.filter((event: CalendarEvent) => {
-            //   if (event.conferenceData && event.conferenceData.entryPoints) {
-            //     return true;
-            //   }
-            //   return false;
-            // });
-            console.log("zoomEvents:",zoomEvents); 
+            const googleMeetEvents = fetchedEvents.filter((event: CalendarEvent) => 
+              event.conferenceData?.conferenceSolution.name === 'Google Meet'
+            );
+            
+            const zoomEvents = fetchedEvents.filter((event: CalendarEvent) => 
+              event.conferenceData?.conferenceSolution.name === 'Zoom Meeting'
+            );
+
+            console.log("googleMeetEvents", googleMeetEvents);
+            console.log("zoomEvents", zoomEvents);
+             
             
           } catch (e) {
             console.error('Error fetching events:', e);

@@ -110,8 +110,8 @@ export default function Calendar() {
 
   return (
     <Container>
-      <div className="flex flex-col justify-center items-center text-black dark:text-white">
-        <div className="mb-4">
+      <div className="flex flex-col justify-center items-center text-black dark:text-white mx-auto max-w-2xl">
+        <div className="flex mb-4">
           <h1 className="text-4xl font-bold">Your Calendar</h1>
         </div>
         {isLoadingAuth ? (

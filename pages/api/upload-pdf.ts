@@ -1,6 +1,5 @@
 import Cors from 'cors';
 const vision = require('@google-cloud/vision');
-const fs = require("fs");
 
 const cors = Cors({
   methods: ['POST', 'OPTIONS'],
@@ -31,6 +30,8 @@ const client = new vision.ImageAnnotatorClient({
   }
 });
 
+// ... (other imports)
+
 export default async function handler(req, res) {
   await applyCors(req, res);
 
@@ -44,8 +45,7 @@ export default async function handler(req, res) {
     return;
   }
 
-  const { pngDataUrl: dataUrl } = req.body;
-
+  const { dataUrl } = req.body;
 
   if (!dataUrl) {
     res.status(400).json({ error: 'dataUrl not provided' });
@@ -58,17 +58,30 @@ export default async function handler(req, res) {
   }
 
   try {
-    const base64Data = dataUrl.replace(/^data:image\/(png|jpeg|jpg);base64,/, '');
+    const base64Prefix = 'data:image/';
+    const contentType = dataUrl.match(/^data:([a-zA-Z]+\/[a-zA-Z]+);base64,/);
+
+    if (!contentType) {
+      res.status(400).json({ error: 'Invalid dataUrl format' });
+      return;
+    }
+
+    const imageFormat = contentType[1];
+    const base64Data = dataUrl.replace(new RegExp(`^${base64Prefix}${imageFormat};base64,`), '');
+    
     const buffer = Buffer.from(base64Data, 'base64');
 
     const [result] = await client.textDetection(buffer);
-    const fullText = result.textAnnotations[0].description;
+    console.log("result", result)
 
-    console.log(fullText);
-    res.status(200).json({ text: fullText });
-} catch (error) {
-    console.error('Error:', error);
+    if (result && result.textAnnotations && result.textAnnotations.length > 0) {
+      const fullText = result.textAnnotations[0].description;
+      res.status(200).json({ text: fullText });
+    } else {
+      res.status(400).json({ error: 'No text found in the image' });
+    }
+  } catch (error) {
+    console.error('Error:', error.message);
     res.status(500).json({ error: 'An error occurred' });
-}
-
+  }
 }

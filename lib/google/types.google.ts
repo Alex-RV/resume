@@ -6,6 +6,14 @@ export interface AuthInfo{
     token_type: string;
 }
 
+export interface EntryPoint{
+    entryPointType: string;
+    uri: string;
+    label?: string;
+    meetingCode?: string;
+    passcode?: string;
+    regionCode?: string;
+}
 export interface ZoomMeetingInfo{
   conferenceId: string;
   entryPoints: {

@@ -30,7 +30,8 @@ export const exchangeCodeForAuthInfo = async (window) => {
     const redirectUri = window.location.origin + '/callback';
 
     const tokenUrl = 'https://oauth2.googleapis.com/token';
-    const response = await fetch(tokenUrl, {
+
+    const request = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -42,7 +43,11 @@ export const exchangeCodeForAuthInfo = async (window) => {
         redirect_uri: redirectUri,
         grant_type: 'authorization_code',
       }),
-    });
+    }
+    // console.log(request);
+  
+    const response = await fetch(tokenUrl, request);
+    // console.log(response);
 
     const data = await response.json();
 

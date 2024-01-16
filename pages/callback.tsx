@@ -6,6 +6,10 @@ export default function Callback() {
     useEffect(() => {
         const handleTokenExchange = async () => {
           try {
+            // const code = new URLSearchParams(window.location.search).get('code')
+            // console.log("code", code)
+            // const authInfo = await fetch(`/api/google/exchangeCodeForAuthInfo?code=${code}`);
+
             const authInfo = await exchangeCodeForAuthInfo(window);
     
             // Send the access token to the parent window

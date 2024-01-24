@@ -4,13 +4,14 @@ import getAccessToken from '../lib/google/getAccessToken';
 import getCalendarIds from '../lib/google/getCalendarIds';
 import getEvents from '../lib/google/getCalendarEvents';
 import getAuthInfoPopUp from '../lib/google/getAuthInfoPopUp';
-import { AuthInfo, CalendarEvent, ZoomMeetingInfo } from '../lib/google/types.google';
+import { AuthInfo, CalendarEvent, ZoomMeetingInfo, EntryPoint } from '../lib/google/types.google';
 import {
   saveRefreshToken,
   loadRefreshToken,
   clearRefreshToken,
 } from '../lib/google/tokenStorage';
 import { encryptToken, decryptToken } from '../lib/google/tokenEncryption';
+import {joinZoomMeeting} from '../lib/google/joinZoomMeeting'
 
 export default function Calendar() {
   const [isLoadingAuth, setIsLoadingAuth] = useState(true);
@@ -86,6 +87,21 @@ export default function Calendar() {
 
             console.log("googleMeetEvents", googleMeetEvents);
             console.log("zoomEvents", zoomEvents);
+
+            if(zoomEvents.length > 0){
+              zoomEvents.map((event: CalendarEvent) => {
+                const entryPoints = event.conferenceData.entryPoints;
+                if(entryPoints){
+                  entryPoints.map((entryPoint: EntryPoint) => {
+                    if (typeof window !== 'undefined') {
+                      // Call joinZoomMeeting function here
+                      joinZoomMeeting('meetingId', 'passcode');
+                    }
+                  })
+                }
+              }
+              )
+            }
              
             
           } catch (e) {

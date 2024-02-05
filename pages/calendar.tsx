@@ -92,10 +92,23 @@ export default function Calendar() {
               zoomEvents.map((event: CalendarEvent) => {
                 const entryPoints = event.conferenceData.entryPoints;
                 if(entryPoints){
-                  entryPoints.map((entryPoint: EntryPoint) => {
+                  entryPoints.map(async (entryPoint: EntryPoint) => {
                     if (typeof window !== 'undefined') {
                       // Call joinZoomMeeting function here
-                      joinZoomMeeting('meetingId', 'passcode');
+                      const response = await fetch('./api/joinZoomMeeting', {
+                        method: 'POST',
+                        headers: {
+                          'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                          meetingNumber: entryPoint.meetingCode,
+                          passcode: entryPoint.passcode
+                          // role: '0' // 0 for participant, 1 for host
+                        })
+                      });
+                      console.log(response);
+                    
+                      // joinZoomMeeting('meetingId', 'passcode');
                     }
                   })
                 }

@@ -14,7 +14,7 @@ if (!sdkKey) {
 
 // Separate function to fetch Zoom signature
 async function fetchZoomSignature(meetingNumber: string): Promise<string> {
-  const response = await fetch('/api/generateSignature', {
+  const response = await fetch('./generateSignature', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

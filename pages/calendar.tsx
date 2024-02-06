@@ -11,7 +11,60 @@ import {
   clearRefreshToken,
 } from '../lib/google/tokenStorage';
 import { encryptToken, decryptToken } from '../lib/google/tokenEncryption';
-import {joinZoomMeeting} from '../lib/google/joinZoomMeeting'
+
+import ZoomMtgEmbedded from '@zoom/meetingsdk/embedded';
+
+async function joinZoomMeeting(meetingNumber, passcode) {
+  try {
+    const jwtResponse = await fetch('/api/generateZoomJWT', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        sdkClientId: process.env.NEXT_PUBLIC_ZOOM_SDK_CLIENT_ID, // Replace with your SDK Key
+        sdkSecret: process.env.NEXT_PUBLIC_ZOOM_SDK_SECRET, // Replace with your SDK Secret
+        meetingNumber: meetingNumber,
+        role: 0 // Assuming a participant role
+      })
+    });
+    
+    if (!jwtResponse.ok) {
+      throw new Error('Failed to generate JWT. Please check your server-side implementation.');
+    }
+
+    const jwtData = await jwtResponse.json();
+
+    if (!jwtData.jwt) {
+      throw new Error('JWT is missing in the response.');
+    }
+
+    const client = ZoomMtgEmbedded.createClient();
+    let meetingSDKElement = document.getElementById('meetingSDKElement');
+
+    if (!meetingSDKElement) {
+      meetingSDKElement = document.createElement('div');
+      meetingSDKElement.id = 'meetingSDKElement';
+      document.body.appendChild(meetingSDKElement);
+    }
+
+    client.init({
+      zoomAppRoot: meetingSDKElement,
+      language: 'en-US'
+    });
+
+    client.join({
+      sdkKey: 'yourSdkKey',
+      signature: jwtData.jwt,
+      meetingNumber: meetingNumber,
+      password: passcode,
+      userName: 'ZoomBot'
+    });
+  } catch (error) {
+    console.error('Error joining Zoom meeting:', error);
+  }
+}
+
 
 export default function Calendar() {
   const [isLoadingAuth, setIsLoadingAuth] = useState(true);
@@ -94,21 +147,13 @@ export default function Calendar() {
                 if(entryPoints){
                   entryPoints.map(async (entryPoint: EntryPoint) => {
                     if (typeof window !== 'undefined') {
-                      // Call joinZoomMeeting function here
-                      const response = await fetch('./api/joinZoomMeeting', {
-                        method: 'POST',
-                        headers: {
-                          'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                          meetingNumber: entryPoint.meetingCode,
-                          passcode: entryPoint.passcode
-                          // role: '0' // 0 for participant, 1 for host
-                        })
-                      });
-                      console.log(response);
-                    
-                      // joinZoomMeeting('meetingId', 'passcode');
+                      try {
+                        const meetingNumber = entryPoint.meetingCode;
+                        const passcode = entryPoint.passcode;
+                        await joinZoomMeeting(meetingNumber, passcode);
+                      } catch (error) {
+                        console.error('Error processing entry point:', error);
+                      }
                     }
                   })
                 }
@@ -210,7 +255,7 @@ const EventCard = ({ event }) => (
 
         {/* Additional Event Details */}
         <p className="mt-2 text-sm text-gray-600 dark:text-gray-400"><strong>Status:</strong> {event.status}</p>
-        <p className="text-sm text-gray-600 dark:text-gray-400"><strong>HTML Link:</strong> <a href={event.htmlLink} target="_blank" className="text-blue-500 hover:text-blue-600">{event.htmlLink}</a></p>
+        <p className="text-sm text-gray-600 dark:text-gray-400"><strong>HTML Link:</strong> <a href={event.htmlLink} className="text-blue-500 hover:text-blue-600">{event.htmlLink}</a></p>
 
         {/* Conditional Rendering for Conference Data */}
         {event.conferenceData && (

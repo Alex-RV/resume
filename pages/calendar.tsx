@@ -140,100 +140,33 @@ export default function Calendar() {
   return (
     <Container>
       <div className="flex flex-col justify-center items-center text-black dark:text-white mx-auto max-w-2xl">
+        
         <div className="flex mb-4">
           <h1 className="text-4xl font-bold">Your Calendar</h1>
         </div>
+        
         {isLoadingAuth ? (
           <div className="text-lg">Loading authentication...</div>
         ) : isLoggedIn ? (
+          // Authenticated state
           <div className='flex flex-col'>
+            {/* Logout Button */}
             <button
               onClick={handleLogout}
               className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 w-36"
             >
               Logout
             </button>
+
+            {/* Event Loading State */}
             {isLoadingEvents ? (
               <div className="text-lg mt-4">Loading events...</div>
             ) : (
+              // Event Display
               <div className="mt-8 flex flex-col overflow-auto max-w-2xl">
                 {events.length > 0 ? (
                   events.map((event: CalendarEvent) => (
-                    <div
-                    key={event.id}
-                    className="flex flex-col bg-[#eeeeee] dark:bg-slate-600 rounded shadow p-4 mb-4 max-w-2xl overflow-auto"
-                    >
-                    {event.status !== 'cancelled' ? (
-                        <>
-                        <div className="mb-2">
-                            <strong className="text-lg truncate">Summary:</strong> {event.summary}
-                        </div>
-                        <div className="flex flex-col md:flex-row mb-2">
-                            <div className="md:mr-4">
-                            <strong className="text-sm">Creator:</strong> {event.creator?.displayName} ({event.creator?.email})
-                            </div>
-                            <div>
-                            <strong className="text-sm">Organizer:</strong> {event.organizer?.displayName} ({event.organizer?.email})
-                            </div>
-                        </div>
-                        <div className='flex flex-col overflow-auto'>
-                            <div className="mb-2">
-                                <strong className="text-sm">Start:</strong> {event.start?.dateTime} ({event.start?.timeZone})
-                            </div>
-                            <div className="mb-2">
-                                <strong className="text-sm">End:</strong> {event.end?.dateTime} ({event.end?.timeZone})
-                            </div>
-                            <div className="mb-2">
-                                <strong className="text-sm">Status:</strong> {event.status}
-                            </div>
-                            <div className="mb-2">
-                                <strong className="text-sm">HTML Link:</strong> {event.htmlLink}
-                            </div>
-                            <div className="mb-2">
-                                <strong className="text-sm">Created:</strong> {event.created}
-                            </div>
-                            <div className="mb-2">
-                                <strong className="text-sm">Updated:</strong> {event.updated}
-                            </div>
-                            <div className="mb-2">
-                                <strong className="text-sm">Conference Data:</strong> {event.conferenceData?.conferenceId}
-                                <p className="text-sm">Conference Data:</p> {event.conferenceData?.entryPoints?.map((entryPoint) => (
-                                <div key={entryPoint.label} className="ml-2">
-                                    {entryPoint.label} Meeting Type: {entryPoint.entryPointType}
-                                </div>
-                                ))}
-                            </div>
-                            <div className="mb-2">
-                                <strong className="text-sm">Attendees:</strong>{' '}
-                                {event.attendees?.map((attendee) => (
-                                <div key={attendee.email} className="ml-2">
-                                    {attendee.email} (Status: {attendee.responseStatus})
-                                </div>
-                                ))}
-                            </div>
-                            <div className="mb-2">
-                                <strong className="text-sm">Extended Properties:</strong>{' '}
-                                {event.extendedProperties?.shared?.meetingId}
-                            </div>
-                            <div className="mb-2">
-                                <strong className="text-sm">Conference Data:</strong>{' '}
-                                {event.conferenceData?.conferenceId}
-                            </div>
-                            <div className="mb-2">
-                                <strong className="text-sm">Guests Can Modify:</strong> {event.guestsCanModify ? 'Yes' : 'No'}
-                            </div>
-                            <div className="mb-2">
-                                <strong className="text-sm">Reminders:</strong> {event.reminders?.useDefault ? 'Use Default' : 'Custom'}
-                            </div>
-                            <div className="mb-2">
-                                <strong className="text-sm">Event Type:</strong> {event.eventType}
-                            </div>
-                        </div>
-                            </>
-                        ) : (
-                            <div className="text-red-500">Event Cancelled</div>
-                        )}
-                        </div>
+                    <EventCard event={event} key={event.id} />
                   ))
                 ) : (
                   <div className="text-lg">No events found.</div>
@@ -242,6 +175,7 @@ export default function Calendar() {
             )}
           </div>
         ) : (
+          // Unauthenticated state
           <div className="flex flex-col text-2xl mt-16 mb-16">
             <button
               onClick={handleGoogleLogin}
@@ -256,3 +190,49 @@ export default function Calendar() {
     </Container>
   );
 };
+
+const EventCard = ({ event }) => (
+  <div className="bg-white dark:bg-slate-700 rounded-lg shadow-md overflow-hidden mb-4">
+    {event.status !== 'cancelled' ? (
+      <div className="p-4">
+        <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">{event.summary}</h3>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+          <div>
+            <p className="text-sm text-gray-600 dark:text-gray-400"><strong>Creator:</strong> {event.creator?.displayName} ({event.creator?.email})</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400"><strong>Organizer:</strong> {event.organizer?.displayName} ({event.organizer?.email})</p>
+          </div>
+          <div>
+            <p className="text-sm text-gray-600 dark:text-gray-400"><strong>Start:</strong> {event.start?.dateTime}</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400"><strong>End:</strong> {event.end?.dateTime}</p>
+          </div>
+        </div>
+
+        {/* Additional Event Details */}
+        <p className="mt-2 text-sm text-gray-600 dark:text-gray-400"><strong>Status:</strong> {event.status}</p>
+        <p className="text-sm text-gray-600 dark:text-gray-400"><strong>HTML Link:</strong> <a href={event.htmlLink} target="_blank" className="text-blue-500 hover:text-blue-600">{event.htmlLink}</a></p>
+
+        {/* Conditional Rendering for Conference Data */}
+        {event.conferenceData && (
+          <div className="mt-2">
+            <p className="text-sm text-gray-600 dark:text-gray-400"><strong>Conference ID:</strong> {event.conferenceData.conferenceId}</p>
+            {/* Display Conference Entry Points */}
+            {event.conferenceData.entryPoints.map((entryPoint, index) => (
+              <p key={index} className="text-sm text-gray-600 dark:text-gray-400">{entryPoint.label}: {entryPoint.entryPointType}</p>
+            ))}
+          </div>
+        )}
+        
+        {/* Attendees */}
+        <div className="mt-2">
+          <p className="text-sm text-gray-600 dark:text-gray-400"><strong>Attendees:</strong></p>
+          {event.attendees?.map((attendee, index) => (
+            <p key={index} className="text-sm text-gray-600 dark:text-gray-400 pl-2">{attendee.email} (Status: {attendee.responseStatus})</p>
+          ))}
+        </div>
+      </div>
+    ) : (
+      <div className="text-red-500 p-4">Event Cancelled</div>
+    )}
+  </div>
+);

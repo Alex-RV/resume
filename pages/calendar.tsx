@@ -11,9 +11,11 @@ import {
   clearRefreshToken,
 } from '../lib/google/tokenStorage';
 import { encryptToken, decryptToken } from '../lib/google/tokenEncryption';
+import Zoom from  '@zoom/meetingsdk/embedded';
 
-async function joinZoomMeeting(meetingNumber, passcode, ZoomMtgEmbedded) {
+async function joinZoomMeeting(meetingNumber, passcode) {
   try {
+    const ZoomMtgEmbedded = await (await import('@zoomus/websdk/embedded')).default;
     const jwtResponse = await fetch('/api/generateZoomJWT', {
       method: 'POST',
       headers: {
@@ -60,6 +62,7 @@ async function joinZoomMeeting(meetingNumber, passcode, ZoomMtgEmbedded) {
       password: passcode,
       userName: 'ZoomBot'
     });
+
   } catch (error) {
     console.error('Error joining Zoom meeting:', error);
   }
@@ -150,8 +153,9 @@ export default function Calendar() {
                       try {
                         const meetingNumber = entryPoint.meetingCode;
                         const passcode = entryPoint.passcode;
-                        const ZoomMtgEmbedded = await import ('@zoom/meetingsdk/embedded');
-                        const response = await joinZoomMeeting(meetingNumber, passcode, ZoomMtgEmbedded);
+                        
+                        // console.log("ZoomMtgEmbedded",ZoomMtgEmbedded, "Zoom", Zoom)
+                        const response = await joinZoomMeeting(meetingNumber, passcode);
                         console.log(response)
                       } catch (error) {
                         console.error('Error processing entry point:', error);

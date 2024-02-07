@@ -12,9 +12,7 @@ import {
 } from '../lib/google/tokenStorage';
 import { encryptToken, decryptToken } from '../lib/google/tokenEncryption';
 
-import ZoomMtgEmbedded from '@zoom/meetingsdk/embedded';
-
-async function joinZoomMeeting(meetingNumber, passcode) {
+async function joinZoomMeeting(meetingNumber, passcode, ZoomMtgEmbedded) {
   try {
     const jwtResponse = await fetch('/api/generateZoomJWT', {
       method: 'POST',
@@ -28,6 +26,7 @@ async function joinZoomMeeting(meetingNumber, passcode) {
         role: 0 // Assuming a participant role
       })
     });
+    console.log(jwtResponse)
     
     if (!jwtResponse.ok) {
       throw new Error('Failed to generate JWT. Please check your server-side implementation.');
@@ -40,6 +39,7 @@ async function joinZoomMeeting(meetingNumber, passcode) {
     }
 
     const client = ZoomMtgEmbedded.createClient();
+    console.log("created client")
     let meetingSDKElement = document.getElementById('meetingSDKElement');
 
     if (!meetingSDKElement) {
@@ -150,7 +150,9 @@ export default function Calendar() {
                       try {
                         const meetingNumber = entryPoint.meetingCode;
                         const passcode = entryPoint.passcode;
-                        await joinZoomMeeting(meetingNumber, passcode);
+                        const ZoomMtgEmbedded = await import ('@zoom/meetingsdk/embedded');
+                        const response = await joinZoomMeeting(meetingNumber, passcode, ZoomMtgEmbedded);
+                        console.log(response)
                       } catch (error) {
                         console.error('Error processing entry point:', error);
                       }
@@ -185,7 +187,7 @@ export default function Calendar() {
   return (
     <Container>
       <div className="flex flex-col justify-center items-center text-black dark:text-white mx-auto max-w-2xl">
-        
+      <div id="meetingSDKElement"></div>
         <div className="flex mb-4">
           <h1 className="text-4xl font-bold">Your Calendar</h1>
         </div>

@@ -13,7 +13,22 @@ import {
 import { encryptToken, decryptToken } from '../lib/google/tokenEncryption';
 import Zoom from  '@zoom/meetingsdk/embedded';
 
-async function joinZoomMeeting(meetingNumber, passcode) {
+async function joinZoomMeeting(meetingCode, passcode) {
+  const sdkClientId = process.env.NEXT_PUBLIC_ZOOM_SDK_CLIENT_ID;
+  const sdkSecret = process.env.NEXT_PUBLIC_ZOOM_SDK_SECRET;
+  if (!sdkClientId) {
+    throw new Error("NEXT_PUBLIC_ZOOM_SDK_CLIENT_ID not set")
+  }
+  if (!sdkSecret) {
+    throw new Error("NEXT_PUBLIC_ZOOM_SDK_SECRET not set")
+  }
+  if (!meetingCode) {
+    throw new Error("meetingCode not passed")
+  }
+  if (!passcode) {
+    throw new Error("passcode not passed")
+  }
+
   try {
     const ZoomMtgEmbedded = await (await import('@zoomus/websdk/embedded')).default;
     const jwtResponse = await fetch('/api/generateZoomJWT', {
@@ -22,10 +37,10 @@ async function joinZoomMeeting(meetingNumber, passcode) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        sdkClientId: process.env.NEXT_PUBLIC_ZOOM_SDK_CLIENT_ID, // Replace with your SDK Key
-        sdkSecret: process.env.NEXT_PUBLIC_ZOOM_SDK_SECRET, // Replace with your SDK Secret
-        meetingNumber: meetingNumber,
-        role: 0 // Assuming a participant role
+        sdkClientId: process.env.NEXT_PUBLIC_ZOOM_SDK_CLIENT_ID, 
+        sdkSecret: process.env.NEXT_PUBLIC_ZOOM_SDK_SECRET, 
+        meetingCode: meetingCode,
+        role: 0 // a participant role
       })
     });
     console.log(jwtResponse)
@@ -58,7 +73,7 @@ async function joinZoomMeeting(meetingNumber, passcode) {
     client.join({
       sdkKey: 'yourSdkKey',
       signature: jwtData.jwt,
-      meetingNumber: meetingNumber,
+      meetingNumber: meetingCode,
       password: passcode,
       userName: 'ZoomBot'
     });
@@ -68,6 +83,62 @@ async function joinZoomMeeting(meetingNumber, passcode) {
   }
 }
 
+const checkForZoomEvents = (events) => {
+  if(events !== undefined){
+    const zoomEvents = events.filter((event: CalendarEvent) => 
+                event.conferenceData?.conferenceSolution.name === 'Zoom Meeting'
+              );
+    return zoomEvents
+  }
+}
+
+const checkForGoogleMeetEvents = (events) => {
+  if(events !== undefined){
+    const googleMeetEvents = events.filter((event: CalendarEvent) => 
+                event.conferenceData?.conferenceSolution.name === 'Google Meet'
+              );
+    return googleMeetEvents
+  }
+}
+
+const checkForFutureEvents = (events) => {
+  if(events !== undefined){
+    const futureEvents = events.filter((event: CalendarEvent) => {
+      if (event.start && event.start.dateTime) {
+        const eventDate = new Date(event.start.dateTime);
+        const currentDate = new Date();
+
+        return eventDate > currentDate;
+      }
+      return false;
+    });
+    return futureEvents;
+  }  
+}
+
+async function joinZoomBot (events) {
+  if(events.length > 0){
+    events.map((event: CalendarEvent) => {
+      const entryPoints = event.conferenceData.entryPoints;
+      if(entryPoints){
+        entryPoints.map(async (entryPoint: EntryPoint) => {
+          if (typeof window !== 'undefined') {
+            try {
+              const meetingCode = entryPoint.meetingCode;
+              const passcode = entryPoint.passcode;
+              
+              const response = await joinZoomMeeting(meetingCode, passcode);
+              console.log("response",response)
+            } catch (error) {
+              console.error('Error processing entry point:', error);
+            }
+          }
+        })
+      }
+    }
+    )
+  }
+}
 
 export default function Calendar() {
   const [isLoadingAuth, setIsLoadingAuth] = useState(true);
@@ -117,57 +188,20 @@ export default function Calendar() {
 
           try {
             const fetchedEvents = await getEvents(accessToken);
+            // to make latest on top
             fetchedEvents.reverse();
+
             setEvents(fetchedEvents);
             console.log(fetchedEvents)
 
-            const futureEvents = fetchedEvents.filter((event: CalendarEvent) => {
-              if (event.start && event.start.dateTime) {
-                const eventDate = new Date(event.start.dateTime);
-                const currentDate = new Date();
-    
-                // Check if the event is in the future
-                return eventDate > currentDate;
-              }
-              return false;
-            });  
+            const futureEvents = checkForFutureEvents(fetchedEvents);
             console.log("futureEvents:",futureEvents);
 
-            const googleMeetEvents = fetchedEvents.filter((event: CalendarEvent) => 
-              event.conferenceData?.conferenceSolution.name === 'Google Meet'
-            );
-            
-            const zoomEvents = fetchedEvents.filter((event: CalendarEvent) => 
-              event.conferenceData?.conferenceSolution.name === 'Zoom Meeting'
-            );
-
-            console.log("googleMeetEvents", googleMeetEvents);
+            const zoomEvents = checkForZoomEvents(futureEvents);
             console.log("zoomEvents", zoomEvents);
 
-            if(zoomEvents.length > 0){
-              zoomEvents.map((event: CalendarEvent) => {
-                const entryPoints = event.conferenceData.entryPoints;
-                if(entryPoints){
-                  entryPoints.map(async (entryPoint: EntryPoint) => {
-                    if (typeof window !== 'undefined') {
-                      try {
-                        const meetingNumber = entryPoint.meetingCode;
-                        const passcode = entryPoint.passcode;
-                        
-                        // console.log("ZoomMtgEmbedded",ZoomMtgEmbedded, "Zoom", Zoom)
-                        const response = await joinZoomMeeting(meetingNumber, passcode);
-                        console.log(response)
-                      } catch (error) {
-                        console.error('Error processing entry point:', error);
-                      }
-                    }
-                  })
-                }
-              }
-              )
-            }
+            joinZoomBot(zoomEvents);
              
-            
           } catch (e) {
             console.error('Error fetching events:', e);
           }

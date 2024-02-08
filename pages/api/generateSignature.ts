@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 export default function handler(req, res) {
   if (req.method === 'POST') {
     try {
-      const { meetingNumber, role } = req.body;
+      const { meetingCode, role } = req.body;
       const apiKey = process.env.NEXT_PUBLIC_ZOOM_API_KEY;
       const apiSecret = process.env.NEXT_PUBLIC_ZOOM_API_SECRET;
       if (!apiKey) {
@@ -23,7 +23,7 @@ export default function handler(req, res) {
       const payload = {
         iss: apiKey,
         exp: expTime,
-        meetingNumber: meetingNumber.toString(),
+        meetingNumber: meetingCode.toString(),
         role: parseInt(role)
       };
 

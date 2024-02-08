@@ -13,7 +13,20 @@ export default function handler(req, res) {
         // Handle the Zoom event
         if (req.body.event === 'meeting.started') {
             console.log('Meeting has started:', req.body.payload.object.id);
-            // Implement your logic for when a meeting starts
+            let data = {
+                fullname: "Zoom",
+                email: "zoom",
+                subject: "meeting start",
+                message: req.body.event,
+              };
+              fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                  'Accept': 'application/json, text/plain, */*',
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+              })
         }
 
         res.status(200).json({ message: 'Webhook received' });

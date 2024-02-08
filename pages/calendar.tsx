@@ -37,13 +37,12 @@ async function joinZoomMeeting(meetingCode, passcode) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        sdkClientId: process.env.NEXT_PUBLIC_ZOOM_SDK_CLIENT_ID, 
-        sdkSecret: process.env.NEXT_PUBLIC_ZOOM_SDK_SECRET, 
+        sdkClientId: sdkClientId, 
+        sdkSecret: sdkSecret, 
         meetingCode: meetingCode,
         role: 0 // a participant role
       })
     });
-    console.log(jwtResponse)
     
     if (!jwtResponse.ok) {
       throw new Error('Failed to generate JWT. Please check your server-side implementation.');
@@ -54,6 +53,8 @@ async function joinZoomMeeting(meetingCode, passcode) {
     if (!jwtData.jwt) {
       throw new Error('JWT is missing in the response.');
     }
+
+    console.log("jwtResponse",jwtData.jwt)
 
     const client = ZoomMtgEmbedded.createClient();
     console.log("created client")
@@ -70,8 +71,10 @@ async function joinZoomMeeting(meetingCode, passcode) {
       language: 'en-US'
     });
 
+    console.log("meetingCode:",meetingCode," passcode:", passcode," jwtData.jwt:", jwtData.jwt )
+
     client.join({
-      sdkKey: 'yourSdkKey',
+      sdkKey: sdkClientId,
       signature: jwtData.jwt,
       meetingNumber: meetingCode,
       password: passcode,
@@ -122,10 +125,11 @@ async function joinZoomBot (events) {
       const entryPoints = event.conferenceData.entryPoints;
       if(entryPoints){
         entryPoints.map(async (entryPoint: EntryPoint) => {
-          if (typeof window !== 'undefined') {
+          if (typeof window !== 'undefined' && entryPoint.entryPointType === "video") {
             try {
               const meetingCode = entryPoint.meetingCode;
               const passcode = entryPoint.passcode;
+              console.log("meetingCode", meetingCode, "entryPoint", entryPoint)
               
               const response = await joinZoomMeeting(meetingCode, passcode);
               console.log("response",response)
@@ -188,7 +192,7 @@ export default function Calendar() {
 
           try {
             const fetchedEvents = await getEvents(accessToken);
-            // to make latest on top
+            // to make latest events on top
             fetchedEvents.reverse();
 
             setEvents(fetchedEvents);
@@ -200,7 +204,9 @@ export default function Calendar() {
             const zoomEvents = checkForZoomEvents(futureEvents);
             console.log("zoomEvents", zoomEvents);
 
-            joinZoomBot(zoomEvents);
+            // joinZoomBot(zoomEvents);
+            const response = await joinZoomMeeting("81946311942", "037329");
+            console.log("response",response)
              
           } catch (e) {
             console.error('Error fetching events:', e);

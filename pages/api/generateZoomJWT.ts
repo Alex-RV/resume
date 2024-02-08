@@ -9,7 +9,7 @@ export default function handler(req, res) {
     const exp = iat + 60 * 60 * 2; // JWT valid for 2 hours
     const oHeader = { alg: 'HS256', typ: 'JWT' };
     const oPayload = {
-      sdkClientId: sdkClientId,
+      sdkKey: sdkClientId,
       mn: meetingNumber,
       role: role,
       iat: iat,

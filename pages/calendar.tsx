@@ -11,8 +11,11 @@ import {
   clearRefreshToken,
 } from '../lib/google/tokenStorage';
 import { encryptToken, decryptToken } from '../lib/google/tokenEncryption';
+
+//necessary for sdk
 import Zoom from  '@zoom/meetingsdk/embedded';
 
+// Joining zoom bot
 async function joinZoomMeeting(meetingCode, passcode) {
   const sdkClientId = process.env.NEXT_PUBLIC_ZOOM_SDK_CLIENT_ID;
   const sdkSecret = process.env.NEXT_PUBLIC_ZOOM_SDK_SECRET;
@@ -30,6 +33,7 @@ async function joinZoomMeeting(meetingCode, passcode) {
   }
 
   try {
+    // IMPORTANT, correct way of importing
     const ZoomMtgEmbedded = await (await import('@zoomus/websdk/embedded')).default;
     const jwtResponse = await fetch('/api/generateZoomJWT', {
       method: 'POST',
@@ -86,6 +90,7 @@ async function joinZoomMeeting(meetingCode, passcode) {
   }
 }
 
+// GET zoom events from events
 const checkForZoomEvents = (events) => {
   if(events !== undefined){
     const zoomEvents = events.filter((event: CalendarEvent) => 
@@ -95,6 +100,7 @@ const checkForZoomEvents = (events) => {
   }
 }
 
+// GET Google meet events from events
 const checkForGoogleMeetEvents = (events) => {
   if(events !== undefined){
     const googleMeetEvents = events.filter((event: CalendarEvent) => 
@@ -104,6 +110,7 @@ const checkForGoogleMeetEvents = (events) => {
   }
 }
 
+// GET future events from events, based on the start date
 const checkForFutureEvents = (events) => {
   if(events !== undefined){
     const futureEvents = events.filter((event: CalendarEvent) => {
@@ -119,6 +126,7 @@ const checkForFutureEvents = (events) => {
   }  
 }
 
+// Initialize zoom bot joining for each of meeting/event
 async function joinZoomBot (events) {
   if(events.length > 0){
     events.map((event: CalendarEvent) => {
@@ -205,6 +213,8 @@ export default function Calendar() {
             console.log("zoomEvents", zoomEvents);
 
             // joinZoomBot(zoomEvents);
+
+            //testing meeeting
             const response = await joinZoomMeeting("81946311942", "037329");
             console.log("response",response)
              

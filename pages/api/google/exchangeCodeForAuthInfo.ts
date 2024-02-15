@@ -22,10 +22,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return;
   }
 
-  // if (!process.env.NEXT_PUBLIC_GOOGLE_AUTH_CALLBACK_URL) {
-  //   res.status(500).json({ error: 'NEXT_PUBLIC_GOOGLE_AUTH_CALLBACK_URL not set' });
-  //   return;
-  // }
+  if (!process.env.NEXT_PUBLIC_GOOGLE_AUTH_CALLBACK_URL) {
+    res.status(500).json({ error: 'NEXT_PUBLIC_GOOGLE_AUTH_CALLBACK_URL not set' });
+    return;
+  }
+
+  if (!process.env.NODE_ENV) {
+    res.status(500).json({ error: 'NODE_ENV not set' });
+    return;
+  }
 
   const code = req.query.code as string;
 
@@ -33,18 +38,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     res.status(400).json({ error: 'Code not provided' });
     return;
   }
-  console.log("code", code)
 
   const clientId = process.env.NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID;
   const clientSecret = process.env.NEXT_PUBLIC_GOOGLE_OAUTH_SECRET;
-  // const callbackURL = process.env.NEXT_PUBLIC_GOOGLE_AUTH_CALLBACK_URL;
+  const callbackURL = process.env.NEXT_PUBLIC_GOOGLE_AUTH_CALLBACK_URL;
 
   const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
 
-  const redirectUri = `${protocol}://${req.headers.host}/callback`;
-  
-
-  console.log("redirectUri", redirectUri)
+  const redirectUri = `${protocol}://${req.headers.host}/${callbackURL}`;
 
   const tokenUrl = 'https://oauth2.googleapis.com/token';
 

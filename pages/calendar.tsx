@@ -164,18 +164,18 @@ export default function Calendar() {
       setIsLoadingAuth(true);
       const authInfo: AuthInfo = await getAuthInfoPopUp(window);
       setIsLoadingAuth(false);
+
       setIsLoggedIn(true);
-      console.log(authInfo)
       saveRefreshToken(encryptToken(authInfo.refresh_token));
       
 
       const accessToken = await getAccessToken(authInfo.refresh_token);
-      setIsLoadingEvents(true);
 
+      setIsLoadingEvents(true);
       const fetchedEvents = await getEvents(accessToken);
       setEvents(fetchedEvents.reverse());
       setIsLoadingEvents(false);
-      console.log('Events: ', fetchedEvents);
+
     } catch (error) {
       console.error('Error:', error);
       setError('Error during login');

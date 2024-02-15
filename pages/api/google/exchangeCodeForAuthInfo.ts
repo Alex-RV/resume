@@ -1,5 +1,14 @@
 // pages/api/exchangeCodeForAuthInfo.ts
 
+/**
+ * Exchanges code which you got from user's auth window to authentication data(authInfo)
+ *
+ * @param {Window} window - window to make sure.
+ * @returns {Promise<string>} A promise that resolves to the access token.
+ * @throws {Error} If any required environment variables are missing,
+ *                 or if no access token is returned.
+ */
+
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -13,16 +22,29 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return;
   }
 
+  // if (!process.env.NEXT_PUBLIC_GOOGLE_AUTH_CALLBACK_URL) {
+  //   res.status(500).json({ error: 'NEXT_PUBLIC_GOOGLE_AUTH_CALLBACK_URL not set' });
+  //   return;
+  // }
+
   const code = req.query.code as string;
 
   if (!code) {
     res.status(400).json({ error: 'Code not provided' });
     return;
   }
+  console.log("code", code)
 
-  const clientId = process.env.GOOGLE_OAUTH_CLIENT_ID;
-  const clientSecret = process.env.GOOGLE_OAUTH_SECRET;
-  const redirectUri = `${req.headers.origin}/callback`;
+  const clientId = process.env.NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID;
+  const clientSecret = process.env.NEXT_PUBLIC_GOOGLE_OAUTH_SECRET;
+  // const callbackURL = process.env.NEXT_PUBLIC_GOOGLE_AUTH_CALLBACK_URL;
+
+  const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
+
+  const redirectUri = `${protocol}://${req.headers.host}/callback`;
+  
+
+  console.log("redirectUri", redirectUri)
 
   const tokenUrl = 'https://oauth2.googleapis.com/token';
 
@@ -42,6 +64,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     });
 
     const data = await response.json();
+    console.log("Data", data)
 
     if (data.error) {
       res.status(400).json({ error: data.error });

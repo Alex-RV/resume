@@ -9,9 +9,6 @@
 import { AuthInfo } from "./types.google";
 
 export default async function getAuthInfoPopUp(windowObj: Window): Promise<AuthInfo | null> {
-  if (!process.env.NEXT_PUBLIC_GOOGLE_OAUTH_SECRET) {
-    throw new Error("GOOGLE_OAUTH_SECRET not set")
-  }
   if (!windowObj) {
     throw new Error("windowObj not provided correctly in getAuthInfoPopUp")
   }

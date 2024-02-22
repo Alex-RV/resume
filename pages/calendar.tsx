@@ -159,6 +159,31 @@ export default function Calendar() {
   const [events, setEvents] = useState<any[]>([]);
   const [error, setError] = useState<string | null>(null);
 
+  const handleAuthClick = () => {
+    window.location.href = '/api/zoomauth';
+  };
+
+  const initiateOAuth = async () => {
+    try {
+        // Make a request to your Next.js API route
+        fetch('/api/zoomauth').then(response => {
+          if (response.redirected) {
+              window.location.href = response.url;
+          }
+      }).catch(error => {
+          console.error('Error initiating OAuth process:', error);
+      });
+        // if (!response.ok) {
+        //     throw new Error('Failed to start OAuth process');
+        // }
+        // // Redirect the user to Zoom's OAuth page
+        // const data = await response.json();
+        // window.location.href = data.authURL;
+    } catch (error) {
+        console.error('Error initiating OAuth:', error);
+    }
+};
+
   const handleGoogleLogin = async () => {
     try {
       setIsLoadingAuth(true);
@@ -215,8 +240,8 @@ export default function Calendar() {
             // joinZoomBot(zoomEvents);
 
             //testing meeeting
-            const response = await joinZoomMeeting("81946311942", "037329");
-            console.log("response",response)
+            // const response = await joinZoomMeeting("81946311942", "037329");
+            // console.log("response",response)
              
           } catch (e) {
             console.error('Error fetching events:', e);
@@ -244,6 +269,7 @@ export default function Calendar() {
       <div id="meetingSDKElement"></div>
         <div className="flex mb-4">
           <h1 className="text-4xl font-bold">Your Calendar</h1>
+          <button onClick={handleAuthClick}>Connect to Zoom</button>
         </div>
         
         {isLoadingAuth ? (

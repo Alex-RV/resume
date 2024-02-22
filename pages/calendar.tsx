@@ -159,30 +159,42 @@ export default function Calendar() {
   const [events, setEvents] = useState<any[]>([]);
   const [error, setError] = useState<string | null>(null);
 
-  const handleAuthClick = () => {
-    window.location.href = '/api/zoomauth';
-  };
+  const handleZoomLogoutClick = async () => {
+    const accessToken = localStorage.getItem('ZOOM_USER_ACCESS_TOKEN');;
 
-  const initiateOAuth = async () => {
-    try {
-        // Make a request to your Next.js API route
-        fetch('/api/zoomauth').then(response => {
-          if (response.redirected) {
-              window.location.href = response.url;
-          }
-      }).catch(error => {
-          console.error('Error initiating OAuth process:', error);
-      });
-        // if (!response.ok) {
-        //     throw new Error('Failed to start OAuth process');
-        // }
-        // // Redirect the user to Zoom's OAuth page
-        // const data = await response.json();
-        // window.location.href = data.authURL;
-    } catch (error) {
-        console.error('Error initiating OAuth:', error);
+    const response = await fetch('/api/zoomrevoke', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ accessToken }),
+    });
+
+    const data = await response.json();
+    if (response.ok) {
+        console.log(data.message);
+        localStorage.removeItem('ZOOM_USER_ACCESS_TOKEN');
+    } else {
+        console.error(data.message);
+        // Handle errors (e.g., show error message)
     }
 };
+
+
+  const handleAuthClick = () => {
+    window.open('/api/zoomauth', '_blank', 'width=500,height=800');
+  
+    window.addEventListener('message', (event) => {
+      if (event.origin !== window.location.origin) {
+        return;
+      }
+  
+      if (event.data.accessToken) {
+        console.log('Access Token:', event.data.accessToken);
+        localStorage.setItem('ZOOM_USER_ACCESS_TOKEN', event.data.accessToken);
+      }
+    }, false);
+  };
 
   const handleGoogleLogin = async () => {
     try {
@@ -270,6 +282,7 @@ export default function Calendar() {
         <div className="flex mb-4">
           <h1 className="text-4xl font-bold">Your Calendar</h1>
           <button onClick={handleAuthClick}>Connect to Zoom</button>
+          <button onClick={handleZoomLogoutClick}>Log out from Zoom</button>
         </div>
         
         {isLoadingAuth ? (

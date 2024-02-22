@@ -2,7 +2,6 @@ export default async function handler(req, res) {
     const { code } = req.query;
     const clientID = process.env.NEXT_PUBLIC_ZOOM_SDK_CLIENT_ID;
     const clientSecret = process.env.NEXT_PUBLIC_ZOOM_SDK_SECRET;
-    // const redirectURI = `http://${req.headers.host}/api/callback`;
     const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
 
     const redirectURI = `${protocol}://${req.headers.host}/api/zoomcallback`;
@@ -31,7 +30,7 @@ export default async function handler(req, res) {
         const data = await tokenResponse.json();
         const accessToken = data.access_token;
         // Use accessToken for further Zoom API calls
-        res.status(200).json({ message: 'Authentication successful', accessToken });
+        res.status(200).end(`<script>window.opener.postMessage({ accessToken: '${accessToken}' }, '*'); window.close();</script>`);
     } catch (error) {
         console.error('Error during OAuth with Zoom:', error);
         res.status(500).json({ message: 'Authentication failed' });

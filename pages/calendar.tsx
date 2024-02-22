@@ -35,7 +35,7 @@ async function joinZoomMeeting(meetingCode, passcode) {
   try {
     // IMPORTANT, correct way of importing
     const ZoomMtgEmbedded = await (await import('@zoomus/websdk/embedded')).default;
-    const jwtResponse = await fetch('/api/generateZoomJWT', {
+    const jwtResponse = await fetch('/api/zoom/generateZoomJWT', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -160,9 +160,9 @@ export default function Calendar() {
   const [error, setError] = useState<string | null>(null);
 
   const handleZoomLogoutClick = async () => {
-    const accessToken = localStorage.getItem('ZOOM_USER_ACCESS_TOKEN');;
+    const accessToken = localStorage.getItem('ZOOM_USER_ACCESS_TOKEN');
 
-    const response = await fetch('/api/zoomrevoke', {
+    const response = await fetch('/api/zoom/revoke', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -182,7 +182,7 @@ export default function Calendar() {
 
 
   const handleAuthClick = () => {
-    window.open('/api/zoomauth', '_blank', 'width=500,height=800');
+    window.open('/api/zoom/auth', '_blank', 'width=500,height=800');
   
     window.addEventListener('message', (event) => {
       if (event.origin !== window.location.origin) {
@@ -192,9 +192,29 @@ export default function Calendar() {
       if (event.data.accessToken) {
         console.log('Access Token:', event.data.accessToken);
         localStorage.setItem('ZOOM_USER_ACCESS_TOKEN', event.data.accessToken);
+        
       }
     }, false);
   };
+
+  const fetchRecordings = async () => {
+    const accessToken = localStorage.getItem('ZOOM_USER_ACCESS_TOKEN');;
+    const response = await fetch('/api/zoom/getRecordings', {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+    });
+
+    if (!response.ok) {
+        console.error('Failed to fetch recordings');
+        return;
+    }
+
+    const recordings = await response.json();
+    console.log(recordings); // Process the list of recordings
+};
+
 
   const handleGoogleLogin = async () => {
     try {
@@ -283,6 +303,7 @@ export default function Calendar() {
           <h1 className="text-4xl font-bold">Your Calendar</h1>
           <button onClick={handleAuthClick}>Connect to Zoom</button>
           <button onClick={handleZoomLogoutClick}>Log out from Zoom</button>
+          <button onClick={fetchRecordings}>Fetch Zoom Reordings</button>
         </div>
         
         {isLoadingAuth ? (

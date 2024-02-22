@@ -103,3 +103,42 @@ export interface CalendarEvent {
     eventType: string;
   }
   
+  interface ZoomRecordingsResponse {
+    from: string;
+    to: string;
+    page_count: number;
+    page_size: number;
+    total_records: number;
+    next_page_token: string;
+    meetings: ZoomMeetingRecording[];
+  }
+  
+  interface ZoomMeetingRecording {
+    uuid: string;
+    id: number;
+    account_id: string;
+    host_id: string;
+    topic: string;
+    type: number;
+    start_time: string;
+    duration: number;
+    timezone: string;
+    total_size: number;
+    recording_count: number;
+    share_url: string;
+    recording_files: ZoomRecordingFile[];
+  }
+  
+  interface ZoomRecordingFile {
+    id: string;
+    meeting_id: string;
+    recording_start: string;
+    recording_end: string;
+    file_type: string;
+    file_size: number;
+    play_url: string;
+    download_url: string;
+    status: string;
+    recording_type: string;
+  }
+  

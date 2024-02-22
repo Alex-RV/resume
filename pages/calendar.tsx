@@ -4,7 +4,7 @@ import getAccessToken from '../lib/google/getAccessToken';
 import getCalendarIds from '../lib/google/getCalendarIds';
 import getEvents from '../lib/google/getCalendarEvents';
 import getAuthInfoPopUp from '../lib/google/getAuthInfoPopUp';
-import { AuthInfo, CalendarEvent, ZoomMeetingInfo, EntryPoint } from '../lib/google/types.google';
+import { AuthInfo, CalendarEvent, ZoomMeetingInfo, EntryPoint } from '../lib/google/types';
 import {
   saveRefreshToken,
   loadRefreshToken,

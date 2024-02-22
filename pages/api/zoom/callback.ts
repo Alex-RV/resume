@@ -1,3 +1,5 @@
+// pages/api/zooom/callback.ts
+
 export default async function handler(req, res) {
     const { code } = req.query;
     const clientID = process.env.NEXT_PUBLIC_ZOOM_SDK_CLIENT_ID;

@@ -6,7 +6,7 @@
  * @throws {Error} If any required environment variables are missing.
  */
 
-import { AuthInfo } from "./types";
+import { AuthInfo } from "../types";
 
 export default async function getAuthInfoPopUp(windowObj: Window): Promise<AuthInfo | null> {
   if (!windowObj) {

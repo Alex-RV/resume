@@ -152,6 +152,28 @@ async function joinZoomBot (events) {
   }
 }
 
+const fetchNewAccessToken = async (refreshToken) => {
+  try {
+      const response = await fetch('/api/zoom/getNewAccessToken', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ refreshToken }),
+      });
+
+      if (!response.ok) {
+          throw new Error('Failed to fetch new access token');
+      }
+
+      const data = await response.json();
+      return data.accessToken;
+  } catch (error) {
+      console.error('Error fetching new access token:', error);
+      // Handle error appropriately
+  }
+};
+
 export default function Calendar() {
   const [isLoadingAuth, setIsLoadingAuth] = useState(true);
   const [isLoadingEvents, setIsLoadingEvents] = useState(false);
@@ -159,29 +181,70 @@ export default function Calendar() {
   const [events, setEvents] = useState<any[]>([]);
   const [error, setError] = useState<string | null>(null);
 
-  const handleZoomLogoutClick = async () => {
-    const accessToken = localStorage.getItem('ZOOM_USER_ACCESS_TOKEN');
+  const checkAccessTokenValidity = async () => {
+    try {
+        const accessToken = localStorage.getItem('ZOOM_USER_ACCESS_TOKEN');
+        if (!accessToken) {
+            console.log('No access token found');
+            if(localStorage.getItem('ZOOM_USER_REFRESH_TOKEN')){
+              const accessToken = await fetchNewAccessToken(localStorage.getItem('ZOOM_USER_REFRESH_TOKEN'));
+              if(accessToken){
+                localStorage.setItem('ZOOM_USER_ACCESS_TOKEN', accessToken);
+                return true;
+              }else{
+                return false;
+              }
+            }else{
+              return false;
+            }
+        }
 
-    const response = await fetch('/api/zoom/revoke', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ accessToken }),
-    });
+        const response = await fetch('/api/zoom/checkAccessToken', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
+            },
+        });
 
-    const data = await response.json();
-    if (response.ok) {
-        console.log(data.message);
-        localStorage.removeItem('ZOOM_USER_ACCESS_TOKEN');
-    } else {
-        console.error(data.message);
-        // Handle errors (e.g., show error message)
+        if (response.ok) {
+            console.log('Access token is valid');
+            return true;
+        } else {
+            console.log('Access token is invalid or expired');
+            return false;
+        }
+    } catch (error) {
+        console.error('Error checking access token validity:', error);
+        return false;
     }
 };
 
 
-  const handleAuthClick = () => {
+  const handleZoomLogoutClick = async () => {
+    if(await checkAccessTokenValidity() == true){
+      const accessToken = localStorage.getItem('ZOOM_USER_ACCESS_TOKEN');
+
+      const response = await fetch('/api/zoom/revoke', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ accessToken }),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+          console.log(data.message);
+          localStorage.removeItem('ZOOM_USER_ACCESS_TOKEN');
+      } else {
+          console.error(data.message);
+          // Handle errors (e.g., show error message)
+      }
+    }
+};
+
+
+  const handleZoomAuthClick = () => {
     window.open('/api/zoom/auth', '_blank', 'width=500,height=800');
   
     window.addEventListener('message', (event) => {
@@ -189,16 +252,23 @@ export default function Calendar() {
         return;
       }
   
-      if (event.data.accessToken) {
-        console.log('Access Token:', event.data.accessToken);
-        localStorage.setItem('ZOOM_USER_ACCESS_TOKEN', event.data.accessToken);
+      if (event.data.refresh_token) {
+        console.log('Refresh Token:', event.data.refresh_token);
+        localStorage.setItem('ZOOM_USER_REFRESH_TOKEN', event.data.refresh_token);
+        localStorage.setItem('ZOOM_USER_ACCESS_TOKEN', event.data.access_token);
         
       }
     }, false);
   };
 
   const fetchRecordings = async () => {
-    const accessToken = localStorage.getItem('ZOOM_USER_ACCESS_TOKEN');;
+    let accessToken;
+    if(await checkAccessTokenValidity() == true){
+      accessToken = localStorage.getItem('ZOOM_USER_ACCESS_TOKEN');
+    }else{
+      const refresh_token = localStorage.getItem('ZOOM_USER_REFRESH_TOKEN');
+      accessToken = await fetchNewAccessToken(refresh_token);
+    }
     const response = await fetch('/api/zoom/getRecordings', {
         method: 'GET',
         headers: {
@@ -213,7 +283,7 @@ export default function Calendar() {
 
     const recordings = await response.json();
     console.log(recordings); // Process the list of recordings
-};
+  };
 
 
   const handleGoogleLogin = async () => {
@@ -248,11 +318,11 @@ export default function Calendar() {
 
   useEffect(() => {
     const checkSession = async () => {
-      const refreshToken = decryptToken(loadRefreshToken());
+      const refreshGoogleToken = decryptToken(loadRefreshToken());
 
-      if (refreshToken) {
+      if (refreshGoogleToken) {
         try {
-          const accessToken = await getAccessToken(refreshToken);
+          const accessToken = await getAccessToken(refreshGoogleToken);
           setIsLoadingEvents(true);
 
           try {
@@ -295,13 +365,42 @@ export default function Calendar() {
     checkSession();
   }, []);
 
+  // useEffect(() => {
+  //   const checkZoomSession = async () => {
+  //     const accessToken = localStorage.getItem('ZOOM_USER_ACCESS_TOKEN');
+  //     const response = await fetch('/api/zoom/refresh', {
+  //       method: 'POST',
+  //       headers: {
+  //           'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({ accessToken }),
+  //   });
+
+  //   const data = await response.json(); // Implement this function to retrieve the refresh token securely
+  
+  //     // if (accessToken && isTokenExpired(accessToken)) {
+  //     //   // If access token is expired, try to renew it
+  //     //   try {
+  //     //     const newAccessToken = await renewAccessToken(refreshToken); // Implement renewAccessToken to call your /api/zoom/refresh endpoint
+  //     //     localStorage.setItem('ZOOM_USER_ACCESS_TOKEN', newAccessToken);
+  //     //   } catch (error) {
+  //     //     console.error('Error renewing access token:', error);
+  //     //     // Handle token renewal failure (e.g., re-authentication)
+  //     //   }
+  //     // }
+  //   };
+  
+  //   checkZoomSession();
+  // }, []);
+  
+
   return (
     <Container>
       <div className="flex flex-col justify-center items-center text-black dark:text-white mx-auto max-w-2xl">
       <div id="meetingSDKElement"></div>
         <div className="flex mb-4">
           <h1 className="text-4xl font-bold">Your Calendar</h1>
-          <button onClick={handleAuthClick}>Connect to Zoom</button>
+          <button onClick={handleZoomAuthClick}>Connect to Zoom</button>
           <button onClick={handleZoomLogoutClick}>Log out from Zoom</button>
           <button onClick={fetchRecordings}>Fetch Zoom Reordings</button>
         </div>

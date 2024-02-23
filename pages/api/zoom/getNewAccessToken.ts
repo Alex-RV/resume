@@ -1,8 +1,10 @@
-// pages/api/zoom/refresh.ts
+// pages/api/zoom/getNewAccessToken.ts
 
-export default async function handler(req, res) {
+import type { NextApiRequest, NextApiResponse } from 'next';
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'POST') {
-        const { refreshToken } = req.body; // Get the refresh token from the request body
+        const { refreshToken } = req.body;
         const clientID = process.env.NEXT_PUBLIC_ZOOM_SDK_CLIENT_ID;
         const clientSecret = process.env.NEXT_PUBLIC_ZOOM_SDK_SECRET;
 
@@ -20,23 +22,18 @@ export default async function handler(req, res) {
                     Authorization: authHeader,
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
-                body: params,
+                body: params.toString(),
             });
 
             if (!tokenResponse.ok) {
-                throw new Error('Failed to refresh token');
+                throw new Error('Failed to refresh access token');
             }
 
             const data = await tokenResponse.json();
-            const newAccessToken = data.access_token;
-            const newRefreshToken = data.refresh_token;
-            console.log("data",data)
-            // You may store the new access and refresh tokens as needed
-
-            res.status(200).json({ accessToken: newAccessToken, refreshToken: newRefreshToken });
+            res.status(200).json({ accessToken: data.access_token });
         } catch (error) {
-            console.error('Error refreshing token:', error);
-            res.status(500).json({ message: 'Error refreshing token' });
+            console.error('Error fetching new access token:', error);
+            res.status(500).json({ message: 'Error fetching new access token' });
         }
     } else {
         res.setHeader('Allow', 'POST');

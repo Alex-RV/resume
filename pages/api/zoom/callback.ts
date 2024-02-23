@@ -30,9 +30,10 @@ export default async function handler(req, res) {
         }
 
         const data = await tokenResponse.json();
-        const accessToken = data.access_token;
+        const refresh_token = data.refresh_token;
+        console.log("data",data)
         // Use accessToken for further Zoom API calls
-        res.status(200).end(`<script>window.opener.postMessage({ accessToken: '${accessToken}' }, '*'); window.close();</script>`);
+        res.status(200).end(`<script>window.opener.postMessage({ refresh_token: '${refresh_token}' }, '*'); window.close();</script>`);
     } catch (error) {
         console.error('Error during OAuth with Zoom:', error);
         res.status(500).json({ message: 'Authentication failed' });

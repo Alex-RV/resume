@@ -4,7 +4,9 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'GET') {
+        // const { accessToken } = req.body;
         const accessToken = req.headers.authorization?.split(' ')[1];
+        console.log("accessToken", accessToken,"req.headers ", req.headers)
 
         if (!accessToken) {
             return res.status(401).json({ message: 'No access token provided' });
@@ -21,7 +23,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             if (userProfileResponse.ok) {
                 res.status(200).json({ message: 'Access token is valid' });
             } else {
-                res.status(401).json({ message: `Access token is invalid or expired  ${userProfileResponse.json}` });
+                res.status(401).json({ message: `Access token is invalid or expired  ${await userProfileResponse.json()}` });
             }
         } catch (error) {
             console.error('Error checking access token validity:', error);

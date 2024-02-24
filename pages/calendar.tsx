@@ -184,6 +184,7 @@ export default function Calendar() {
   const checkAccessTokenValidity = async () => {
     try {
         const accessToken = localStorage.getItem('ZOOM_USER_ACCESS_TOKEN');
+        console.log("checkAccessTokenValidity accessToken: ", accessToken);
         if (!accessToken) {
             console.log('No access token found');
             if(localStorage.getItem('ZOOM_USER_REFRESH_TOKEN')){
@@ -221,7 +222,7 @@ export default function Calendar() {
 
 
   const handleZoomLogoutClick = async () => {
-    if(await checkAccessTokenValidity() == true){
+    // if(await checkAccessTokenValidity() == true){
       const accessToken = localStorage.getItem('ZOOM_USER_ACCESS_TOKEN');
 
       const response = await fetch('/api/zoom/revoke', {
@@ -240,7 +241,7 @@ export default function Calendar() {
           console.error(data.message);
           // Handle errors (e.g., show error message)
       }
-    }
+    // }
 };
 
 
@@ -255,8 +256,8 @@ export default function Calendar() {
       if (event.data.refresh_token) {
         console.log('Refresh Token:', event.data.refresh_token);
         localStorage.setItem('ZOOM_USER_REFRESH_TOKEN', event.data.refresh_token);
+        console.log(event.data)
         localStorage.setItem('ZOOM_USER_ACCESS_TOKEN', event.data.access_token);
-        
       }
     }, false);
   };

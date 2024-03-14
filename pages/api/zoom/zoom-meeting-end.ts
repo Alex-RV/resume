@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import crypto from 'crypto';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method === 'POST') {
+//   if (req.method === 'POST') {
     const event = req.body;
 
     // Zoom Verification Token from your Zoom App
@@ -65,8 +65,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     } else {
       res.status(200).json({ message: 'Event not related to the requested event types' });
     }
-  } else {
-    res.setHeader('Allow', ['POST']);
-    res.status(405).end(`Method ${req.method} Not Allowed`);
-  }
+//   } else {
+//     res.setHeader('Allow', ['POST']);
+//     res.status(405).end(`Method ${req.method} Not Allowed`);
+//   }
 }

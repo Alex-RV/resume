@@ -16,7 +16,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 subject: "meeting end",
                 message: req.body.event,
               };
-            fetch('/api/contact', {
+              fetch('https://ariabov.tech/api/contact', {
                 method: 'POST',
                 headers: {
                   'Accept': 'application/json, text/plain, */*',

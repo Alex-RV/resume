@@ -1,4 +1,4 @@
-// pages/api/zoom-meeting-end.ts
+// pages/api/zoom/zoom-meeting-end.ts
 
 import type { NextApiRequest, NextApiResponse } from 'next';
 

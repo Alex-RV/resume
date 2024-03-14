@@ -1,4 +1,4 @@
-// pages/api/zoom-meeting-start.ts
+// pages/api/zoom/zoom-meeting-start.ts
 
 export default function handler(req, res) {
     if (req.method === 'POST') {

@@ -1,45 +1,52 @@
 // pages/api/zoom/zoom-meeting-end.ts
-import type { NextApiRequest, NextApiResponse } from 'next';
+import { NextApiRequest, NextApiResponse } from 'next';
 import crypto from 'crypto';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-//   if (req.method === 'POST') {
-    const event = req.body;
+  if (req.method === 'POST') {
+    const timestamp = req.headers['x-zm-request-timestamp'] as string;
+    const signature = req.headers['x-zm-signature'] as string;
+    const zoomWebhookSecretToken = process.env.ZOOM_WEBHOOK_SECRET_TOKEN || '';
 
-    // Zoom Verification Token from your Zoom App
-    const zoomVerificationToken = process.env.NEXT_PUBLIC_ZOOM_TOKEN;
+    // Construct the message string
+    const message = `v0:${timestamp}:${JSON.stringify(req.body)}`;
 
-    // The `authorization` header sent by Zoom
-    const signature = req.headers['authorization'];
-
-    // Construct the verification signature using the payload and your verification token
-    const expectedSignature = 'v0=' + crypto
-      .createHmac('sha256', zoomVerificationToken)
-      .update(JSON.stringify(req.body))
+    // Verify the signature
+    const hashForVerify = crypto
+      .createHmac('sha256', zoomWebhookSecretToken)
+      .update(message)
       .digest('hex');
+    const computedSignature = `v0=${hashForVerify}`;
 
-    // Check if the computed signature matches the header from Zoom
-    if (signature !== expectedSignature) {
-      res.status(403).json({ message: 'Invalid signature' });
+    // Check if the signature matches
+    if (signature !== computedSignature) {
+      res.status(401).json({ message: 'Unauthorized request to Zoom Webhook.' });
       return;
     }
 
-    // Verification process to respond to Zoom's challenge request
-    if (event.event === 'endpoint.url_verification') {
-      res.status(200).json({ challenge: event.payload.challenge });
+    // Zoom is validating that you control the webhook endpoint
+    if (req.body.event === 'endpoint.url_validation') {
+      const plainToken = req.body.payload.plainToken;
+      const hashForValidate = crypto
+        .createHmac('sha256', zoomWebhookSecretToken)
+        .update(plainToken)
+        .digest('hex');
+
+      res.status(200).json({
+        plainToken,
+        encryptedToken: hashForValidate
+      });
       return;
     }
 
-    console.log(event.event);
-
-    if (event.event === 'meeting.ended' || event.event === 'meeting.started') {
-      console.log('Meeting ', event.event, ": ", event.payload.object);
-
-      let data = {
-        fullname: "Zoom",
-        email: "zoom",
-        subject: event.event,
-        message: JSON.stringify(event.payload.object),
+    // Handle Zoom events (e.g., 'meeting.ended', 'meeting.started')
+    if (req.body.event === 'meeting.ended' || req.body.event === 'meeting.started') {
+      // Insert your logic here, such as notifying a contact endpoint or logging the event
+      const data = {
+        fullname: "Zoom Event",
+        email: "event@zoom.us",
+        subject: `Zoom Meeting ${req.body.event}`,
+        message: JSON.stringify(req.body.payload.object),
       };
 
       try {
@@ -53,20 +60,23 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         });
 
         if (contactResponse.status === 200) {
-          console.log('Response succeeded!');
+          console.log('Notification sent successfully');
         } else {
-          console.log('Response not succeeded, status code:', contactResponse.status);
+          console.error('Failed to send notification', contactResponse.status);
         }
       } catch (error) {
-        console.error('Error sending request to /api/contact:', error);
+        console.error('Error sending request to /api/contact', error);
       }
 
-      res.status(200).json({ message: 'Event received' });
+      res.status(200).json({ message: 'Zoom event processed.' });
     } else {
-      res.status(200).json({ message: 'Event not related to the requested event types' });
+      // If the event type is unrecognized, log it and respond accordingly
+      console.log('Received unrecognized Zoom event type:', req.body.event);
+      res.status(200).json({ message: 'Unrecognized event type received.' });
     }
-//   } else {
-//     res.setHeader('Allow', ['POST']);
-//     res.status(405).end(`Method ${req.method} Not Allowed`);
-//   }
+  } else {
+    // If the request method is not POST, return 405 Method Not Allowed
+    res.setHeader('Allow', ['POST']);
+    res.status(405).end('Method Not Allowed');
+  }
 }

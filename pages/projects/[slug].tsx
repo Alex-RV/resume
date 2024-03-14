@@ -1,12 +1,12 @@
 import { GetStaticProps, GetStaticPaths } from "next";
 
-import {Post} from "../../typings" 
+import {PostType} from "../../typings" 
 import { sanityClient, urlFor} from "../../sanity.config"
 import Project from "../../layouts/project";
 import { queryProject, } from "../../lib/queries"
 
 interface Props{
-    post: Post,
+    post: PostType,
 } 
 
 function Post({post}:Props) {
@@ -31,7 +31,7 @@ export const getStaticPaths : GetStaticPaths = async() => {
 
     const posts = await sanityClient.fetch(query);
 
-    const paths = posts.map((post: Post) => ({
+    const paths = posts.map((post: PostType) => ({
         params:{
             slug: post.slug.current,
         }

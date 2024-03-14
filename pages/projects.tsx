@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 import ProjectLink from '../components/ProjectLink'
 import { sanityClient, urlFor} from "../sanity.config"
-import {Post, Projects} from "../typings"
+import {PostType, Projects} from "../typings"
 import { queryProject, queryProjectsTab } from '../lib/queries'
 import LoadingScreen from '../components/LoadingScreen'
 import { InferGetStaticPropsType } from 'next'
@@ -31,6 +31,6 @@ export default function projects({
   );
 }
 export async function getStaticProps({ preview = false }) {
-  const posts: Post[] = await sanityClient.fetch(queryProjectsTab);
+  const posts: PostType[] = await sanityClient.fetch(queryProjectsTab);
   return { props: { posts } };
 }

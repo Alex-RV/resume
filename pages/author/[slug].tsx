@@ -1,12 +1,12 @@
 import { GetStaticProps, GetStaticPaths } from "next";
 
-import { Author} from "../../typings" 
+import { AuthorType} from "../../typings" 
 import { sanityClient, urlFor, getClient} from "../../sanity.config"
 import AuthorPage from "../../layouts/author";
 import { queryProject, queryAuthorPage, queryAuthor} from "../../lib/queries"
 
 interface Props{
-    author: Author,
+    author: AuthorType,
 } 
 
 function Author({author}:Props) {
@@ -26,7 +26,7 @@ export const getStaticPaths: GetStaticPaths = async() => {
           slug{current},
       }`;
     const authors = await sanityClient.fetch(query);
-    const paths = authors.map((author: Author) => ({
+    const paths = authors.map((author: AuthorType) => ({
         params:{
             slug: author.slug.current
         }

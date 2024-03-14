@@ -19,7 +19,7 @@ export default function handler(req, res) {
                 subject: "meeting start",
                 message: req.body.event,
               };
-              fetch('/api/contact', {
+              fetch('https://ariabov.tech/api/contact', {
                 method: 'POST',
                 headers: {
                   'Accept': 'application/json, text/plain, */*',

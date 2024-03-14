@@ -1,4 +1,4 @@
-export interface Post{
+export interface PostType{
     _id:string;
     publishedAt:string;
     title:string;
@@ -21,7 +21,7 @@ export interface Post{
     };
     body:[object];
 }
-export interface Author{
+export interface AuthorType{
     _id:string;
     name: string,
     slug:{

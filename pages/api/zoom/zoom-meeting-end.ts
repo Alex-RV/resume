@@ -14,7 +14,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 fullname: "Zoom",
                 email: "zoom",
                 subject: "meeting end",
-                message: req.body.event,
+                message: event.payload.object,
               };
               fetch('https://ariabov.tech/api/contact', {
                 method: 'POST',

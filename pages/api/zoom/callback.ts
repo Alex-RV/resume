@@ -3,7 +3,7 @@
 export default async function handler(req, res) {
     const { code } = req.query;
     const clientID = process.env.NEXT_PUBLIC_ZOOM_SDK_CLIENT_ID;
-    const clientSecret = process.env.NEXT_PUBLIC_ZOOM_SDK_SECRET;
+    const clientSecret = process.env.NEXT_PUBLIC_ZOOM_SDK_CLIENT_SECRET;
     const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
 
     const redirectURI = `${protocol}://${req.headers.host}/api/zoom/callback`;

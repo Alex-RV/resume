@@ -4,7 +4,7 @@ export default async function handler(req, res) {
     if (req.method === 'POST') {
         const { refreshToken } = req.body; // Get the refresh token from the request body
         const clientID = process.env.NEXT_PUBLIC_ZOOM_SDK_CLIENT_ID;
-        const clientSecret = process.env.NEXT_PUBLIC_ZOOM_SDK_SECRET;
+        const clientSecret = process.env.NEXT_PUBLIC_ZOOM_SDK_CLIENT_SECRET;
 
         const tokenURL = 'https://zoom.us/oauth/token';
         const authHeader = `Basic ${Buffer.from(`${clientID}:${clientSecret}`).toString('base64')}`;

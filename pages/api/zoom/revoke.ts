@@ -4,7 +4,7 @@ export default async function handler(req, res) {
         const { accessToken } = req.body;
 
         const revokeURL = 'https://zoom.us/oauth/revoke';
-        const credentials = `${process.env.NEXT_PUBLIC_ZOOM_SDK_CLIENT_ID}:${process.env.NEXT_PUBLIC_ZOOM_SDK_SECRET}`;
+        const credentials = `${process.env.NEXT_PUBLIC_ZOOM_SDK_CLIENT_ID}:${process.env.NEXT_PUBLIC_ZOOM_SDK_CLIENT_SECRET}`;
         // const authHeader = `Basic ${Buffer.from(`${process.env.NEXT_PUBLIC_ZOOM_SDK_CLIENT_ID}:${process.env.NEXT_PUBLIC_ZOOM_SDK_SECRET}`).toString('base64')}`;
 
         const authHeader = `Basic ${Buffer.from(credentials).toString('base64')}`;

@@ -6,7 +6,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (req.method === 'POST') {
     const timestamp = req.headers['x-zm-request-timestamp'] as string;
     const signature = req.headers['x-zm-signature'] as string;
-    const zoomWebhookSecretToken = process.env.NEXT_PUBLIC_ZOOM_TOKEN || '';
+    const zoomWebhookSecretToken = process.env.NEXT_PUBLIC_ZOOM_SDK_SECRET || '';
+    console.log("zoomWebhookSecretToken: ",zoomWebhookSecretToken)
 
     // Construct the message string
     const message = `v0:${timestamp}:${JSON.stringify(req.body)}`;
@@ -22,7 +23,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       fullname: "Zoom Event",
       email: "event@zoom.us",
       subject: `Zoom Meeting ${req.body.event}`,
-      message: `signature:${signature}, computedSignature: ${computedSignature}, NEXT_PUBLIC_ZOOM_TOKEN:${process.env.NEXT_PUBLIC_ZOOM_TOKEN}`,
+      message: `signature:${signature}, computedSignature: ${computedSignature}, NEXT_PUBLIC_ZOOM_TOKEN:${process.env.NEXT_PUBLIC_ZOOM_SDK_SECRET}`,
     };
 
     const contactResponse = await fetch('https://ariabov.tech/api/contact', {

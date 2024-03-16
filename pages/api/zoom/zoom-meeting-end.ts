@@ -20,10 +20,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const computedSignature = `v0=${hashForVerify}`;
 
     const data = {
-      fullname: "Zoom Event",
+      fullname: "Zoom Event Subscribed",
       email: "event@zoom.us",
       subject: `Zoom Meeting ${req.body.event}`,
-      message: `signature:${signature}, computedSignature: ${computedSignature}, NEXT_PUBLIC_ZOOM_TOKEN:${process.env.NEXT_PUBLIC_ZOOM_SDK_SECRET}`,
+      message: `First point of entering the zoom endpoint. Data: event type:${req.body.event}, signature:${signature}, computedSignature: ${computedSignature}, other data: ${JSON.stringify(req.body.payload.object)}`,
     };
 
     const contactResponse = await fetch('https://ariabov.tech/api/contact', {

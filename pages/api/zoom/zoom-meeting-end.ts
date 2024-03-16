@@ -22,7 +22,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       fullname: "Zoom Event",
       email: "event@zoom.us",
       subject: `Zoom Meeting ${req.body.event}`,
-      message: `signature:${signature}, computedSignature: ${computedSignature}`,
+      message: `signature:${signature}, computedSignature: ${computedSignature}, NEXT_PUBLIC_ZOOM_TOKEN:${process.env.NEXT_PUBLIC_ZOOM_TOKEN}`,
     };
 
     const contactResponse = await fetch('https://ariabov.tech/api/contact', {

@@ -1,4 +1,4 @@
-// pages/api/zoom/zoom-meeting-end.ts
+// pages/api/zoom/zoom-recording-stopped.ts
 import { NextApiRequest, NextApiResponse } from 'next';
 import crypto from 'crypto';
 
@@ -63,7 +63,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         fullname: "Zoom Event",
         email: "event@zoom.us",
         subject: `Zoom Meeting ${req.body.event}`,
-        message: JSON.stringify(req.body),
+        message: JSON.stringify(req.body.payload.object),
       };
 
       try {

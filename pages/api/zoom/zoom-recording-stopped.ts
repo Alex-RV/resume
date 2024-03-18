@@ -18,23 +18,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       .update(message)
       .digest('hex');
     const computedSignature = `v0=${hashForVerify}`;
-
-    const data = {
-      fullname: "Zoom Event Subscribed",
-      email: "event@zoom.us",
-      subject: `Zoom Meeting ${req.body.event}`,
-      message: `First point of entering the zoom endpoint. Data: event type:${req.body.event}, signature:${signature}, computedSignature: ${computedSignature}, other data: ${JSON.stringify(req.body.payload.object)}`,
-    };
-
-    const contactResponse = await fetch('https://ariabov.tech/api/contact', {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json, text/plain, */*',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(data)
-        });
-
+    
     // Check if the signature matches
     if (signature !== computedSignature) {
       res.status(401).json({ message: 'Unauthorized request to Zoom Webhook.' });

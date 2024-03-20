@@ -59,7 +59,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (req.body.event === 'meeting.ended' || req.body.event === 'meeting.started') {
       // Insert your logic here, such as notifying a contact endpoint or logging the event
       const data = {
-        fullname: "Zoom Event",
+        fullname: `Zoom Event: ${req.body.event}`,
         email: "event@zoom.us",
         subject: `Zoom Meeting ${req.body.payload.topic}`,
         message: JSON.stringify(req.body),

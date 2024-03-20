@@ -7,7 +7,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const timestamp = req.headers['x-zm-request-timestamp'] as string;
     const signature = req.headers['x-zm-signature'] as string;
     const zoomWebhookSecretToken = process.env.NEXT_PUBLIC_ZOOM_SDK_SECRET || '';
-    console.log("zoomWebhookSecretToken: ",zoomWebhookSecretToken)
 
     // Construct the message string
     const message = `v0:${timestamp}:${JSON.stringify(req.body)}`;

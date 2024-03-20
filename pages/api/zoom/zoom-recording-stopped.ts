@@ -7,7 +7,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const timestamp = req.headers['x-zm-request-timestamp'] as string;
     const signature = req.headers['x-zm-signature'] as string;
     const zoomWebhookSecretToken = process.env.NEXT_PUBLIC_ZOOM_SDK_SECRET || '';
-    console.log("zoomWebhookSecretToken: ",zoomWebhookSecretToken)
 
     // Construct the message string
     const message = `v0:${timestamp}:${JSON.stringify(req.body)}`;
@@ -18,7 +17,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       .update(message)
       .digest('hex');
     const computedSignature = `v0=${hashForVerify}`;
-    
+
     // Check if the signature matches
     if (signature !== computedSignature) {
       res.status(401).json({ message: 'Unauthorized request to Zoom Webhook.' });

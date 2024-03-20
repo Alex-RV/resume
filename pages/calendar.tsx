@@ -401,9 +401,11 @@ export default function Calendar() {
       <div id="meetingSDKElement"></div>
         <div className="flex mb-4">
           <h1 className="text-4xl font-bold">Your Calendar</h1>
-          <button onClick={handleZoomAuthClick}>Connect to Zoom</button>
-          <button onClick={handleZoomLogoutClick}>Log out from Zoom</button>
-          <button onClick={fetchRecordings}>Fetch Zoom Reordings</button>
+        </div>
+        <div className='flex gap-3 my-5'>
+        <button onClick={handleZoomAuthClick} className="bg-blue-500 text-white  p-2 rounded hover:bg-blue-600 w-36">Connect to Zoom</button>
+          <button onClick={handleZoomLogoutClick} className="bg-blue-500 text-white  p-2 rounded hover:bg-blue-600 w-36">Log out from Zoom</button>
+          <button onClick={fetchRecordings} className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600 w-36">Fetch Zoom Reordings</button>
         </div>
         
         {isLoadingAuth ? (

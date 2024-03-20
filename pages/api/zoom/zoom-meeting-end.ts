@@ -61,7 +61,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const data = {
         fullname: "Zoom Event",
         email: "event@zoom.us",
-        subject: `Zoom Meeting ${req.body.event}`,
+        subject: `Zoom Meeting ${req.body.payload.topic}`,
         message: JSON.stringify(req.body),
       };
 

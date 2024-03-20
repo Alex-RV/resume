@@ -56,7 +56,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     if (req.body.event) {
-      // Insert your logic here, such as notifying a contact endpoint or logging the event
       const data = {
         fullname: `Zoom Event: ${req.body.event}`,
         email: "event@zoom.us",

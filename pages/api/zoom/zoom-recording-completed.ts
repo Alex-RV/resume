@@ -1,4 +1,4 @@
-// pages/api/zoom/zoom-recording-stopped.ts
+// pages/api/zoom/zoom-recording-completed.ts
 import { NextApiRequest, NextApiResponse } from 'next';
 import crypto from 'crypto';
 
@@ -39,14 +39,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return;
     }
 
-    // Handle Zoom events (e.g., 'meeting.ended', 'meeting.started')
-    if (req.body.event === 'meeting.ended' || req.body.event === 'meeting.started') {
-      // Insert your logic here, such as notifying a contact endpoint or logging the event
+    if (req.body.event === 'recording.completed') {
       const data = {
-        fullname: "Zoom Event",
+        fullname: `Zoom Event: ${req.body.event}`,
         email: "event@zoom.us",
-        subject: `Zoom Meeting ${req.body.event}`,
-        message: JSON.stringify(req.body.payload.object),
+        subject: `Zoom Meeting ${req.body.payload.object.topic}`,
+        message: JSON.stringify(req.body),
       };
 
       try {

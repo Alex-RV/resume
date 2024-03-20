@@ -55,8 +55,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return;
     }
 
-    // Handle Zoom events (e.g., 'meeting.ended', 'meeting.started')
-    if (req.body.event === 'meeting.ended' || req.body.event === 'meeting.started') {
+    if (req.body.event) {
       // Insert your logic here, such as notifying a contact endpoint or logging the event
       const data = {
         fullname: `Zoom Event: ${req.body.event}`,

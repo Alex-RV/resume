@@ -1,7 +1,8 @@
+'use client'
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
-export default function chatauth() {
+export default function Chatauth() {
   const router = useRouter();
 
   useEffect(() => {

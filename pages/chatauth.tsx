@@ -6,8 +6,7 @@ export default function Chatauth() {
   const router = useRouter();
 
   useEffect(() => {
-    // Redirecting to the specified URL
-    router.replace('http://127.0.0.1:5000/');
+    router.replace('http://127.0.0.1:8000');
   }, [router]);
 
   return (

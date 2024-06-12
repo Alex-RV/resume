@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Container from '../components/Container';
 import getAccessToken from '../lib/google/getAccessToken';
 import getCalendarIds from '../lib/google/getCalendarIds';
-import getEvents from '../lib/google/getCalendarEvents';
+// import getEvents from '../lib/google/getCalendarEvents';
 import getAuthInfoPopUp from '../lib/google/getAuthInfoPopUp';
 import { AuthInfo, CalendarEvent, ZoomMeetingInfo, EntryPoint } from '../lib/types';
 import {
@@ -154,7 +154,7 @@ async function joinZoomBot (events) {
 
 const fetchNewAccessToken = async (refreshToken) => {
   try {
-      const response = await fetch('/api/zoom/getNewAccessToken', {
+      const response = await fetch('http://localhost:8032/integrations/zoom/auth/getNewAccessToken', {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',
@@ -200,7 +200,7 @@ export default function Calendar() {
             }
         }
 
-        const response = await fetch('/api/zoom/checkAccessToken', {
+        const response = await fetch('http://localhost:8032/integrations/zoom/auth/checkAccessToken', {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${accessToken}`,
@@ -225,7 +225,7 @@ export default function Calendar() {
     // if(await checkAccessTokenValidity() == true){
       const accessToken = localStorage.getItem('ZOOM_USER_ACCESS_TOKEN');
 
-      const response = await fetch('/api/zoom/revoke', {
+      const response = await fetch('http://localhost:8032/integrations/zoom/auth/revoke', {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',
@@ -246,12 +246,16 @@ export default function Calendar() {
 
 
   const handleZoomAuthClick = () => {
-    window.open('/api/zoom/auth', '_blank', 'width=500,height=800');
+    // console.log("start log in zoom")
+    const user_id = "IWUSERID"
+    const team_id = "IWTEAMID"
+    window.open(`http://localhost:8032/integrations/zoom/auth?user_id=${user_id}&team_id=${team_id}', '_blank', 'width=500,height=800`);
   
     window.addEventListener('message', (event) => {
       if (event.origin !== window.location.origin) {
         return;
       }
+      console.log("event",event)
   
       if (event.data.refresh_token) {
         console.log('Refresh Token:', event.data.refresh_token);
@@ -270,7 +274,7 @@ export default function Calendar() {
       const refresh_token = localStorage.getItem('ZOOM_USER_REFRESH_TOKEN');
       accessToken = await fetchNewAccessToken(refresh_token);
     }
-    const response = await fetch('/api/zoom/getRecordings', {
+    const response = await fetch('http://localhost:8032/integrations/zoom/auth/getRecordings', {
         method: 'GET',
         headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -286,31 +290,76 @@ export default function Calendar() {
     console.log(recordings); // Process the list of recordings
   };
 
-
-  const handleGoogleLogin = async () => {
+  const getEvents = async (accessToken: string): Promise<CalendarEvent[]> => {
+    setIsLoadingEvents(true);
     try {
+        const response = await fetch(`http://localhost:8032/integrations/google/getCalendarEvents`, {
+            method: 'GET',
+            headers: { 
+                'Authorization': `Bearer ${accessToken}`,
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch events');
+        }
+
+        const data = await response.json();
+        setIsLoadingEvents(false);
+        return data; 
+    } catch (error) {
+        console.error('Error fetching events:', error);
+        setIsLoadingEvents(false);
+        throw error;
+    }
+};
+
+const getAuthInfoPopUp = async (window: Window): Promise<AuthInfo> => {
+    return new Promise((resolve, reject) => {
+        window.open('http://localhost:8032/integrations/google/auth', '_blank', 'width=500,height=800');
+
+        window.addEventListener('message', (event) => {
+      
+          if (event.data.access_token && event.data.refresh_token) {
+              resolve({
+                  access_token: event.data.access_token,
+                  refresh_token: event.data.refresh_token,
+                  expires_in: event.data.expires_in,
+                  scope: event.data.scope,
+                  token_type: event.data.token_type
+              });
+          } else {
+              reject(new Error('Authentication failed'));
+          }
+      }, false);
+      
+    });
+};
+
+
+const handleGoogleLogin = async () => {
+  try {
       setIsLoadingAuth(true);
-      const authInfo: AuthInfo = await getAuthInfoPopUp(window);
+      const authInfo:AuthInfo = await getAuthInfoPopUp(window);
       setIsLoadingAuth(false);
+      console.log("authInfo:",authInfo)
 
       setIsLoggedIn(true);
       saveRefreshToken(encryptToken(authInfo.refresh_token));
-      
-
+      console.log("refresh_token",decryptToken(loadRefreshToken()));
       const accessToken = await getAccessToken(authInfo.refresh_token);
-
-      setIsLoadingEvents(true);
+      console.log("accessToken", accessToken)
       const fetchedEvents = await getEvents(accessToken);
+      console.log("fetchedEvents",fetchedEvents)
       setEvents(fetchedEvents.reverse());
-      setIsLoadingEvents(false);
-
-    } catch (error) {
+  } catch (error) {
       console.error('Error:', error);
       setError('Error during login');
       setIsLoadingAuth(false);
       setIsLoggedIn(false);
-    }
-  };
+  }
+};
 
   const handleLogout = () => {
     clearRefreshToken();
